@@ -7,8 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.adapter.SlideAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
@@ -70,17 +69,16 @@ public class Home extends Fragment {
         return items;
     }
     public void callServiceSlide() {
-        ResClient restClient = new ResClient();
+        ResClien restClient = new ResClien();
         restClient.GetService().GetSlide(
-                new Callback<List<SlideDto>>() {
+                new Callback<List<AdvertDto>>() {
                     @Override
-                    public void success(List<SlideDto> slideDtos, Response response) {
+                    public void success(List<AdvertDto> slideDtos, Response response) {
                         for (int i = 0; i < slideDtos.size(); i++) {
 
-                            list_id_slide.add(slideDtos.get(i).id_slide);
-                            list_img_slide.add(slideDtos.get(i).img_slide);
-                            list_des_slide.add(slideDtos.get(i).des_slide);
-                            list_title_slide.add(slideDtos.get(i).title_slide);
+                            ListIdAdvert.add(slideDtos.get(i).IdAdvert);
+                            ListNameAdvert.add(slideDtos.get(i).NameAdvert);
+
                         }
                         loadSilde();
                     }
