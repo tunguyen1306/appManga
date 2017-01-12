@@ -26,7 +26,7 @@ import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.fragment.Fragment1;
 import com.example.tunguyen.manga.view.fragment.Fragment2;
 import com.example.tunguyen.manga.view.fragment.Home;
-import com.google.android.gms.appindexing.AppIndex;
+//import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }//end Oncreate
 
 

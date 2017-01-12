@@ -36,34 +36,34 @@ public class SlideAdapter extends PagerAdapter {
     public int getCount() {
         return listAdvert.size();
     }
-
-    @Override
-    public Object instantiateItem(ViewGroup view, final int  position) {
-        View imageLayout = inflater.inflate(R.layout.slide_image, view, false);
-        assert imageLayout != null;
-        final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.SlideImage);
-        listAdvert.get(position).getImgAdvert();
-        if(listAdvert.get(position).getImgAdvert()!=null){
-            Picasso.with(context).load(listAdvert.get(position).getImgAdvert()).into(imageView);
-        }
-        else {
-            Picasso.with(context).load(R.drawable.icon_home).into(imageView);
-        }
-
-
-        view.addView(imageLayout, 0);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation animation = new AlphaAnimation(0.3f, 1.0f);
-                animation.setDuration(1000);
-                v.startAnimation(animation);
-
-            }
-        });
-        return imageLayout;
-    }
+//
+//    @Override
+//    public Object instantiateItem(ViewGroup view, final int  position) {
+//        View imageLayout = inflater.inflate(R.layout.SlideImage, view, false);
+//        assert imageLayout != null;
+//        final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.SlideImage);
+//        listAdvert.get(position).getImgAdvert();
+//        if(listAdvert.get(position).getImgAdvert()!=null){
+//            Picasso.with(context).load(listAdvert.get(position).getImgAdvert()).into(imageView);
+//        }
+//        else {
+//            Picasso.with(context).load(R.drawable.icon_home).into(imageView);
+//        }
+//
+//
+//        view.addView(imageLayout, 0);
+//
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Animation animation = new AlphaAnimation(0.3f, 1.0f);
+//                animation.setDuration(1000);
+//                v.startAnimation(animation);
+//
+//            }
+//        });
+//        return imageLayout;
+//    }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {

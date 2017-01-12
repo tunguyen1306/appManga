@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.adapter.SlideAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
