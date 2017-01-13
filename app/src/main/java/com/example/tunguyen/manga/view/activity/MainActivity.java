@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         //Add Header
 
         setupViewPager(viewPager);
-       setupTabLayout(tabLayout);
+        setupTabLayout(tabLayout);
         setupActionBar();
 
         navigationView.setNavigationItemSelectedListener(this);

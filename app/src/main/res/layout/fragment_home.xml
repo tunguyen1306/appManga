@@ -70,13 +70,13 @@
                     android:textSize="16sp" />
             </FrameLayout>
 
-            <!--<org.lucasr.twowayview.widget.TwoWayView
-                android:id="@+id/lv_advert_feauture"
-                style="@style/TwoWayView"
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:layout_marginLeft="12dp"
-                app:twowayview_layoutManager="ListLayoutManager" />-->
+            <!--&lt;!&ndash;<org.lucasr.twowayview.widget.TwoWayView-->
+                <!--android:id="@+id/lv_advert_feauture"-->
+                <!--style="@style/TwoWayView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="230dp"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--app:twowayview_layoutManager="ListLayoutManager" />&ndash;&gt;-->
 
             <FrameLayout
                 android:id="@+id/fr_advert_viewed"
@@ -107,13 +107,13 @@
                     android:textSize="16sp" />
             </FrameLayout>
 
-          <!--  <org.lucasr.twowayview.widget.TwoWayView
-                android:id="@+id/lv_advert_viewed"
-                style="@style/TwoWayView"
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:layout_marginLeft="12dp"
-                app:twowayview_layoutManager="ListLayoutManager" />-->
+          <!--&lt;!&ndash;  <org.lucasr.twowayview.widget.TwoWayView-->
+                <!--android:id="@+id/lv_advert_viewed"-->
+                <!--style="@style/TwoWayView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="230dp"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--app:twowayview_layoutManager="ListLayoutManager" />&ndash;&gt;-->
         </LinearLayout>
     </ScrollView>
 

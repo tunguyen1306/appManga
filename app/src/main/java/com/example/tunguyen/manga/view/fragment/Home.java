@@ -42,8 +42,9 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-
+        loadSilde();
         return view;
+
     }
     ///LoadSlide///////
     private void loadSilde(){
