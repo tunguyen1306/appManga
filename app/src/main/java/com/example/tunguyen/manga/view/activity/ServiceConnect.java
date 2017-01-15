@@ -18,7 +18,7 @@ import retrofit.mime.TypedFile;
  */
 
 public interface ServiceConnect {
-    @GET("/Slide/")
-    void GetSlide(Callback<List<AdvertDto>> items);
+    @GET("/Advert/")
+    void GetListAdvert(Callback<List<AdvertDto>> items);
 
 }

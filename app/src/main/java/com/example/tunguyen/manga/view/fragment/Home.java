@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
+import com.example.tunguyen.manga.view.adapter.ProjectFeaturedAdapter;
 import com.example.tunguyen.manga.view.adapter.SlideAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
+
+import org.lucasr.twowayview.widget.TwoWayView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,16 +39,26 @@ public class Home extends Fragment {
     List<String> ListStatusAdvert = new ArrayList<>();
     List<String> ListStatusChapAdvert = new ArrayList<>();
     List<String> ListCountChapAdvert = new ArrayList<>();
+    List<String> ListImgAdvert = new ArrayList<>();
     ////End Slide///
 
+
+    //////////
+    TwoWayView lv_advert_feauture;
+    //////////
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        loadSilde();
+        lv_advert_feauture = (TwoWayView) view.findViewById(R.id.lv_advert_feauture);
+        indicator_banel=(InkPageIndicator)view.findViewById(R.id.indicator_slide);
+        pager_banner=(ViewPager)  view.findViewById(R.id.pager_banner);
+        callServiceSlide();
+        callServiceAdvertFeauture();
         return view;
 
     }
+
     ///LoadSlide///////
     private void loadSilde(){
 
@@ -67,21 +80,21 @@ public class Home extends Fragment {
     private List<AdvertDto>getDataSlide(){
         List<AdvertDto> items = new ArrayList<>();
         for (int i=0;i<ListIdAdvert.size();i++) {
-            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i)));
+            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i),ListImgAdvert.get(i)));
         }
         return items;
     }
     public void callServiceSlide() {
         ResClien restClient = new ResClien();
-        restClient.GetService().GetSlide(
+        restClient.GetService().GetListAdvert(
                 new Callback<List<AdvertDto>>() {
                     @Override
-                    public void success(List<AdvertDto> slideDtos, Response response) {
-                        for (int i = 0; i < slideDtos.size(); i++) {
-
-                            ListIdAdvert.add(slideDtos.get(i).IdAdvert);
-                            ListNameAdvert.add(slideDtos.get(i).NameAdvert);
-
+                    public void success(List<AdvertDto> AdvertDto, Response response) {
+                        for (int i = 0; i < AdvertDto.size(); i++) {
+                            String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+                            ListIdAdvert.add(tmpStr10);
+                            ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
+                            ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
                         }
                         loadSilde();
                     }
@@ -93,4 +106,55 @@ public class Home extends Fragment {
                 });
     }
     ///End LoadSlide///
+
+
+    ///LoadAdvertFeauture///
+    private void loadDataAdvertFeauture() {
+
+        ItemAdvert = getAllItemsAdvertFeauture();
+
+        try {
+
+            ProjectFeaturedAdapter adapter = new ProjectFeaturedAdapter(getActivity(), ItemAdvert, "project");
+            lv_advert_feauture.setAdapter(adapter);
+        } catch (Exception ex) {
+
+        }
+    }
+    private List<AdvertDto> getAllItemsAdvertFeauture() {
+        List<AdvertDto> items = new ArrayList<>();
+        for (int i = 0; i < ListIdAdvert.size(); i++) {
+            items.add(
+                    new AdvertDto(
+                            ListIdAdvert.get(i),
+                            ListNameAdvert.get(i),
+                            ListImgAdvert.get(i)
+
+                    )
+            );
+        }
+        return items;
+    }
+    public void callServiceAdvertFeauture() {
+        ResClien restClient = new ResClien();
+        restClient.GetService().GetListAdvert(new Callback<List<AdvertDto>>() {
+            @Override
+            public void success(List<AdvertDto> AdvertDto, Response response) {
+                for (int i = 0; i < AdvertDto.size(); i++) {
+
+                    String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+                    ListIdAdvert.add(tmpStr10);
+                    ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
+                    ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
+                }
+                loadDataAdvertFeauture();
+            }
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("myLogs", "-------ERROR-------Slide");
+                Log.d("myLogs", Log.getStackTraceString(error));
+            }
+        });
+    }
+    ///End LoadAdvertFeauture///
 }

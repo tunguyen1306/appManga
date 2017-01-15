@@ -42,9 +42,9 @@ public class SlideAdapter extends PagerAdapter {
         View imageLayout = inflater.inflate(R.layout.slide_image, view, false);
         assert imageLayout != null;
         final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.SlideImage);
-        listAdvert.get(position).getImgAdvert();
-        if(listAdvert.get(position).getImgAdvert()!=null){
-            Picasso.with(context).load(listAdvert.get(position).getImgAdvert()).into(imageView);
+        listAdvert.get(position).getImgAdvertManga();
+        if(listAdvert.get(position).getImgAdvertManga()!=null){
+            Picasso.with(context).load(listAdvert.get(position).getImgAdvertManga()).into(imageView);
         }
         else {
             Picasso.with(context).load(R.drawable.icon_home).into(imageView);

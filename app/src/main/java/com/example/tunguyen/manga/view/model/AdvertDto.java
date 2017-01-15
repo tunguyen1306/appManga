@@ -1,73 +1,74 @@
 package com.example.tunguyen.manga.view.model;
 
 public class AdvertDto {
-        public AdvertDto (String IdAdvert,String NameAdvert){
-                this.IdAdvert=IdAdvert;
-                this.NameAdvert=NameAdvert;
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga){
+                this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
+                this.NameAdvertManga=NameAdvertManga;
+                this.ImgAdvertManga=ImgAdvertManga;
         }
-        public  String IdAdvert;
-        public  String NameAdvert;
+        public  int IdAdvertManga;
+        public  String NameAdvertManga;
 
-        public String getNameAuthorAdvert() {
-                return NameAuthorAdvert;
-        }
-
-        public void setNameAuthorAdvert(String nameAuthorAdvert) {
-                NameAuthorAdvert = nameAuthorAdvert;
+        public String getNameAuthorAdvertManga() {
+                return NameAuthorAdvertManga;
         }
 
-        public String getIdAdvert() {
-                return IdAdvert;
+        public void setNameAuthorAdvertManga(String nameAuthorAdvertManga) {
+                NameAuthorAdvertManga = nameAuthorAdvertManga;
         }
 
-        public void setIdAdvert(String idAdvert) {
-                IdAdvert = idAdvert;
+        public int getIdAdvertManga() {
+                return IdAdvertManga;
         }
 
-        public String getNameAdvert() {
-                return NameAdvert;
+        public void setIdAdvertManga(int idAdvertManga) {
+                IdAdvertManga = idAdvertManga;
         }
 
-        public void setNameAdvert(String nameAdvert) {
-                NameAdvert = nameAdvert;
+        public String getNameAdvertManga() {
+                return NameAdvertManga;
         }
 
-        public int getStatusAdvert() {
-                return StatusAdvert;
+        public void setNameAdvertManga(String nameAdvertManga) {
+                NameAdvertManga = nameAdvertManga;
         }
 
-        public void setStatusAdvert(int statusAdvert) {
-                StatusAdvert = statusAdvert;
+        public int getStatusAdvertManga() {
+                return StatusAdvertManga;
         }
 
-        public int getStatusChapAdvert() {
-                return StatusChapAdvert;
+        public void setStatusAdvertManga(int statusAdvertManga) {
+                StatusAdvertManga = statusAdvertManga;
         }
 
-        public void setStatusChapAdvert(int statusChapAdvert) {
-                StatusChapAdvert = statusChapAdvert;
+        public int getStatusChapAdvertManga() {
+                return StatusChapAdvertManga;
         }
 
-        public int getCountChapAdvert() {
-                return CountChapAdvert;
+        public void setStatusChapAdvertManga(int statusChapAdvertManga) {
+                StatusChapAdvertManga = statusChapAdvertManga;
         }
 
-        public void setCountChapAdvert(int countChapAdvert) {
-                CountChapAdvert = countChapAdvert;
+        public int getCountChapAdvertManga() {
+                return CountChapAdvertManga;
         }
 
-        public  String NameAuthorAdvert;
-        public  int StatusAdvert;
-        public  int StatusChapAdvert;
-        public  int CountChapAdvert;
-
-        public String getImgAdvert() {
-                return ImgAdvert;
+        public void setCountChapAdvertManga(int countChapAdvertManga) {
+                CountChapAdvertManga = countChapAdvertManga;
         }
 
-        public void setImgAdvert(String imgAdvert) {
-                ImgAdvert = imgAdvert;
+        public  String NameAuthorAdvertManga;
+        public  int StatusAdvertManga;
+        public  int StatusChapAdvertManga;
+        public  int CountChapAdvertManga;
+
+        public String getImgAdvertManga() {
+                return ImgAdvertManga;
         }
 
-        public String ImgAdvert;
+        public void setImgAdvertManga(String imgAdvertManga) {
+                ImgAdvertManga = imgAdvertManga;
+        }
+
+        public String ImgAdvertManga;
 }

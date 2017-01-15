@@ -16,7 +16,7 @@ public class ResClien {
     //You need to change the IP if you testing environment is not local machine
     //or you may have different URL than we have here
     // private static final String URL = "http://instinctcoder.com/wp-content/uploads/2015/08/";
-    private static final String URL = "http://api.vangia.net/api";
+    private static final String URL = "http://manga.vangia.net/api";
     public static final String BASE_URL = "http://api.vangia.net/api/base-url";
     private retrofit.RestAdapter restAdapter;
     private ServiceConnect serviceman;
