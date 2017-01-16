@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
@@ -30,7 +31,7 @@ public class Home extends Fragment {
     ViewPager pager_banner;
     InkPageIndicator indicator_banel;
     View view;
-
+TextView tv_count_advert;
     ////Slide///////
     List<AdvertDto> ItemAdvert;
     List<String> ListIdAdvert = new ArrayList<>();
@@ -51,7 +52,7 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         lv_advert_feauture = (TwoWayView) view.findViewById(R.id.lv_advert_feauture);
-
+        tv_count_advert=(TextView) view.findViewById(R.id.tv_count_advert);
         indicator_banel=(InkPageIndicator)view.findViewById(R.id.indicator_slide);
         pager_banner=(ViewPager)  view.findViewById(R.id.pager_banner);
         callServiceSlide();
@@ -64,6 +65,7 @@ public class Home extends Fragment {
     private void loadSilde(){
 
         ItemAdvert = getDataSlide();
+
         try {
             for (int i = 0; i < ItemAdvert.size(); i++) {
 
@@ -91,7 +93,9 @@ public class Home extends Fragment {
                 new Callback<List<AdvertDto>>() {
                     @Override
                     public void success(List<AdvertDto> AdvertDto, Response response) {
+
                         for (int i = 0; i < AdvertDto.size(); i++) {
+
                             String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
                             ListIdAdvert.add(tmpStr10);
                             ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);

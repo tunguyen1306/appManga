@@ -26,6 +26,7 @@ import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.fragment.Fragment1;
 import com.example.tunguyen.manga.view.fragment.Fragment2;
 import com.example.tunguyen.manga.view.fragment.Home;
+import com.example.tunguyen.manga.view.fragment.NoSwipeableViewpager;
 //import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private NoSwipeableViewpager viewPager;
     DrawerLayout drawer;
     NavigationView navigationView;
 
@@ -75,7 +76,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (NoSwipeableViewpager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         //Add Header
@@ -109,7 +110,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         super.onResume();
     }
     private void setupTabLayout(TabLayout tabLayout) {
-//        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.greenToolBarBg1));
     }
@@ -120,6 +121,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         adapter.addFrag(new Fragment1(), getResources().getString(R.string.title_all));
         adapter.addFrag(new Fragment2(), getResources().getString(R.string.title_update));
         viewPager.setAdapter(adapter);
+
         viewPager.setOffscreenPageLimit(3);
     }
 
@@ -216,11 +218,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
-    }
-
-
-    private static SharedPreferences getPref(Context context) {
-        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
 }

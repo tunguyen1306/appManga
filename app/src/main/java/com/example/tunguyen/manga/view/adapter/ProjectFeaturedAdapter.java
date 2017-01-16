@@ -31,15 +31,14 @@ public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeatured
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         LinearLayout ln_view;
         ImageView image;
-        TextView title;
-        TextView price;
+        TextView txtNameAdvert,txtAuthor;
 
         public SimpleViewHolder(View view) {
             super(view);
             ln_view = (LinearLayout) view.findViewById(R.id.ln_view);
             image = (ImageView) view.findViewById(R.id.gallery_img);
-            title = (TextView) view.findViewById(R.id.gallery_title);
-            price = (TextView) view.findViewById(R.id.gallery_price);
+            txtNameAdvert = (TextView) view.findViewById(R.id.txtNameAdvert);
+            txtAuthor = (TextView) view.findViewById(R.id.txtAuthor);
         }
     }
 
@@ -66,7 +65,7 @@ public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeatured
         } else {
             Picasso.with(mContext).load(_list.get(position).getImgAdvertManga()).resize(180, 180).into(holder.image);
         }
-        holder.title.setText(_list.get(position).getNameAdvertManga());
+        holder.txtNameAdvert.setText(_list.get(position).getNameAdvertManga());
         //holder.price.setText(_list.get(position).getPercent_brand_promotiom());
         holder.ln_view.setOnClickListener(new View.OnClickListener() {
             @Override
