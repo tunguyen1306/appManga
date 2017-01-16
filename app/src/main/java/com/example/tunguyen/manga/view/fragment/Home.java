@@ -46,6 +46,16 @@ TextView tv_count_advert;
 
     //////////
     TwoWayView lv_advert_feauture;
+    ////Slide///////
+    List<AdvertDto> ItemAdvertFeauture;
+    List<String> ListIdAdvertFeauture = new ArrayList<>();
+    List<String> ListNameAdvertFeauture = new ArrayList<>();
+    List<String> ListNameAuthorAdvertFeauture = new ArrayList<>();
+    List<String> ListStatusAdvertFeauture = new ArrayList<>();
+    List<String> ListStatusChapAdvertFeauture = new ArrayList<>();
+    List<String> ListCountChapAdvertFeauture = new ArrayList<>();
+    List<String> ListImgAdvertFeauture = new ArrayList<>();
+    ////End Slide///
     //////////
 
     @Override
@@ -83,7 +93,7 @@ TextView tv_count_advert;
     private List<AdvertDto>getDataSlide(){
         List<AdvertDto> items = new ArrayList<>();
         for (int i=0;i<ListIdAdvert.size();i++) {
-            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i),ListImgAdvert.get(i)));
+            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i),ListImgAdvert.get(i),ListNameAuthorAdvert.get(i)));
         }
         return items;
     }
@@ -100,6 +110,7 @@ TextView tv_count_advert;
                             ListIdAdvert.add(tmpStr10);
                             ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
                             ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
+                            ListNameAuthorAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
                         }
                         loadSilde();
                     }
@@ -116,11 +127,11 @@ TextView tv_count_advert;
     ///LoadAdvertFeauture///
     private void loadDataAdvertFeauture() {
 
-        ItemAdvert = getAllItemsAdvertFeauture();
+        ItemAdvertFeauture = getAllItemsAdvertFeauture();
 
         try {
 
-            ProjectFeaturedAdapter adapter = new ProjectFeaturedAdapter(getActivity(), ItemAdvert, "project");
+            ProjectFeaturedAdapter adapter = new ProjectFeaturedAdapter(getActivity(), ItemAdvertFeauture, "project");
             lv_advert_feauture.setAdapter(adapter);
         } catch (Exception ex) {
 
@@ -128,13 +139,13 @@ TextView tv_count_advert;
     }
     private List<AdvertDto> getAllItemsAdvertFeauture() {
         List<AdvertDto> items = new ArrayList<>();
-        for (int i = 0; i < ListIdAdvert.size(); i++) {
+        for (int i = 0; i < ListIdAdvertFeauture.size(); i++) {
             items.add(
                     new AdvertDto(
-                            ListIdAdvert.get(i),
-                            ListNameAdvert.get(i),
-                            ListImgAdvert.get(i)
-
+                            ListIdAdvertFeauture.get(i),
+                            ListNameAdvertFeauture.get(i),
+                            ListImgAdvertFeauture.get(i) ,
+                            ListNameAuthorAdvertFeauture.get(i)
                     )
             );
         }
@@ -148,9 +159,10 @@ TextView tv_count_advert;
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
-                    ListIdAdvert.add(tmpStr10);
-                    ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
-                    ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
+                    ListIdAdvertFeauture.add(tmpStr10);
+                    ListNameAdvertFeauture.add(AdvertDto.get(i).NameAdvertManga);
+                    ListImgAdvertFeauture.add(AdvertDto.get(i).ImgAdvertManga);
+                    ListNameAuthorAdvertFeauture.add(AdvertDto.get(i).NameAuthorAdvertManga);
                 }
                 loadDataAdvertFeauture();
             }

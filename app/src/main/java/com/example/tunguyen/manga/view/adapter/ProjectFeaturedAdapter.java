@@ -63,10 +63,17 @@ public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeatured
             } catch (Exception ex) {
             }
         } else {
-            Picasso.with(mContext).load(_list.get(position).getImgAdvertManga()).resize(180, 180).into(holder.image);
+            if(_list.get(position).getImgAdvertManga()!="")
+            {
+                Picasso.with(mContext).load(_list.get(position).getImgAdvertManga()).resize(180, 180).into(holder.image);}
+            else
+            {
+                Picasso.with(mContext).load(R.drawable.img_error).into(holder.image);
+            }
+
         }
         holder.txtNameAdvert.setText(_list.get(position).getNameAdvertManga());
-        //holder.price.setText(_list.get(position).getPercent_brand_promotiom());
+        holder.txtAuthor.setText(_list.get(position).getNameAuthorAdvertManga());
         holder.ln_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

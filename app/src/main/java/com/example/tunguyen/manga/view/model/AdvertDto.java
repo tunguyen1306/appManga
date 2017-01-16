@@ -1,10 +1,11 @@
 package com.example.tunguyen.manga.view.model;
 
 public class AdvertDto {
-        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga){
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga ){
                 this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
                 this.NameAdvertManga=NameAdvertManga;
                 this.ImgAdvertManga=ImgAdvertManga;
+                this.NameAuthorAdvertManga=NameAuthorAdvertManga;
         }
         public  int IdAdvertManga;
         public  String NameAdvertManga;
