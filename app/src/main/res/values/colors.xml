@@ -19,4 +19,13 @@
     <color name="BGLayoutColor">#FFFFFF</color>
     <color name="TextColor">#212121</color>
     <color name="xamnhe">#ffdedede</color>
+    <color name="backgroundMain">#161b21</color>
+    <color name="colorTextMain">#fefefe</color>
+    <color name="colorTextSecon">#555658</color>
+    <color name="backgroundIcon">#1b8bb3</color>
+    <color name="colorTextOnButton">#2782a6</color>
+    <color name="colorTextOnButtonSelect">#000816</color>
+    <color name="backgroundDetail">#161b21</color>
+    <color name="colorTextDetail">#929398</color>
+    <color name="colorTextOnBar">#247c9c</color>
 </resources>

@@ -7,6 +7,9 @@ public class AdvertDto {
                 this.ImgAdvertManga=ImgAdvertManga;
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
         }
+        public static  int IdAdvertRefer;
+        public static  String NameAdvertRefer;
+
         public  int IdAdvertManga;
         public  String NameAdvertManga;
 

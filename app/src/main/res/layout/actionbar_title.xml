@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/greenToolBarBg1">
+    android:background="@color/black">
 
     <LinearLayout
         android:id="@+id/ln_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:background="@color/greenToolBarBg1"
+        android:background="@color/black"
         android:gravity="center">
 
         <ImageView
@@ -23,7 +23,7 @@
         android:layout_marginLeft="60dp"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textColor="@color/white"
+        android:textColor="@color/colorTextOnBar"
         android:layout_marginStart="50dp"
         android:gravity="center"
         android:textSize="18sp"

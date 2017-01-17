@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
 
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ import retrofit.mime.TypedFile;
 public interface ServiceConnect {
     @GET("/Advert/")
     void GetListAdvert(Callback<List<AdvertDto>> items);
-
+    @GET("/Advert/GetAdvertById/")
+    void GetAdvertById(@Query("id")int id,
+                       Callback<List<clsAllAdvertDto>> items);
 }

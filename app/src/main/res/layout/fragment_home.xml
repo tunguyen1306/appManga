@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/backgroundMain"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_marginBottom="12dp"
         android:scrollbars="none">
         <!--<LinearLayout-->
@@ -37,10 +36,10 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="12dp"
                 app:animationDuration="320"
-                app:currentPageIndicatorColor="@color/greenToolBarBg1"
+                app:currentPageIndicatorColor="@color/backgroundMain"
                 app:dotDiameter="8dp"
                 app:dotGap="8dp"
-                app:pageIndicatorColor="@color/greenToolBarBg" />
+                app:pageIndicatorColor="@color/backgroundIcon" />
             <FrameLayout
                 android:id="@+id/fr_advert_feauture"
                 android:layout_width="match_parent"
@@ -57,7 +56,7 @@
                     android:gravity="left|center"
                     android:layout_marginLeft="12dp"
                     android:text="Nhiều người đang đọc"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorTextMain"
                     android:textSize="14sp" />
                 <TextView
                     android:id="@+id/tv_count_advert"
@@ -67,7 +66,7 @@
                     android:layout_marginLeft="12dp"
                     android:text="96 truyện"
                     android:layout_marginTop="25dp"
-                    android:textColor="@color/Silver"
+                    android:textColor="@color/colorTextSecon"
                     android:textSize="12sp" />
                 <TextView
                     android:layout_width="match_parent"
@@ -75,7 +74,7 @@
                     android:gravity="center|right"
                     android:layout_marginRight="12dp"
                     android:text="Xem tất cả >"
-                    android:textColor="@color/Silver"
+                    android:textColor="@color/colorTextSecon"
                     android:textSize="12sp" />
             </FrameLayout>
 
@@ -102,7 +101,7 @@
                     android:gravity="left|center"
                     android:layout_marginLeft="12dp"
                     android:text="Truyện phổ biến trong tuần"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorTextMain"
                     android:textSize="14sp" />
 
                 <TextView
@@ -111,8 +110,8 @@
                     android:gravity="center|right"
                     android:layout_marginRight="12dp"
                     android:text="Xem tất cả >"
-                    android:textColor="@color/Silver"
-                    android:textSize="16sp" />
+                    android:textColor="@color/colorTextSecon"
+                    android:textSize="12sp" />
             </FrameLayout>
 
             <org.lucasr.twowayview.widget.TwoWayView

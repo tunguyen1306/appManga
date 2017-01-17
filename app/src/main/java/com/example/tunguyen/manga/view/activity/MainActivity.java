@@ -2,6 +2,8 @@ package com.example.tunguyen.manga.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -132,7 +134,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
-
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         View mCustomView = mInflater.inflate(R.layout.actionbar, null);
         ImageView logo = (ImageView) mCustomView.findViewById(R.id.img_logo);
         logo.setImageResource(R.drawable.ic_launcher);

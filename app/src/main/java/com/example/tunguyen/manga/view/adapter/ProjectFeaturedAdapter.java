@@ -11,17 +11,16 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.activity.DetailAdvert;
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.Preference;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
+import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 
-/**
- * Created by TuNguyen on 01/15/2017.
- */
 
 public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeaturedAdapter.SimpleViewHolder> {
     private final Context mContext;
@@ -81,13 +80,12 @@ public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeatured
                 animation.setDuration(1000);
                 view.startAnimation(animation);
 
-//                Intent intent_login=new Intent(mContext,DetailBrand.class);
-//                BrandDto.idBrandPromotiom=_list.get(position).getId_brand_promotiom();
-//                BrandDto.NameBrandPromotiom = _list.get(position).getName_brand_promotiom();
-//                BrandDto.idCategory = _list.get(position).getCategory_id_brand_promotion();
-//                Preference.savePreference(mContext.getApplicationContext());
-//                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                mContext.startActivity(intent_login);
+                Intent intent_login=new Intent(mContext,DetailAdvert.class);
+                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                IdAdvertRefer=_list.get(position).getIdAdvertManga();
+                NameAdvertRefer =_list.get(position).getNameAdvertManga();
+                Preference.savePreference(mContext.getApplicationContext());
+                mContext.startActivity(intent_login);
 
 
             }

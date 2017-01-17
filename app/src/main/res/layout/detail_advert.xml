@@ -1,0 +1,178 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundDetail"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="@color/backgroundDetail"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/Base.AppCompat.Responsive"
+                android:background="@color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:orientation="horizontal"
+                android:background="@color/backgroundDetail"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:padding="2dp">
+
+                <ImageView
+                    android:id="@+id/imgAdvert"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:contentDescription=""
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="0.27"
+                    android:orientation="vertical"
+                    android:background="@color/backgroundDetail"
+                    android:padding="5dp"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/txtNameAdvert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:text="Title"
+                        android:textColor="@color/colorTextMain"
+                        android:textSize="14sp"
+                        android:maxLines="2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtAuthorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:ellipsize="end"
+                        android:gravity="left|center"
+                        android:maxLines="2"
+                        android:text="Author"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorTextDetail"
+                         />
+
+                    <TextView
+                        android:id="@+id/txtStatusChap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="3"
+                        android:gravity="bottom"
+                        android:inputType="text"
+                        android:text="Status"
+                        android:textColor="@color/colorTextDetail"
+                        android:textSize="12sp"
+                         />
+                    <TextView
+                        android:id="@+id/txtCountChapter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+
+                        android:gravity="bottom"
+                        android:inputType="text"
+                        android:text="CountChap"
+                        android:textColor="@color/colorTextDetail"
+                        android:textSize="12sp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/radius">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Thông Tin"
+                    android:textColor="@color/TextColor"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/txtInfo"
+                    android:onClick="onClick" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:text="Chương"
+                    android:textColor="@color/colorTextOnButton"
+                    android:background="@color/black"
+                    android:id="@+id/txtChap" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Liên Quan"
+                    android:textColor="@color/colorTextOnButton"
+                    android:id="@+id/txtRelate"
+                    android:background="@color/black"/>
+            </LinearLayout>
+            <!--<android.support.design.widget.TabLayout-->
+                <!--android:id="@+id/tabs"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="45dp"-->
+                <!--app:tabIndicatorColor="@color/greenToolBarBg1"-->
+                <!--app:tabIndicatorHeight="2dp"-->
+                <!--app:tabSelectedTextColor="@color/white"-->
+                <!--app:tabTextColor="@color/greenTabTextColor"-->
+                <!--app:tabMode="fixed"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--app:tabBackground="@color/backgroundDetail"-->
+                <!--app:tabGravity="fill"-->
+                <!--/>-->
+
+            <!--<com.example.tunguyen.manga.view.fragment.NoSwipeableViewpager-->
+                <!--android:id="@+id/viewpager"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <!-- Drawer Section -->
+
+</android.support.v4.widget.DrawerLayout>
