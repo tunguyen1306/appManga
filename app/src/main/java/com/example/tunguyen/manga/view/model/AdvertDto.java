@@ -75,4 +75,14 @@ public class AdvertDto {
         }
 
         public String ImgAdvertManga;
+
+        public String getDesAdvertManga() {
+                return DesAdvertManga;
+        }
+
+        public void setDesAdvertManga(String desAdvertManga) {
+                DesAdvertManga = desAdvertManga;
+        }
+
+        public  String DesAdvertManga;
 }

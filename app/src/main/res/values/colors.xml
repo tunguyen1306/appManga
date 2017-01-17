@@ -13,7 +13,7 @@
     <color name="black">#000000</color>
     <color name="Silver">#c0c0c0</color>
     <color name="colorToolBarBg">#2baf2b</color>
-    <color name="greenToolBarBg">#00BCD4</color>//nhạt
+    <color name="greenToolBarBg">#000000</color>//nhạt
     <color name="greenToolBarBg1">#0097A7</color>//đậm
     <color name="greenTabTextColor">#B2EBF2</color>
     <color name="BGLayoutColor">#FFFFFF</color>
@@ -28,4 +28,6 @@
     <color name="backgroundDetail">#161b21</color>
     <color name="colorTextDetail">#929398</color>
     <color name="colorTextOnBar">#247c9c</color>
+    <color name="colorBarH">#1a1e23</color>
+    <color name="colorTextChap">#fcfdfd</color>
 </resources>

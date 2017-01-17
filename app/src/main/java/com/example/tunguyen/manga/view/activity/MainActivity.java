@@ -114,7 +114,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     private void setupTabLayout(TabLayout tabLayout) {
 
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.greenToolBarBg1));
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -134,7 +134,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         View mCustomView = mInflater.inflate(R.layout.actionbar, null);
         ImageView logo = (ImageView) mCustomView.findViewById(R.id.img_logo);
         logo.setImageResource(R.drawable.ic_launcher);

@@ -3,6 +3,89 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundDetail"
-    >
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="0.27"
+        android:orientation="vertical"
+        android:background="@color/backgroundDetail"
+        android:padding="5dp"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txtAdvertDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="Ngày cập nhật"
+            android:textColor="@color/colorTextMain"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtAdvertDate1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:maxLines="2"
+            android:layout_marginTop="5dp"
+            android:text="01-01-2017"
+            android:textSize="12sp"
+            android:textColor="@color/colorTextDetail"
+            />
+        <TextView
+            android:id="@+id/txtAdvertType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="Thể loại"
+            android:textColor="@color/colorTextMain"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:maxLines="2"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtAdvertType1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:maxLines="2"
+            android:text="Manga"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorTextDetail"
+            />
+        <TextView
+            android:id="@+id/txtAdvertDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="Nội dung"
+            android:textColor="@color/colorTextMain"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtAdvertDes1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:text="Rất hay"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorTextDetail"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

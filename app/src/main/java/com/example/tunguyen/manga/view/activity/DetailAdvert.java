@@ -1,5 +1,6 @@
 package com.example.tunguyen.manga.view.activity;
 
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class DetailAdvert extends ActionBarActivity  {
     TextView tvHeaderName,tvHeaderEmail,txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate;
     ImageView imgHeaderUser,imgAdvert;
 
-
+    public FragmentTransaction ft;
     boolean doubleBackToExitPressedOnce = false;
 
     //string
@@ -65,6 +66,15 @@ public class DetailAdvert extends ActionBarActivity  {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        viewPager = (NoSwipeableViewpager) findViewById(R.id.viewpager);
 //        tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+
+        /////replace fragment/////
+        Fragment fragment = null;
+        fragment = new FraInfoChapter();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_frame, fragment);
+        transaction.commit();
 
         ///Advert///
         txtNameAdvert=(TextView) findViewById(R.id.txtNameAdvert);
@@ -82,6 +92,19 @@ public class DetailAdvert extends ActionBarActivity  {
         txtInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                txtRelate.setBackgroundColor(getResources().getColor(R.color.black));
+                txtRelate.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtChap.setBackgroundColor(getResources().getColor(R.color.black));
+                txtChap.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtInfo.setBackgroundColor(getResources().getColor(R.color.backgroundIcon));
+                txtInfo.setTextColor(getResources().getColor(R.color.TextColor));
+
+                Fragment fragment = null;
+               fragment = new FraInfoChapter();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_frame, fragment);
+                transaction.commit();
 
             }
         });
@@ -90,12 +113,39 @@ public class DetailAdvert extends ActionBarActivity  {
             @Override
             public void onClick(View v) {
 
+                txtRelate.setBackgroundColor(getResources().getColor(R.color.black));
+                txtRelate.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtInfo.setBackgroundColor(getResources().getColor(R.color.black));
+                txtInfo.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtChap.setBackgroundColor(getResources().getColor(R.color.backgroundIcon));
+                txtChap.setTextColor(getResources().getColor(R.color.TextColor));
+
+                Fragment fragment = null;
+                fragment = new FraListChapter();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_frame, fragment);
+                transaction.commit();
+
             }
         });
 
         txtRelate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                txtChap.setBackgroundColor(getResources().getColor(R.color.black));
+                txtChap.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtInfo.setBackgroundColor(getResources().getColor(R.color.black));
+                txtInfo.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtRelate.setBackgroundColor(getResources().getColor(R.color.backgroundIcon));
+                txtRelate.setTextColor(getResources().getColor(R.color.TextColor));
+
+                Fragment fragment = null;
+                fragment = new FraRelateChapter();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_frame, fragment);
+                transaction.commit();
 
             }
         });
