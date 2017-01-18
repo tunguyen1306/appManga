@@ -15,16 +15,7 @@
             android:layout_weight="1"
             android:text="Chap 01"
             android:textColor="@color/colorTextChap"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.27"
-            android:orientation="vertical"
-            android:background="@color/colorBarH"
-            android:padding="1dp"
-            android:layout_marginTop="25dp"
-            android:weightSum="3">
-        </LinearLayout>
+            android:textSize="13sp"
+             />
+
 </android.support.v7.widget.CardView>

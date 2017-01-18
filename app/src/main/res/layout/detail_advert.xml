@@ -6,11 +6,7 @@
     android:clipToPadding="false"
     android:background="@color/backgroundDetail"
     android:fitsSystemWindows="true">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="12dp"
-        android:scrollbars="none">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -197,5 +193,5 @@
 
     </RelativeLayout>
     <!-- Drawer Section -->
-    </ScrollView>
+
 </android.support.v4.widget.DrawerLayout>

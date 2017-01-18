@@ -21,18 +21,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.adapter.CustomAdapter;
 import com.example.tunguyen.manga.view.fragment.Fragment1;
 import com.example.tunguyen.manga.view.fragment.Fragment2;
 import com.example.tunguyen.manga.view.fragment.Home;
 import com.example.tunguyen.manga.view.fragment.NoSwipeableViewpager;
 //import com.google.android.gms.appindexing.AppIndex;
+import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,6 +53,8 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     TextView tvHeaderName, tvHeaderEmail;
     ImageView imgHeaderUser;
 
+    GridView simpleGrid;
+    int flags[] = {R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide,R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide,R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide,R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide};
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -95,6 +104,9 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
 
+//        simpleGrid = (GridView) findViewById(R.id.simpleGridView);
+//        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), flags);
+//        simpleGrid.setAdapter(customAdapter);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -220,5 +232,22 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             }
         }, 2000);
     }
+    ///Load Detail Advert by ID///
+    public void LoadDetailAdvertById(int id)
+    {
+        ResClien resClient=new ResClien();
+        resClient.GetService().GetAdvertById(id, new Callback<List<clsAllAdvertDto>>() {
+            @Override
+            public void success(List<clsAllAdvertDto> advertDtos, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+    ///End Load Detail Advert by ID///
 
 }

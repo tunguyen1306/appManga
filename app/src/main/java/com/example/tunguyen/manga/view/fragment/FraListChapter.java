@@ -12,6 +12,7 @@ import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.adapter.ListChapterAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 
@@ -42,9 +43,9 @@ public class FraListChapter extends Fragment {
     public void LoadDetailAdvertById(int id)
     {
         ResClien resClient=new ResClien();
-        resClient.GetService().GetAdvertById(id, new Callback<List<clsAllAdvertDto>>() {
+        resClient.GetService().GetChapByAdvertID(id, new Callback<List<ChapterDto>>() {
             @Override
-            public void success(List<clsAllAdvertDto> advertDtos, Response response) {
+            public void success(List<ChapterDto> advertDtos, Response response) {
                 list.setAdapter(new ListChapterAdapter(getActivity(),advertDtos));
 
             }

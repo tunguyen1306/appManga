@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
 
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 
 import java.util.List;
@@ -24,4 +25,7 @@ public interface ServiceConnect {
     @GET("/Advert/GetAdvertById/")
     void GetAdvertById(@Query("id")int id,
                        Callback<List<clsAllAdvertDto>> items);
+    @GET("/Chapter/GetChapByAdvertID/")
+    void GetChapByAdvertID(@Query("id")int id,
+                       Callback<List<ChapterDto>> items);
 }
