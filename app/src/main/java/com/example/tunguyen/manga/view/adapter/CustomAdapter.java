@@ -10,76 +10,70 @@ import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.model.ChapterDto;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ducthien on 18/01/2017.
  */
 
-public class CustomAdapter extends BaseAdapter {
-    private LayoutInflater layoutInflater;
-    private Context _Context;
-    List<ChapterDto> AllAdvertDto;
-    TextView txt_tile;
-    CustomAdapter.ViewHolder listViewHolder;
-    public CustomAdapter(Context context, List<ChapterDto> ChapterListView) {
-        this._Context = context;
-        layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        AllAdvertDto = ChapterListView;
+public class CustomAdapter extends BaseAdapter{
+    private Context mContext;
+    private final ArrayList<String> NameAdvert;
+    private final ArrayList<String> ImgAdvert;
 
+    public CustomAdapter(Context c, ArrayList<String> NameAdvert, ArrayList<String> ImgAdvert ) {
+        mContext = c;
+        this.ImgAdvert = ImgAdvert;
+        this.NameAdvert = NameAdvert;
     }
+
     @Override
     public int getCount() {
-        return AllAdvertDto.size();
+        // TODO Auto-generated method stub
+        return NameAdvert.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return position;
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        if(convertView == null)
-        {
-            listViewHolder = new CustomAdapter.ViewHolder();
-            convertView=layoutInflater.inflate(R.layout.item_list_chapter,parent,false);
-            listViewHolder.txtNameChapter=(TextView)convertView.findViewById(R.id.txtNameChapter);
-            convertView.setTag(listViewHolder);
-        }
-        else
-        {
-            listViewHolder = (CustomAdapter.ViewHolder)convertView.getTag();
-        }
-        listViewHolder.txtNameChapter.setText(AllAdvertDto.get(position).NameChapterManga);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // TODO Auto-generated method stub
+        View grid;
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        if (convertView == null) {
 
-
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent_login=new Intent(_Context,DetailBrand.class);
-//                BrandDto.idBrandPromotiom=brandDtos.get(position).getId_brand_promotiom();
-//                BrandDto.NameBrandPromotiom = brandDtos.get(position).getName_brand_promotiom();
-//                BrandDto.idCategory = brandDtos.get(position).getCategory_id_brand_promotion();
-//                Preference.savePreference(_Context.getApplicationContext());
-//                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                _Context.startActivity(intent_login);
-
-
-
+            grid = new View(mContext);
+            grid = inflater.inflate(R.layout.item_gridview, null);
+            TextView textView = (TextView) grid.findViewById(R.id.grid_text);
+            ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
+            textView.setText(NameAdvert.get(position));
+            if(ImgAdvert.get(position)!=""){
+                Picasso.with(mContext).load(ImgAdvert.get(position)).into(imageView);
             }
-        });
-        return convertView;
-    }
-    public  class  ViewHolder{
-        TextView txtNameChapter,txtAddressChapter,txtPercentChapter;
-        ImageView imgChapter;
+            else {
+                Picasso.with(mContext).load(R.drawable.img_error).into(imageView);
+            }
+
+
+        } else {
+            grid = (View) convertView;
+        }
+
+        return grid;
     }
 }

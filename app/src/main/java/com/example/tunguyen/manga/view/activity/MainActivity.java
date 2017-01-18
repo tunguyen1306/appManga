@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +33,14 @@ import com.example.tunguyen.manga.view.fragment.Fragment2;
 import com.example.tunguyen.manga.view.fragment.Home;
 import com.example.tunguyen.manga.view.fragment.NoSwipeableViewpager;
 //import com.google.android.gms.appindexing.AppIndex;
+import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +60,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     TextView tvHeaderName, tvHeaderEmail;
     ImageView imgHeaderUser;
 
-    GridView simpleGrid;
-    int flags[] = {R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide,R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide,R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide,R.drawable.ic_back, R.drawable.ic_call_white, R.drawable.ic_hide};
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -104,13 +109,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
 
-//        simpleGrid = (GridView) findViewById(R.id.simpleGridView);
-//        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), flags);
-//        simpleGrid.setAdapter(customAdapter);
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }//end Oncreate
 
 
@@ -161,7 +160,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                 Intent home = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(home);
                 break;
-
 
         }
 
@@ -232,22 +230,5 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             }
         }, 2000);
     }
-    ///Load Detail Advert by ID///
-    public void LoadDetailAdvertById(int id)
-    {
-        ResClien resClient=new ResClien();
-        resClient.GetService().GetAdvertById(id, new Callback<List<clsAllAdvertDto>>() {
-            @Override
-            public void success(List<clsAllAdvertDto> advertDtos, Response response) {
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
-    }
-    ///End Load Detail Advert by ID///
 
 }
