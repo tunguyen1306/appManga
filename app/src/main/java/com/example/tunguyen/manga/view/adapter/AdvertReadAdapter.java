@@ -22,7 +22,7 @@ import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 
 
-public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeaturedAdapter.SimpleViewHolder> {
+public class AdvertReadAdapter extends RecyclerView.Adapter<AdvertReadAdapter.SimpleViewHolder> {
     private final Context mContext;
     List<AdvertDto> _list = new ArrayList<>();
     String from_activity;
@@ -41,7 +41,7 @@ public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeatured
         }
     }
 
-    public ProjectFeaturedAdapter(Context context, List<AdvertDto> list, String from_activity) {
+    public AdvertReadAdapter(Context context, List<AdvertDto> list, String from_activity) {
         mContext = context;
         this._list = list;
         this.from_activity = from_activity;
@@ -49,7 +49,7 @@ public class ProjectFeaturedAdapter extends RecyclerView.Adapter<ProjectFeatured
 
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recycle_adapter, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_advert_read, parent, false);
 
         return new SimpleViewHolder(view);
     }

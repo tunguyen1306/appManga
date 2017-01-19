@@ -11,11 +11,10 @@ import com.example.tunguyen.manga.R;
 /**
  * Created by DucTin on 2/9/2016.
  */
-public class Fragment1 extends Fragment {
+public class FraUpdateAdvert extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment1, container, false);
+        View view = inflater.inflate(R.layout.fra_update_advert, container, false);
         return view;
     }
-
 }

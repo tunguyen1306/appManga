@@ -85,4 +85,14 @@ public class AdvertDto {
         }
 
         public  String DesAdvertManga;
+
+        public String getTypeAdvertManga() {
+                return TypeAdvertManga;
+        }
+
+        public void setTypeAdvertManga(String typeAdvertManga) {
+                TypeAdvertManga = typeAdvertManga;
+        }
+
+        public  String TypeAdvertManga;
 }

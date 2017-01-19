@@ -1,9 +1,5 @@
 package com.example.tunguyen.manga.view.activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -11,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,46 +15,34 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
-import com.example.tunguyen.manga.view.adapter.CustomAdapter;
-import com.example.tunguyen.manga.view.fragment.Fragment1;
-import com.example.tunguyen.manga.view.fragment.Fragment2;
-import com.example.tunguyen.manga.view.fragment.Home;
-import com.example.tunguyen.manga.view.fragment.NoSwipeableViewpager;
+import com.example.tunguyen.manga.view.fragment.FraListChapter;
+import com.example.tunguyen.manga.view.fragment.FraRelateChapter;
+import com.example.tunguyen.manga.view.fragment.FraAllAdvert;
+import com.example.tunguyen.manga.view.fragment.FraUpdateAdvert;
+import com.example.tunguyen.manga.view.fragment.FraHome;
 //import com.google.android.gms.appindexing.AppIndex;
-import com.example.tunguyen.manga.view.model.AdvertDto;
-import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-
 public class MainActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private NoSwipeableViewpager viewPager;
+    //private TabLayout tabLayout;
+    //private NoSwipeableViewpager viewPager;
     DrawerLayout drawer;
     NavigationView navigationView;
 
     View header;
-    TextView tvHeaderName, tvHeaderEmail;
+    TextView tvHeaderName, tvHeaderEmail,txtUpdateAdvert,txtAllAdvert,txtFeauture;
     ImageView imgHeaderUser;
 
 
@@ -92,13 +77,13 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        viewPager = (NoSwipeableViewpager) findViewById(R.id.viewpager);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        //viewPager = (NoSwipeableViewpager) findViewById(R.id.viewpager);
+        //tabLayout = (TabLayout) findViewById(R.id.tabs);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         //Add Header
 
-        setupViewPager(viewPager);
-        setupTabLayout(tabLayout);
+        //setupViewPager(viewPager);
+        //setupTabLayout(tabLayout);
         setupActionBar();
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -108,6 +93,82 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
+
+        /////replace fragment/////
+        Fragment fragment = null;
+        fragment = new FraHome();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_main, fragment);
+        transaction.commit();
+
+        txtFeauture=(TextView) findViewById(R.id.txtFeauture);
+        txtAllAdvert=(TextView) findViewById(R.id.txtAllAdvert);
+        txtUpdateAdvert=(TextView) findViewById(R.id.txtUpdateAdvert);
+        ///End Advert///
+
+        ///Event Button///
+        txtFeauture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtUpdateAdvert.setBackgroundColor(getResources().getColor(R.color.black));
+                txtUpdateAdvert.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtAllAdvert.setBackgroundColor(getResources().getColor(R.color.black));
+                txtAllAdvert.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtFeauture.setBackgroundColor(getResources().getColor(R.color.backgroundIcon));
+                txtFeauture.setTextColor(getResources().getColor(R.color.TextColor));
+
+                Fragment fragment = null;
+                fragment = new FraHome();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_main, fragment);
+                transaction.commit();
+
+            }
+        });
+
+        txtAllAdvert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                txtUpdateAdvert.setBackgroundColor(getResources().getColor(R.color.black));
+                txtUpdateAdvert.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtFeauture.setBackgroundColor(getResources().getColor(R.color.black));
+                txtFeauture.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtAllAdvert.setBackgroundColor(getResources().getColor(R.color.backgroundIcon));
+                txtAllAdvert.setTextColor(getResources().getColor(R.color.TextColor));
+
+                Fragment fragment = null;
+                fragment = new FraAllAdvert();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_main, fragment);
+                transaction.commit();
+
+            }
+        });
+
+        txtUpdateAdvert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtAllAdvert.setBackgroundColor(getResources().getColor(R.color.black));
+                txtAllAdvert.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtFeauture.setBackgroundColor(getResources().getColor(R.color.black));
+                txtFeauture.setTextColor(getResources().getColor(R.color.colorTextOnButton));
+                txtUpdateAdvert.setBackgroundColor(getResources().getColor(R.color.backgroundIcon));
+                txtUpdateAdvert.setTextColor(getResources().getColor(R.color.TextColor));
+
+                Fragment fragment = null;
+                fragment = new FraUpdateAdvert();
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_main, fragment);
+                transaction.commit();
+
+            }
+        });
+
 
 
     }//end Oncreate
@@ -124,15 +185,15 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     }
     private void setupTabLayout(TabLayout tabLayout) {
 
-        tabLayout.setupWithViewPager(viewPager);
+        //tabLayout.setupWithViewPager(viewPager);
 
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new Home(), getResources().getString(R.string.title_special));
-        adapter.addFrag(new Fragment1(), getResources().getString(R.string.title_all));
-        adapter.addFrag(new Fragment2(), getResources().getString(R.string.title_update));
+        adapter.addFrag(new FraHome(), getResources().getString(R.string.title_special));
+        adapter.addFrag(new FraAllAdvert(), getResources().getString(R.string.title_all));
+        adapter.addFrag(new FraUpdateAdvert(), getResources().getString(R.string.title_update));
         viewPager.setAdapter(adapter);
 
         viewPager.setOffscreenPageLimit(3);

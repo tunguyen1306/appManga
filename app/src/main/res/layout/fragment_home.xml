@@ -11,40 +11,37 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="12dp"
         android:scrollbars="none">
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginLeft="12dp"-->
-            <!--android:layout_marginRight="12dp"-->
-            <!--android:orientation="vertical">-->
-           <!---->
-        <!--</LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager_banner"
-                android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:layout_alignParentTop="true" />
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:id="@+id/pager_banner"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="200dp"-->
+                <!--android:layout_alignParentTop="true" />-->
 
-            <com.pixelcan.inkpageindicator.InkPageIndicator
-                android:id="@+id/indicator_slide"
+            <!--<com.pixelcan.inkpageindicator.InkPageIndicator-->
+                <!--android:id="@+id/indicator_slide"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--app:animationDuration="320"-->
+                <!--app:currentPageIndicatorColor="@color/backgroundMain"-->
+                <!--app:dotDiameter="8dp"-->
+                <!--app:dotGap="8dp"-->
+                <!--app:pageIndicatorColor="@color/backgroundIcon" />-->
+            <org.lucasr.twowayview.widget.TwoWayView
+                android:id="@+id/lv_advert_feature"
+                style="@style/TwoWayView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="12dp"
-                app:animationDuration="320"
-                app:currentPageIndicatorColor="@color/backgroundMain"
-                app:dotDiameter="8dp"
-                app:dotGap="8dp"
-                app:pageIndicatorColor="@color/backgroundIcon" />
+                android:layout_height="150dp"
+                app:twowayview_layoutManager="ListLayoutManager" />
             <FrameLayout
                 android:id="@+id/fr_advert_feauture"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:paddingTop="10dp"
                 android:background="@drawable/btn_background_grey"
                 android:orientation="horizontal">
@@ -79,10 +76,10 @@
             </FrameLayout>
 
             <org.lucasr.twowayview.widget.TwoWayView
-                android:id="@+id/lv_advert_feauture"
+                android:id="@+id/lv_advert_read"
                 style="@style/TwoWayView"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="200dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="15dp"
                 app:twowayview_layoutManager="ListLayoutManager" />
@@ -115,10 +112,10 @@
             </FrameLayout>
 
             <org.lucasr.twowayview.widget.TwoWayView
-                android:id="@+id/lv_advert_viewed"
+                android:id="@+id/lv_advert_popular"
                 style="@style/TwoWayView"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="200dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="15dp"
                 app:twowayview_layoutManager="ListLayoutManager" />

@@ -25,11 +25,12 @@ import retrofit.client.Response;
  */
 
 public class FraInfoChapter extends Fragment {
-    TextView txtAdvertDes1;
+    TextView txtAdvertDes1,txtAdvertType1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_info_chapter, container, false);
         txtAdvertDes1 =(TextView)view.findViewById(R.id.txtAdvertDes1);
+        txtAdvertType1 =(TextView)view.findViewById(R.id.txtAdvertType1);
         Preference.restorePreference(getContext());
         LoadDetailAdvertById(AdvertDto.IdAdvertRefer);
         return view;
@@ -42,6 +43,7 @@ public class FraInfoChapter extends Fragment {
             @Override
             public void success(List<clsAllAdvertDto> advertDtos, Response response) {
                 txtAdvertDes1.setText(advertDtos.get(0).tblAdvertManga.DesAdvertManga);
+                txtAdvertType1.setText(advertDtos.get(0).tblAdvertManga.TypeAdvertManga);
 
             }
 

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.squareup.picasso.Picasso;
 
@@ -19,61 +20,67 @@ import java.util.List;
  * Created by ducthien on 18/01/2017.
  */
 
-public class CustomAdapter extends BaseAdapter{
-    private Context mContext;
-    private final ArrayList<String> NameAdvert;
-    private final ArrayList<String> ImgAdvert;
+public class CustomAdapter extends BaseAdapter {
+    private LayoutInflater layoutInflater;
+    private Context _Context;
+    List<AdvertDto> AdvertDtos;
+    TextView txt_tile;
+    CustomAdapter.ViewHolder listViewHolder;
+    public CustomAdapter(Context context, List<AdvertDto> AdvertRelateListView) {
+        this._Context = context;
+        layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        AdvertDtos = AdvertRelateListView;
 
-    public CustomAdapter(Context c, ArrayList<String> NameAdvert, ArrayList<String> ImgAdvert ) {
-        mContext = c;
-        this.ImgAdvert = ImgAdvert;
-        this.NameAdvert = NameAdvert;
     }
-
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        return NameAdvert.size();
+        return AdvertDtos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return null;
+        return position;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
+        return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        View grid;
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (convertView == null) {
-
-            grid = new View(mContext);
-            grid = inflater.inflate(R.layout.item_gridview, null);
-            TextView textView = (TextView) grid.findViewById(R.id.grid_text);
-            ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
-            textView.setText(NameAdvert.get(position));
-            if(ImgAdvert.get(position)!=""){
-                Picasso.with(mContext).load(ImgAdvert.get(position)).into(imageView);
-            }
-            else {
-                Picasso.with(mContext).load(R.drawable.img_error).into(imageView);
-            }
-
-
-        } else {
-            grid = (View) convertView;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        if(convertView == null)
+        {
+            listViewHolder = new CustomAdapter.ViewHolder();
+            convertView=layoutInflater.inflate(R.layout.item_gridview,parent,false);
+            listViewHolder.txtNameAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAllAdvert);
+            listViewHolder.txtAddressAdvertRelate=(TextView)convertView.findViewById(R.id.txtAuthorAllAdvertr);
+            listViewHolder.imgAdvertRelate=(ImageView) convertView.findViewById(R.id.imgAllAdvert);
+            convertView.setTag(listViewHolder);
         }
+        else
+        {
+            listViewHolder = (CustomAdapter.ViewHolder)convertView.getTag();
+        }
+        listViewHolder.txtNameAdvertRelate.setText(AdvertDtos.get(position).NameAdvertManga);
+        listViewHolder.txtAddressAdvertRelate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
+        if(AdvertDtos.get(position).ImgAdvertManga !="")
+        {
+            Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).resize(180, 180).into(listViewHolder.imgAdvertRelate);}
+        else
+        {
+            Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgAdvertRelate);
+        }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        return grid;
+            }
+        });
+        return convertView;
+    }
+    public  class  ViewHolder{
+        TextView txtNameAdvertRelate,txtAddressAdvertRelate,txtPercentAdvertRelate;
+        ImageView imgAdvertRelate;
     }
 }

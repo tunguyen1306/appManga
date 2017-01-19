@@ -30,4 +30,5 @@
     <color name="colorTextOnBar">#247c9c</color>
     <color name="colorBarH">#1a1e23</color>
     <color name="colorTextChap">#fcfdfd</color>
+    <color name="backgroundfeature">#212830</color>
 </resources>

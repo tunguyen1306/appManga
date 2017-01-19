@@ -27,23 +27,17 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class FraRelateChapter extends Fragment {
-//    GridView grid;
-//    private ArrayList<String> NameAdvert=new ArrayList<String>();
-//    private ArrayList<String> ImgAdvert=new ArrayList<String>();
-
     CardView cardView;
     ListView list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_relate_chapter, container, false);
-       // grid=(GridView)view.findViewById(R.id.grid);
-        cardView=(CardView)view.findViewById(R.id.cardViewAdvertRelate);
         list=(ListView)view.findViewById(R.id.lvAdvertRelate);
-        LoadDetailAdvertById();
+        LoadAdvertRalate();
         return view;
     }
 
-    public void LoadDetailAdvertById()
+    public void LoadAdvertRalate()
     {
         ResClien resClient=new ResClien();
         resClient.GetService().GetListAdvert(
@@ -51,14 +45,6 @@ public class FraRelateChapter extends Fragment {
                     @Override
                     public void success(List<AdvertDto> AdvertDto, Response response) {
                         list.setAdapter(new AdvertRelateAdapter(getActivity(),AdvertDto));
-                        for (int i = 0; i < AdvertDto.size(); i++) {
-
-//                            String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
-//                            NameAdvert.add(AdvertDto.get(i).NameAdvertManga);
-//                            ImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
-//                            CustomAdapter adapter = new CustomAdapter(getActivity(), NameAdvert, ImgAdvert);
-//                            grid.setAdapter(adapter);
-                        }
                     }
                     @Override
                     public void failure(RetrofitError error) {

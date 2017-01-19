@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ln_view"
+    android:layout_width="280dp"
+    android:layout_height="150dp"
+    android:layout_marginRight="8dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        card_view:cardElevation="1dp"
+        card_view:cardCornerRadius="0dp"
+        card_view:cardUseCompatPadding="false">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:background="@color/backgroundfeature"
+            >
+
+            <ImageView
+                android:id="@+id/imgAdvert"
+                android:layout_width="110dp"
+                android:layout_height="130dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="0.27"
+                android:orientation="vertical"
+                android:background="@color/backgroundfeature"
+                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingBottom="8dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/txtNameAdvert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="Title"
+                    android:textColor="@color/colorTextMain"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAuthorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:ellipsize="end"
+                    android:gravity="left|center"
+                    android:maxLines="2"
+                    android:text="Author"
+                    android:textSize="12sp"
+
+                    android:textColor="@color/colorTextDetail"
+                    />
+
+                <TextView
+                    android:id="@+id/txtStatusChap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="3"
+                    android:gravity="bottom"
+                    android:inputType="text"
+                    android:text="Status"
+                    android:textColor="@color/colorTextDetail"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/txtCountChapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+
+                    android:gravity="bottom"
+                    android:inputType="text"
+                    android:text="CountChap"
+                    android:textColor="@color/colorTextDetail"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

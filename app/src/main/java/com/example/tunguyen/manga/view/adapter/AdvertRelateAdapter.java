@@ -45,31 +45,32 @@ public class AdvertRelateAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if(convertView == null)
-        {
-            listViewHolder = new ViewHolder();
-            convertView=layoutInflater.inflate(R.layout.item_list_relate,parent,false);
-            listViewHolder.txtNameAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAdvertRelate);
-            listViewHolder.txtAddressAdvertRelate=(TextView)convertView.findViewById(R.id.txtAddressAdvertRelate);
-            listViewHolder.imgAdvertRelate=(ImageView) convertView.findViewById(R.id.imgAdvertRelate);
-            convertView.setTag(listViewHolder);
-        }
-        else
-        {
-            listViewHolder = (ViewHolder)convertView.getTag();
-        }
-        listViewHolder.txtNameAdvertRelate.setText(AdvertDtos.get(position).NameAdvertManga);
-        listViewHolder.txtAddressAdvertRelate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
-        if(AdvertDtos.get(position).ImgAdvertManga !="")
-        {
-            Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).resize(180, 180).into(listViewHolder.imgAdvertRelate);}
-        else
-        {
-            Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgAdvertRelate);
-        }
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        try {
+            if(convertView == null)
+            {
+                listViewHolder = new ViewHolder();
+                convertView=layoutInflater.inflate(R.layout.item_gridview,parent,false);
+                listViewHolder.txtNameAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAdvertRelate);
+                listViewHolder.txtAddressAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAuthorAdvertRelate);
+                listViewHolder.imgAdvertRelate=(ImageView) convertView.findViewById(R.id.imgAdvertRelate);
+                convertView.setTag(listViewHolder);
+            }
+            else
+            {
+                listViewHolder = (ViewHolder)convertView.getTag();
+            }
+            listViewHolder.txtNameAdvertRelate.setText(AdvertDtos.get(position).NameAdvertManga);
+            listViewHolder.txtAddressAdvertRelate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
+            if(AdvertDtos.get(position).ImgAdvertManga !="")
+            {
+                Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).resize(180, 180).into(listViewHolder.imgAdvertRelate);}
+            else
+            {
+                Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgAdvertRelate);
+            }
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 //                Intent intent_login=new Intent(_Context,DetailBrand.class);
 //                AdvertDto.idBrandPromotiom=AdvertDtos.get(position).getId_brand_promotiom();
 //                AdvertDto.NameBrandPromotiom = AdvertDtos.get(position).getName_brand_promotiom();
@@ -80,8 +81,15 @@ public class AdvertRelateAdapter extends BaseAdapter {
 
 
 
-            }
-        });
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+
         return convertView;
     }
     public  class  ViewHolder{
