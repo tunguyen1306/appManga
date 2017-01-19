@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.activity.DetailAdvert;
+import com.example.tunguyen.manga.view.activity.DetailChapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
@@ -69,13 +71,9 @@ public class ListChapterAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent_login=new Intent(_Context,DetailBrand.class);
-//                BrandDto.idBrandPromotiom=brandDtos.get(position).getId_brand_promotiom();
-//                BrandDto.NameBrandPromotiom = brandDtos.get(position).getName_brand_promotiom();
-//                BrandDto.idCategory = brandDtos.get(position).getCategory_id_brand_promotion();
-//                Preference.savePreference(_Context.getApplicationContext());
-//                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                _Context.startActivity(intent_login);
+                Intent intent_login=new Intent(_Context,DetailChapter.class);
+                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                _Context.startActivity(intent_login);
 
 
 

@@ -49,7 +49,7 @@ public class AdvertRelateAdapter extends BaseAdapter {
             if(convertView == null)
             {
                 listViewHolder = new ViewHolder();
-                convertView=layoutInflater.inflate(R.layout.item_gridview,parent,false);
+                convertView=layoutInflater.inflate(R.layout.item_list_relate,parent,false);
                 listViewHolder.txtNameAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAdvertRelate);
                 listViewHolder.txtAddressAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAuthorAdvertRelate);
                 listViewHolder.imgAdvertRelate=(ImageView) convertView.findViewById(R.id.imgAdvertRelate);

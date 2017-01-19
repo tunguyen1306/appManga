@@ -76,9 +76,9 @@ TextView tv_count_advert;
         tv_count_advert=(TextView) view.findViewById(R.id.tv_count_advert);
         //indicator_banel=(InkPageIndicator)view.findViewById(R.id.indicator_slide);
         //pager_banner=(ViewPager)  view.findViewById(R.id.pager_banner);
-        callServiceSlide();
-        callServiceAdvertRead();
-        callServiceAdvertPopular();
+        callServiceSlide(1);
+        callServiceAdvertRead(2);
+        callServiceAdvertPopular(3);
         return view;
 
     }
@@ -110,9 +110,9 @@ TextView tv_count_advert;
         }
         return items;
     }
-    public void callServiceSlide() {
+    public void callServiceSlide(int id) {
         ResClien restClient = new ResClien();
-        restClient.GetService().GetListAdvert(
+        restClient.GetService().GetAdvertByTypeId(id,
                 new Callback<List<AdvertDto>>() {
                     @Override
                     public void success(List<AdvertDto> AdvertDto, Response response) {
@@ -164,9 +164,9 @@ TextView tv_count_advert;
         }
         return items;
     }
-    public void callServiceAdvertRead() {
+    public void callServiceAdvertRead(int id) {
         ResClien restClient = new ResClien();
-        restClient.GetService().GetListAdvert(new Callback<List<AdvertDto>>() {
+        restClient.GetService().GetAdvertByTypeId(id,new Callback<List<AdvertDto>>() {
             @Override
             public void success(List<AdvertDto> AdvertDto, Response response) {
                 for (int i = 0; i < AdvertDto.size(); i++) {
@@ -215,9 +215,9 @@ TextView tv_count_advert;
         }
         return items;
     }
-    public void callServiceAdvertPopular() {
+    public void callServiceAdvertPopular(int id) {
         ResClien restClient = new ResClien();
-        restClient.GetService().GetListAdvert(new Callback<List<AdvertDto>>() {
+        restClient.GetService().GetAdvertByTypeId(id,new Callback<List<AdvertDto>>() {
             @Override
             public void success(List<AdvertDto> AdvertDto, Response response) {
                 for (int i = 0; i < AdvertDto.size(); i++) {

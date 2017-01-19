@@ -23,5 +23,9 @@
             android:name="com.example.tunguyen.manga.view.activity.DetailAdvert"
             android:label="" >
         </activity>
+        <activity
+            android:name="com.example.tunguyen.manga.view.activity.DetailChapter"
+            android:label="" >
+        </activity>
     </application>
 </manifest>
