@@ -1,6 +1,5 @@
 package com.example.tunguyen.manga.view.adapter;
 
-
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -10,20 +9,25 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class SlideAdapter extends PagerAdapter {
+/**
+ * Created by TuNguyen on 09/13/2016.
+ */
+public class SlideChapAdapter extends PagerAdapter {
 
-    List<AdvertDto> listAdvert;
+    List<ChapterDto> list_slide;
     private LayoutInflater inflater;
     private Context context;
-    public SlideAdapter(Context context, List<AdvertDto> _listAdvert) {
+    public SlideChapAdapter(Context context, List<ChapterDto> list_slide) {
         this.context = context;
-        this.listAdvert=_listAdvert;
+        this.list_slide=list_slide;
         inflater = LayoutInflater.from(context);
     }
 
@@ -34,23 +38,23 @@ public class SlideAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return listAdvert.size();
+        return list_slide.size();
     }
 
     @Override
     public Object instantiateItem(ViewGroup view, final int  position) {
-        View imageLayout = inflater.inflate(R.layout.slide_image, view, false);
+        View imageLayout = inflater.inflate(R.layout.slide_chap, view, false);
         assert imageLayout != null;
-        final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.SlideImage);
-        listAdvert.get(position).getImgAdvertManga();
-        if(listAdvert.get(position).getImgAdvertManga()!=""){
-            Picasso.with(context).load(listAdvert.get(position).getImgAdvertManga()).into(imageView);
+        final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.SlideChap);
+        list_slide.get(position).getLink();
+        if(list_slide.get(position).getLink()!=""){
+            Picasso.with(context).load(list_slide.get(position).getLink()).into(imageView);
         }
         else {
-            Picasso.with(context).load(R.drawable.img_error).into(imageView);
+            Picasso.with(context).load(R.drawable.icon_home).into(imageView);
         }
 
-
+        //Picasso.with(context).load(R.drawable.icon_home).into(imageView);
         view.addView(imageLayout, 0);
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -79,4 +83,3 @@ public class SlideAdapter extends PagerAdapter {
         return null;
     }
 }
-

@@ -64,9 +64,6 @@ public class DetailAdvert extends ActionBarActivity  {
         setContentView(R.layout.detail_advert);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        viewPager = (NoSwipeableViewpager) findViewById(R.id.viewpager);
-//        tabLayout = (TabLayout) findViewById(R.id.tabs);
-
 
         /////replace fragment/////
         Fragment fragment = null;
@@ -78,7 +75,7 @@ public class DetailAdvert extends ActionBarActivity  {
 
         ///Advert///
         txtNameAdvert=(TextView) findViewById(R.id.txtNameAdvert);
-        txtAuthor=(TextView) findViewById(R.id.txtAuthor);
+        txtAuthor=(TextView) findViewById(R.id.txtAuthorName);
         txtCountChapter=(TextView) findViewById(R.id.txtCountChapter);
         txtStatusChap=(TextView) findViewById(R.id.txtStatusChap);
         imgAdvert=(ImageView) findViewById(R.id.imgAdvert);
@@ -152,14 +149,11 @@ public class DetailAdvert extends ActionBarActivity  {
 
         ///End Event Button///
 
-//        setupViewPager(viewPager);
-//        setupTabLayout(tabLayout);
         setupActionBar();
 
 
 
-    }//end Oncreate
-
+    }
 
     @Override
     public void onPause() {
@@ -268,9 +262,12 @@ public class DetailAdvert extends ActionBarActivity  {
             @Override
             public void success(List<clsAllAdvertDto> advertDtos, Response response) {
                 txtNameAdvert.setText(advertDtos.get(0).tblAdvertManga.NameAdvertManga);
+                txtAuthor.setText(advertDtos.get(0).tblAdvertManga.NameAuthorAdvertManga);
+                int countChap= advertDtos.get(0).ListChapterManga.size();
+                txtCountChapter.setText(countChap+" Chap");
                 if(advertDtos.get(0).tblAdvertManga.ImgAdvertManga!="")
                 {
-                    Picasso.with(getApplication()).load(advertDtos.get(0).tblAdvertManga.ImgAdvertManga).resize(180, 180).into(imgAdvert);
+                    Picasso.with(getApplication()).load(advertDtos.get(0).tblAdvertManga.ImgAdvertManga).into(imgAdvert);
                 }
                 else
                 {

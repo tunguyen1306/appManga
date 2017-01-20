@@ -30,7 +30,7 @@ public class FraHome extends Fragment {
     //ViewPager pager_banner;
     //InkPageIndicator indicator_banel;
     View view;
-TextView tv_count_advert;
+TextView tv_count_advert,tv_count_advert2;
     ////Slide///////
     TwoWayView lv_advert_feature;
     List<AdvertDto> ItemAdvert;
@@ -72,13 +72,13 @@ TextView tv_count_advert;
         view = inflater.inflate(R.layout.fragment_home, container, false);
         lv_advert_read = (TwoWayView) view.findViewById(R.id.lv_advert_read);
         lv_advert_feature = (TwoWayView) view.findViewById(R.id.lv_advert_feature);
-    lv_advert_popular=(TwoWayView) view.findViewById(R.id.lv_advert_popular);
+        lv_advert_popular=(TwoWayView) view.findViewById(R.id.lv_advert_popular);
         tv_count_advert=(TextView) view.findViewById(R.id.tv_count_advert);
-        //indicator_banel=(InkPageIndicator)view.findViewById(R.id.indicator_slide);
-        //pager_banner=(ViewPager)  view.findViewById(R.id.pager_banner);
+        tv_count_advert2=(TextView) view.findViewById(R.id.tv_count_advert2);
         callServiceSlide(1);
         callServiceAdvertRead(2);
         callServiceAdvertPopular(3);
+
         return view;
 
     }
@@ -146,6 +146,7 @@ TextView tv_count_advert;
 
             AdvertReadAdapter adapter = new AdvertReadAdapter(getActivity(), ItemAdvertRead, "project");
             lv_advert_read.setAdapter(adapter);
+
         } catch (Exception ex) {
 
         }
@@ -177,6 +178,8 @@ TextView tv_count_advert;
                     ListImgAdvertRead.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorAdvertRead.add(AdvertDto.get(i).NameAuthorAdvertManga);
                 }
+                int count=AdvertDto.size();
+                tv_count_advert.setText(count+" truyện");
                 loadDataAdvertRead();
             }
             @Override
@@ -228,6 +231,8 @@ TextView tv_count_advert;
                     ListImgAdvertPopular.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorAdvertPopular.add(AdvertDto.get(i).NameAuthorAdvertManga);
                 }
+                int count=AdvertDto.size();
+                tv_count_advert2.setText(count+" truyện");
                 loadDataAdvertPopular();
             }
             @Override
@@ -238,4 +243,6 @@ TextView tv_count_advert;
         });
     }
     ///End LoadAdvertRead///
+
+
 }

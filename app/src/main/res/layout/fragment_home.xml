@@ -100,7 +100,16 @@
                     android:text="Truyện phổ biến trong tuần"
                     android:textColor="@color/colorTextMain"
                     android:textSize="14sp" />
-
+                <TextView
+                    android:id="@+id/tv_count_advert2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:layout_marginLeft="12dp"
+                    android:text="96 truyện"
+                    android:layout_marginTop="25dp"
+                    android:textColor="@color/colorTextSecon"
+                    android:textSize="12sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -119,6 +128,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="15dp"
                 app:twowayview_layoutManager="ListLayoutManager" />
+
         </LinearLayout>
     </ScrollView>
 

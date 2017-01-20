@@ -4,6 +4,11 @@ package com.example.tunguyen.manga.view.model;
 import java.util.List;
 
 public class clsAllAdvertDto {
+
+    public  clsAllAdvertDto(int IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga)
+    {
+
+    }
     public List<AdvertDto> ListAdvertManga;
 
     public List<ChapterDto> getListChapterManga() {

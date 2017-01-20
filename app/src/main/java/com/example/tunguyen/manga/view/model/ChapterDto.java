@@ -2,6 +2,13 @@ package com.example.tunguyen.manga.view.model;
 
 public class ChapterDto {
 
+    public static int IdChapterRefer;
+    public static String NameChapterRefer;
+    public ChapterDto(String Link)
+    {
+        this.Link=Link;
+    }
+
     public  int IdChapterManga;
 
     public String getNameChapterManga() {
@@ -39,4 +46,15 @@ public class ChapterDto {
     public  String NameChapterManga;
     public  int StatusChapterManga;
     public  int IdAdvertManga;
+
+    public String getLink() {
+        return Link;
+    }
+
+    public void setLink(String link) {
+        Link = link;
+    }
+    public  String Link;
+
+
 }

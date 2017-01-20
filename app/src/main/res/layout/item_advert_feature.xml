@@ -73,7 +73,7 @@
                     android:layout_weight="3"
                     android:gravity="bottom"
                     android:inputType="text"
-                    android:text="Status"
+                    android:text="Còn tiếp"
                     android:textColor="@color/colorTextDetail"
                     android:textSize="12sp"
                     />
@@ -85,7 +85,7 @@
 
                     android:gravity="bottom"
                     android:inputType="text"
-                    android:text="CountChap"
+                    android:text="20 chap"
                     android:textColor="@color/colorTextDetail"
                     android:textSize="12sp"
                     />

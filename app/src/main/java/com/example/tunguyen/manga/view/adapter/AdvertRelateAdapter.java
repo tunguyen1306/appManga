@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.activity.DetailAdvert;
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.Preference;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 
 /**
  * Created by TuNguyen on 09/10/2016.
@@ -63,7 +69,7 @@ public class AdvertRelateAdapter extends BaseAdapter {
             listViewHolder.txtAddressAdvertRelate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
             if(AdvertDtos.get(position).ImgAdvertManga !="")
             {
-                Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).resize(180, 180).into(listViewHolder.imgAdvertRelate);}
+                Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).into(listViewHolder.imgAdvertRelate);}
             else
             {
                 Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgAdvertRelate);
@@ -71,14 +77,12 @@ public class AdvertRelateAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                Intent intent_login=new Intent(_Context,DetailBrand.class);
-//                AdvertDto.idBrandPromotiom=AdvertDtos.get(position).getId_brand_promotiom();
-//                AdvertDto.NameBrandPromotiom = AdvertDtos.get(position).getName_brand_promotiom();
-//                AdvertDto.idCategory = AdvertDtos.get(position).getCategory_id_brand_promotion();
-//                Preference.savePreference(_Context.getApplicationContext());
-//                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                _Context.startActivity(intent_login);
-
+                    Intent intent_login=new Intent(_Context,DetailAdvert.class);
+                    intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
+                    NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
+                    Preference.savePreference(_Context.getApplicationContext());
+                    _Context.startActivity(intent_login);
 
 
                 }

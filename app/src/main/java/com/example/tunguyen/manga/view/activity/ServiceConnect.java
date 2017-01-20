@@ -31,4 +31,10 @@ public interface ServiceConnect {
     @GET("/Advert/GetAdvertByTypeId/")
     void GetAdvertByTypeId(@Query("id")int id,
                            Callback<List<AdvertDto>> items);
+    @GET("/Chapter/GetDetailChapByID/")
+    void GetDetailChapByID(@Query("idChap")int idChap,
+                           Callback<List<ChapterDto>> items);
+
+    @GET("/Advert/GetAdvertWithChap/")
+    void GetAdvertWithChap(Callback<List<clsAllAdvertDto>> items);
 }

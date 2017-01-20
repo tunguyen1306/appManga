@@ -26,40 +26,23 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/Base.AppCompat.Responsive"
                 android:background="@color/black" />
-            <LinearLayout
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager_chap"
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
-                android:orientation="horizontal"
-                android:background="@color/backgroundDetail"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:padding="2dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_weight="0.27"
-                    android:orientation="vertical"
-                    android:background="@color/backgroundDetail"
-                    android:padding="5dp"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:id="@+id/txtNameAdvert"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:text="Day la trang detail"
-                        android:textColor="@color/colorTextMain"
-                        android:textSize="14sp"
-                        android:maxLines="2"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true" />
+            <com.pixelcan.inkpageindicator.InkPageIndicator
+                android:id="@+id/indicator_chap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="12dp"
+                app:animationDuration="320"
+                app:currentPageIndicatorColor="@color/greenToolBarBg1"
+                app:dotDiameter="8dp"
+                app:dotGap="8dp"
+                app:pageIndicatorColor="@color/greenToolBarBg" />
 
         </LinearLayout>
 

@@ -64,7 +64,7 @@ public class AdvertReadAdapter extends RecyclerView.Adapter<AdvertReadAdapter.Si
         } else {
             if(_list.get(position).getImgAdvertManga()!="")
             {
-                Picasso.with(mContext).load(_list.get(position).getImgAdvertManga()).resize(180, 180).into(holder.image);}
+                Picasso.with(mContext).load(_list.get(position).getImgAdvertManga()).into(holder.image);}
             else
             {
                 Picasso.with(mContext).load(R.drawable.img_error).into(holder.image);

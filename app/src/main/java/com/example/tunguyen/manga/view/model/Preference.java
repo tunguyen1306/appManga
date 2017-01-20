@@ -16,6 +16,10 @@ public class Preference {
         edit.putInt("IdAdvertRefer", AdvertDto.IdAdvertRefer);
         edit.putString("NameAdvertRefer", AdvertDto.NameAdvertRefer);
 
+        ///Chapter///
+        edit.putInt("IdChapterRefer", ChapterDto.IdChapterRefer);
+        edit.putString("NameChapterRefer",ChapterDto.NameChapterRefer);
+
 
         edit.clear();
         edit.commit();
@@ -23,6 +27,10 @@ public class Preference {
     public static void restorePreference(Context context) {
         AdvertDto.IdAdvertRefer=getPref(context).getInt("IdAdvertRefer",0);
         AdvertDto.NameAdvertRefer=getPref(context).getString("NameAdvertRefer", "");
+
+        ///Chapter///
+        ChapterDto.IdChapterRefer=getPref(context).getInt("IdChapterRefer",0);
+        ChapterDto.NameChapterRefer=getPref(context).getString("NameChapterRefer", "");
 
     }
 }

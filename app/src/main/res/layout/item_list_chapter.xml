@@ -11,7 +11,7 @@
             android:id="@+id/txtNameChapter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="Chap 01"
             android:textColor="@color/colorTextChap"

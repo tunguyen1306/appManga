@@ -10,15 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
-import com.example.tunguyen.manga.view.activity.DetailAdvert;
+
 import com.example.tunguyen.manga.view.activity.DetailChapter;
-import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
-import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
+import static com.example.tunguyen.manga.view.model.ChapterDto.IdChapterRefer;
+import static com.example.tunguyen.manga.view.model.ChapterDto.NameChapterRefer;
 
 /**
  * Created by TuNguyen on 01/17/2017.
@@ -27,18 +25,18 @@ import java.util.List;
 public class ListChapterAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context _Context;
-    List<ChapterDto> AllAdvertDto;
+    List<ChapterDto> ChapterDto;
     TextView txt_tile;
     ViewHolder listViewHolder;
     public ListChapterAdapter(Context context, List<ChapterDto> ChapterListView) {
         this._Context = context;
         layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        AllAdvertDto = ChapterListView;
+        ChapterDto = ChapterListView;
 
     }
     @Override
     public int getCount() {
-        return AllAdvertDto.size();
+        return ChapterDto.size();
     }
 
     @Override
@@ -64,25 +62,22 @@ public class ListChapterAdapter extends BaseAdapter {
         {
             listViewHolder = (ViewHolder)convertView.getTag();
         }
-                 listViewHolder.txtNameChapter.setText(AllAdvertDto.get(position).NameChapterManga);
-
-
+                 listViewHolder.txtNameChapter.setText(ChapterDto.get(position).NameChapterManga);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_login=new Intent(_Context,DetailChapter.class);
                 intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                IdChapterRefer=ChapterDto.get(position).getIdChapterManga();
+                NameChapterRefer =ChapterDto.get(position).getNameChapterManga();
+                Preference.savePreference(_Context.getApplicationContext());
                 _Context.startActivity(intent_login);
-
-
-
             }
         });
         return convertView;
     }
     public  class  ViewHolder{
-        TextView txtNameChapter,txtAddressChapter,txtPercentChapter;
-        ImageView imgChapter;
+        TextView txtNameChapter;
     }
 }
