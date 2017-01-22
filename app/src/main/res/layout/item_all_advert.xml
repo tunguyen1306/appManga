@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="65dp"
+android:orientation="horizontal"
+android:background="@color/backgroundDetail"
+android:padding="2dp">
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.27"
+        android:orientation="vertical"
+        android:background="@color/backgroundDetail">
+        <TextView
+            android:id="@+id/txtNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:text="1"
+            android:gravity="center"
+            android:textColor="@color/colorTextMain"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:textStyle="bold" />
+        </LinearLayout>
+
+<ImageView
+    android:id="@+id/imgAllAdvert"
+    android:layout_width="50dp"
+    android:layout_height="65dp"
+    android:layout_gravity="left"
+    android:contentDescription=""
+    android:scaleType="centerCrop"
+    android:src="@drawable/ic_launcher" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="2dp"
+    android:layout_weight="0.27"
+    android:orientation="vertical"
+    android:background="@color/backgroundDetail"
+    android:padding="5dp"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/txtNameAllAdvert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:text="Title"
+        android:textColor="@color/colorTextMain"
+        android:textSize="12sp"
+        android:maxLines="2"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtNameAuthorAllAdvert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="left|center"
+        android:maxLines="2"
+        android:text="Place"
+        android:textSize="10sp"
+        android:textColor="@color/colorTextDetail"
+        />
+
+
+</LinearLayout>
+</LinearLayout>

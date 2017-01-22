@@ -1,20 +1,28 @@
 package com.example.tunguyen.manga.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.activity.DetailAdvert;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
+import com.example.tunguyen.manga.view.model.Preference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 
 /**
  * Created by ducthien on 18/01/2017.
@@ -73,7 +81,18 @@ public class CustomAdapter extends BaseAdapter {
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                Animation animation = new AlphaAnimation(0.3f, 1.0f);
+                animation.setDuration(1000);
+                view.startAnimation(animation);
+
+                Intent intent_login=new Intent(_Context,DetailAdvert.class);
+                intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
+                NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
+                Preference.CountView(AdvertDtos.get(position).getIdAdvertManga(),123);
+                Preference.savePreference(_Context.getApplicationContext());
+                _Context.startActivity(intent_login);
 
             }
         });

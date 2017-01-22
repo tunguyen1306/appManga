@@ -4,6 +4,7 @@ public class ChapterDto {
 
     public static int IdChapterRefer;
     public static String NameChapterRefer;
+
     public ChapterDto(String Link)
     {
         this.Link=Link;
@@ -55,6 +56,7 @@ public class ChapterDto {
         Link = link;
     }
     public  String Link;
+
 
 
 }

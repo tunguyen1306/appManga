@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.DetailAdvert;
 import com.example.tunguyen.manga.view.model.AdvertDto;
@@ -22,16 +23,16 @@ import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 /**
  * Created by TuNguyen on 09/10/2016.
  */
-public class AdvertRelateAdapter extends BaseAdapter {
+public class AllAdvertAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context _Context;
     List<AdvertDto> AdvertDtos;
     TextView txt_tile;
     ViewHolder listViewHolder;
-    public AdvertRelateAdapter(Context context, List<AdvertDto> AdvertRelateListView) {
+    public AllAdvertAdapter(Context context, List<AdvertDto> AllAdvertListView) {
         this._Context = context;
         layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        AdvertDtos = AdvertRelateListView;
+        AdvertDtos = AllAdvertListView;
 
     }
     @Override
@@ -55,24 +56,24 @@ public class AdvertRelateAdapter extends BaseAdapter {
             if(convertView == null)
             {
                 listViewHolder = new ViewHolder();
-                convertView=layoutInflater.inflate(R.layout.item_list_relate,parent,false);
-                listViewHolder.txtNameAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAdvertRelate);
-                listViewHolder.txtAddressAdvertRelate=(TextView)convertView.findViewById(R.id.txtNameAuthorAdvertRelate);
-                listViewHolder.imgAdvertRelate=(ImageView) convertView.findViewById(R.id.imgAdvertRelate);
+                convertView=layoutInflater.inflate(R.layout.item_all_advert,parent,false);
+                listViewHolder.txtNameAllAdvert=(TextView)convertView.findViewById(R.id.txtNameAllAdvert);
+                listViewHolder.txtAddressAllAdvert=(TextView)convertView.findViewById(R.id.txtNameAuthorAllAdvert);
+                listViewHolder.imgAllAdvert=(ImageView) convertView.findViewById(R.id.imgAllAdvert);
                 convertView.setTag(listViewHolder);
             }
             else
             {
                 listViewHolder = (ViewHolder)convertView.getTag();
             }
-            listViewHolder.txtNameAdvertRelate.setText(AdvertDtos.get(position).NameAdvertManga);
-            listViewHolder.txtAddressAdvertRelate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
+            listViewHolder.txtNameAllAdvert.setText(AdvertDtos.get(position).NameAdvertManga);
+            listViewHolder.txtAddressAllAdvert.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
             if(AdvertDtos.get(position).ImgAdvertManga !="")
             {
-                Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).into(listViewHolder.imgAdvertRelate);}
+                Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).into(listViewHolder.imgAllAdvert);}
             else
             {
-                Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgAdvertRelate);
+                Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgAllAdvert);
             }
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,7 +99,7 @@ public class AdvertRelateAdapter extends BaseAdapter {
         return convertView;
     }
     public  class  ViewHolder{
-        TextView txtNameAdvertRelate,txtAddressAdvertRelate,txtPercentAdvertRelate;
-        ImageView imgAdvertRelate;
+        TextView txtNameAllAdvert,txtAddressAllAdvert,txtPercentAllAdvert;
+        ImageView imgAllAdvert;
     }
 }

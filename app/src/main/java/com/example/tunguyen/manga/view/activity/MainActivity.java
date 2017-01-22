@@ -1,5 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -15,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,10 +31,13 @@ import com.example.tunguyen.manga.view.fragment.FraAllAdvert;
 import com.example.tunguyen.manga.view.fragment.FraUpdateAdvert;
 import com.example.tunguyen.manga.view.fragment.FraHome;
 //import com.google.android.gms.appindexing.AppIndex;
+import com.example.tunguyen.manga.view.model.Preference;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.tunguyen.manga.view.model.DeviceDto.SerialDeviceRefer;
 
 public class MainActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -75,15 +81,25 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 //        }
 
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //viewPager = (NoSwipeableViewpager) findViewById(R.id.viewpager);
-        //tabLayout = (TabLayout) findViewById(R.id.tabs);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //Add Header
+        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        telephonyManager.getDeviceId();// Product
+        String SerialDevice = telephonyManager.getLine1Number();
+        String OsVersion=System.getProperty("os.version");
+        String OsInCremental=android.os.Build.VERSION.INCREMENTAL;
+        int OSAPILevel = android.os.Build.VERSION.SDK_INT;
+        String OsDevice= android.os.Build.DEVICE;
+        String ModelDevice=  android.os.Build.MODEL;
+        String ProductDevice=  android.os.Build.PRODUCT;
+        SerialDeviceRefer=SerialDevice;
+        Preference.savePreference(getApplicationContext());
+        //Preference.AddDevice(SerialDevice,OsVersion,OsInCremental,OsDevice,ModelDevice,OSAPILevel,ProductDevice);
 
-        //setupViewPager(viewPager);
-        //setupTabLayout(tabLayout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         setupActionBar();
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -183,21 +199,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     public void onResume() {
         super.onResume();
     }
-    private void setupTabLayout(TabLayout tabLayout) {
-
-        //tabLayout.setupWithViewPager(viewPager);
-
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new FraHome(), getResources().getString(R.string.title_special));
-        adapter.addFrag(new FraAllAdvert(), getResources().getString(R.string.title_all));
-        adapter.addFrag(new FraUpdateAdvert(), getResources().getString(R.string.title_update));
-        viewPager.setAdapter(adapter);
-
-        viewPager.setOffscreenPageLimit(3);
-    }
 
     public void setupActionBar() {
         setSupportActionBar(toolbar);
@@ -207,8 +208,8 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
         View mCustomView = mInflater.inflate(R.layout.actionbar, null);
-        ImageView logo = (ImageView) mCustomView.findViewById(R.id.img_logo);
-        logo.setImageResource(R.drawable.ic_launcher);
+        //ImageView logo = (ImageView) mCustomView.findViewById(R.id.img_logo);
+       // logo.setImageResource(R.drawable.ic_launcher);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
     }

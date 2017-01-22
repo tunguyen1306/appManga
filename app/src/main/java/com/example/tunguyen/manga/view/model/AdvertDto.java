@@ -9,7 +9,7 @@ public class AdvertDto {
         }
         public static  int IdAdvertRefer;
         public static  String NameAdvertRefer;
-
+        public static int CountViewRefer;
         public  int IdAdvertManga;
         public  String NameAdvertManga;
 
@@ -95,4 +95,14 @@ public class AdvertDto {
         }
 
         public  String TypeAdvertManga;
+        public int getCountView() {
+                return CountView;
+        }
+
+        public void setCountView(int countView) {
+                CountView = countView;
+        }
+
+        public  int CountView;
+
 }

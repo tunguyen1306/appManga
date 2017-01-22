@@ -71,6 +71,7 @@ public class ListChapterAdapter extends BaseAdapter {
                 intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 IdChapterRefer=ChapterDto.get(position).getIdChapterManga();
                 NameChapterRefer =ChapterDto.get(position).getNameChapterManga();
+
                 Preference.savePreference(_Context.getApplicationContext());
                 _Context.startActivity(intent_login);
             }

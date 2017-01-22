@@ -1,16 +1,11 @@
 package com.example.tunguyen.manga.view.activity;
 
 import android.support.v4.app.FragmentTransaction;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +15,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.fragment.FraInfoChapter;
@@ -40,17 +34,18 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.example.tunguyen.manga.view.model.DeviceDto.SerialDeviceRefer;
+
 public class DetailAdvert extends ActionBarActivity  {
 
     private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private NoSwipeableViewpager viewPager;
-    DrawerLayout drawer;
-    NavigationView navigationView;
 
-    View header;
-    TextView tvHeaderName,tvHeaderEmail,txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate;
-    ImageView imgHeaderUser,imgAdvert;
+    DrawerLayout drawer;
+
+
+
+    TextView txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate,txtCountView;
+    ImageView imgAdvert;
 
     public FragmentTransaction ft;
     boolean doubleBackToExitPressedOnce = false;
@@ -79,7 +74,7 @@ public class DetailAdvert extends ActionBarActivity  {
         txtCountChapter=(TextView) findViewById(R.id.txtCountChapter);
         txtStatusChap=(TextView) findViewById(R.id.txtStatusChap);
         imgAdvert=(ImageView) findViewById(R.id.imgAdvert);
-
+        txtCountView=(TextView) findViewById(R.id.txtCountView);
         txtInfo=(TextView) findViewById(R.id.txtInfo);
         txtChap=(TextView) findViewById(R.id.txtChap);
         txtRelate=(TextView) findViewById(R.id.txtRelate);
@@ -166,20 +161,6 @@ public class DetailAdvert extends ActionBarActivity  {
     public void onResume() {
         super.onResume();
     }
-    private void setupTabLayout(TabLayout tabLayout) {
-//        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.greenToolBarBg1));
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new FraInfoChapter(),"Thông tin");
-        adapter.addFrag(new FraListChapter(),"Chương");
-        adapter.addFrag(new FraRelateChapter(),"Liên quan");
-        viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
-    }
     public void setupActionBar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         Preference.restorePreference(getApplicationContext());
@@ -265,6 +246,8 @@ public class DetailAdvert extends ActionBarActivity  {
                 txtAuthor.setText(advertDtos.get(0).tblAdvertManga.NameAuthorAdvertManga);
                 int countChap= advertDtos.get(0).ListChapterManga.size();
                 txtCountChapter.setText(countChap+" Chap");
+                Preference.restorePreference(getApplicationContext());
+                txtCountView.setText(advertDtos.get(0).tblAdvertManga.CountView + " lượt xem");
                 if(advertDtos.get(0).tblAdvertManga.ImgAdvertManga!="")
                 {
                     Picasso.with(getApplication()).load(advertDtos.get(0).tblAdvertManga.ImgAdvertManga).into(imgAdvert);

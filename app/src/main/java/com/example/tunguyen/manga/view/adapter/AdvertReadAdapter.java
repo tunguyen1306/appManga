@@ -84,6 +84,7 @@ public class AdvertReadAdapter extends RecyclerView.Adapter<AdvertReadAdapter.Si
                 intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 IdAdvertRefer=_list.get(position).getIdAdvertManga();
                 NameAdvertRefer =_list.get(position).getNameAdvertManga();
+                Preference.CountView(_list.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(mContext.getApplicationContext());
                 mContext.startActivity(intent_login);
 

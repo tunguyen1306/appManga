@@ -2,6 +2,7 @@ package com.example.tunguyen.manga.view.activity;
 
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
+import com.example.tunguyen.manga.view.model.DeviceDto;
 import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 
 import java.util.List;
@@ -37,4 +38,17 @@ public interface ServiceConnect {
 
     @GET("/Advert/GetAdvertWithChap/")
     void GetAdvertWithChap(Callback<List<clsAllAdvertDto>> items);
+
+    @GET("/Advert/CountView/")
+    void CountView(@Query("id")int id,@Query("idCount")int idCount,Callback<List<AdvertDto>> items);
+
+    @GET("/Device/AddDevice/")
+    void AddDevice(@Query("serial")String serial,
+                   @Query("model")String model,
+                   @Query("product")String product,
+                   @Query("imei")String imei,
+                   @Query("osversion")String osversion,
+                   @Query("osapiLevel")int osapiLevel,
+                   @Query("os")String os,
+                           Callback<List<DeviceDto>> device);
 }

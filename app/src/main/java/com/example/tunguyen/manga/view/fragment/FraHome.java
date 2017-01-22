@@ -1,19 +1,24 @@
 package com.example.tunguyen.manga.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.activity.AllAdvertBy;
 import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.adapter.AdvertFeaturedAdapter;
 import com.example.tunguyen.manga.view.adapter.AdvertPopularAdapter;
 import com.example.tunguyen.manga.view.adapter.AdvertReadAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.Preference;
 
 import org.lucasr.twowayview.widget.TwoWayView;
 
@@ -30,7 +35,7 @@ public class FraHome extends Fragment {
     //ViewPager pager_banner;
     //InkPageIndicator indicator_banel;
     View view;
-TextView tv_count_advert,tv_count_advert2;
+TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
     ////Slide///////
     TwoWayView lv_advert_feature;
     List<AdvertDto> ItemAdvert;
@@ -75,10 +80,37 @@ TextView tv_count_advert,tv_count_advert2;
         lv_advert_popular=(TwoWayView) view.findViewById(R.id.lv_advert_popular);
         tv_count_advert=(TextView) view.findViewById(R.id.tv_count_advert);
         tv_count_advert2=(TextView) view.findViewById(R.id.tv_count_advert2);
+        txtReadmore=(TextView) view.findViewById(R.id.txtReadmore);
+        txtReadmore1=(TextView) view.findViewById(R.id.txtReadmore1);
         callServiceSlide(1);
         callServiceAdvertRead(2);
         callServiceAdvertPopular(3);
+        txtReadmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation animation = new AlphaAnimation(0.3f, 1.0f);
+                animation.setDuration(1000);
+                view.startAnimation(animation);
+                Preference.idActionbar=1;
+                Preference.savePreference(getActivity());
+                Intent intent_login=new Intent(getActivity(),AllAdvertBy.class);
+                startActivity(intent_login);
 
+            }
+        });
+        txtReadmore1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation animation = new AlphaAnimation(0.3f, 1.0f);
+                animation.setDuration(1000);
+                view.startAnimation(animation);
+                Preference.idActionbar=2;
+                Preference.savePreference(getActivity());
+                Intent intent_login=new Intent(getActivity(),AllAdvertBy.class);
+                startActivity(intent_login);
+
+            }
+        });
         return view;
 
     }
