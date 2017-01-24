@@ -35,6 +35,7 @@ public class FraAllAdvert extends Fragment {
     List<String> ListStatusChapAllAdvert = new ArrayList<>();
     List<String> ListCountChapAllAdvert = new ArrayList<>();
     List<String> ListImgAllAdvert = new ArrayList<>();
+    List<String> ListCountAllAdvert = new ArrayList<>();
     ////End Advert Read///////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {

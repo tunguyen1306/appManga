@@ -35,6 +35,7 @@ public class FraUpdateAdvert extends Fragment {
     List<String> ListStatusChapUpdateAdvert = new ArrayList<>();
     List<String> ListCountChapUpdateAdvert = new ArrayList<>();
     List<String> ListImgUpdateAdvert = new ArrayList<>();
+    List<String> ListCountUpdateAdvert = new ArrayList<>();
     ////End Advert Read///////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -66,7 +67,8 @@ public class FraUpdateAdvert extends Fragment {
                             ListIdUpdateAdvert.get(i),
                             ListNameUpdateAdvert.get(i),
                             ListImgUpdateAdvert.get(i) ,
-                            ListNameAuthorUpdateAdvert.get(i)
+                            ListNameAuthorUpdateAdvert.get(i),
+                            ListCountUpdateAdvert.get(i)
                     )
             );
         }
@@ -74,16 +76,18 @@ public class FraUpdateAdvert extends Fragment {
     }
     public void callServiceUpdateAdvert() {
         ResClien restClient = new ResClien();
-        restClient.GetService().GetListAdvert(new Callback<List<AdvertDto>>() {
+        restClient.GetService().CountUpdate(new Callback<List<AdvertDto>>() {
             @Override
             public void success(List<AdvertDto> AdvertDto, Response response) {
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+                    String strCount = Integer.toString(AdvertDto.get(i).num_update);
                     ListIdUpdateAdvert.add(tmpStr10);
                     ListNameUpdateAdvert.add(AdvertDto.get(i).NameAdvertManga);
                     ListImgUpdateAdvert.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorUpdateAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
+                    ListCountUpdateAdvert.add(strCount);
                 }
                 loadDataUpdateAdvert();
             }

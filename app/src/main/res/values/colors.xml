@@ -31,4 +31,5 @@
     <color name="colorBarH">#1a1e23</color>
     <color name="colorTextChap">#fcfdfd</color>
     <color name="backgroundfeature">#212830</color>
+    <color name="colorTextCountUpdate">#ff031a</color>
 </resources>

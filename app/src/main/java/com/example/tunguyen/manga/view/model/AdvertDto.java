@@ -1,11 +1,19 @@
 package com.example.tunguyen.manga.view.model;
 
 public class AdvertDto {
-        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga ){
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga, String num_update){
                 this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
                 this.NameAdvertManga=NameAdvertManga;
                 this.ImgAdvertManga=ImgAdvertManga;
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
+                this.num_update=Integer.parseInt(num_update);
+        }
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga){
+                this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
+                this.NameAdvertManga=NameAdvertManga;
+                this.ImgAdvertManga=ImgAdvertManga;
+                this.NameAuthorAdvertManga=NameAuthorAdvertManga;
+
         }
         public static  int IdAdvertRefer;
         public static  String NameAdvertRefer;
@@ -104,5 +112,15 @@ public class AdvertDto {
         }
 
         public  int CountView;
+
+        public int getnum_update() {
+                return num_update;
+        }
+
+        public void setnum_update(int countUpdate) {
+                num_update = countUpdate;
+        }
+
+        public  int num_update;
 
 }

@@ -23,6 +23,10 @@ import retrofit.mime.TypedFile;
 public interface ServiceConnect {
     @GET("/Advert/")
     void GetListAdvert(Callback<List<AdvertDto>> items);
+
+    @GET("/Chapter/CountUpdate/")
+    void CountUpdate(Callback<List<AdvertDto>> items);
+
     @GET("/Advert/GetAdvertById/")
     void GetAdvertById(@Query("id")int id,
                        Callback<List<clsAllAdvertDto>> items);
