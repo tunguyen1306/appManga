@@ -21,6 +21,7 @@ import java.util.List;
 
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 
 /**
  * Created by ducthien on 18/01/2017.
@@ -60,8 +61,10 @@ public class UpdateAdvertAdapter extends BaseAdapter {
             listViewHolder = new UpdateAdvertAdapter.ViewHolder();
             convertView=layoutInflater.inflate(R.layout.item_update_gridview,parent,false);
             listViewHolder.txtNameCountUpdate=(TextView)convertView.findViewById(R.id.txtNameCountUpdate);
-            listViewHolder.txtAddressCountUpdate=(TextView)convertView.findViewById(R.id.txtAuthorCountUpdate);
+            listViewHolder.txtAuthorCountUpdate=(TextView)convertView.findViewById(R.id.txtAuthorCountUpdate);
+            listViewHolder.txtCountUpdate=(TextView)convertView.findViewById(R.id.txtCountUpdate);
             listViewHolder.imgCountUpdate=(ImageView) convertView.findViewById(R.id.imgCountUpdate);
+
             convertView.setTag(listViewHolder);
         }
         else
@@ -69,10 +72,17 @@ public class UpdateAdvertAdapter extends BaseAdapter {
             listViewHolder = (UpdateAdvertAdapter.ViewHolder)convertView.getTag();
         }
         listViewHolder.txtNameCountUpdate.setText(AdvertDtos.get(position).NameAdvertManga);
-        listViewHolder.txtAddressCountUpdate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
+        listViewHolder.txtAuthorCountUpdate.setText(AdvertDtos.get(position).NameAuthorAdvertManga);
+        String numUpdate=String.valueOf(AdvertDtos.get(position).num_update);
+        if (AdvertDtos.get(position).num_update==0){
+            listViewHolder.txtCountUpdate.setText("0");
+        }else {
+            listViewHolder.txtCountUpdate.setText(numUpdate);
+        }
+
         if(AdvertDtos.get(position).ImgAdvertManga !="")
         {
-            Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).resize(180, 180).into(listViewHolder.imgCountUpdate);}
+            Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).into(listViewHolder.imgCountUpdate);}
         else
         {
             Picasso.with(_Context).load(R.drawable.img_error).into(listViewHolder.imgCountUpdate);
@@ -88,6 +98,7 @@ public class UpdateAdvertAdapter extends BaseAdapter {
                 intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
                 NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
+                TypeAdvertRefer =AdvertDtos.get(position).getTypeAdvertManga();
                 Preference.CountView(AdvertDtos.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(_Context.getApplicationContext());
                 _Context.startActivity(intent_login);
@@ -97,7 +108,7 @@ public class UpdateAdvertAdapter extends BaseAdapter {
         return convertView;
     }
     public  class  ViewHolder{
-        TextView txtNameCountUpdate,txtAddressCountUpdate,txtPercentCountUpdate;
+        TextView txtNameCountUpdate,txtAuthorCountUpdate,txtCountUpdate;
         ImageView imgCountUpdate;
     }
 }

@@ -45,6 +45,7 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
     List<String> ListStatusAdvert = new ArrayList<>();
     List<String> ListStatusChapAdvert = new ArrayList<>();
     List<String> ListCountChapAdvert = new ArrayList<>();
+    List<String> ListTypeAdvert = new ArrayList<>();
     List<String> ListImgAdvert = new ArrayList<>();
     ////End Slide///
 

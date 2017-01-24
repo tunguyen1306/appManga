@@ -8,15 +8,17 @@ public class AdvertDto {
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
                 this.num_update=Integer.parseInt(num_update);
         }
-        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga){
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String ){
                 this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
                 this.NameAdvertManga=NameAdvertManga;
                 this.ImgAdvertManga=ImgAdvertManga;
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
+                this.TypeAdvertManga=TypeAdvertManga;
 
         }
         public static  int IdAdvertRefer;
         public static  String NameAdvertRefer;
+        public static  String TypeAdvertRefer;
         public static int CountViewRefer;
         public  int IdAdvertManga;
         public  String NameAdvertManga;
@@ -113,12 +115,14 @@ public class AdvertDto {
 
         public  int CountView;
 
-        public int getnum_update() {
+
+
+        public int getNum_update() {
                 return num_update;
         }
 
-        public void setnum_update(int countUpdate) {
-                num_update = countUpdate;
+        public void setNum_update(int num_update) {
+                this.num_update = num_update;
         }
 
         public  int num_update;

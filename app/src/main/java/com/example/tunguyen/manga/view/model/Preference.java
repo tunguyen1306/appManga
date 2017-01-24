@@ -27,7 +27,7 @@ public class Preference {
         edit.putInt("IdAdvertRefer", AdvertDto.IdAdvertRefer);
         edit.putString("NameAdvertRefer", AdvertDto.NameAdvertRefer);
         edit.putInt("CountViewRefer", AdvertDto.CountViewRefer);
-
+        edit.putString("TypeAdvertRefer", AdvertDto.TypeAdvertRefer);
         ///Chapter///
         edit.putInt("IdChapterRefer", ChapterDto.IdChapterRefer);
         edit.putString("NameChapterRefer",ChapterDto.NameChapterRefer);
@@ -45,7 +45,7 @@ public class Preference {
         AdvertDto.IdAdvertRefer=getPref(context).getInt("IdAdvertRefer",0);
         AdvertDto.NameAdvertRefer=getPref(context).getString("NameAdvertRefer", "");
         AdvertDto.CountViewRefer=getPref(context).getInt("CountViewRefer",0);
-
+        AdvertDto.TypeAdvertRefer=getPref(context).getString("TypeAdvertRefer", "");
         ///Chapter///
         ChapterDto.IdChapterRefer=getPref(context).getInt("IdChapterRefer",0);
         ChapterDto.NameChapterRefer=getPref(context).getString("NameChapterRefer", "");

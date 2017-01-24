@@ -15,6 +15,8 @@ import com.example.tunguyen.manga.view.activity.DetailChapter;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
 import java.util.List;
+
+import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 import static com.example.tunguyen.manga.view.model.ChapterDto.IdChapterRefer;
 import static com.example.tunguyen.manga.view.model.ChapterDto.NameChapterRefer;
 

@@ -18,6 +18,7 @@ import com.example.tunguyen.manga.view.adapter.AdvertRelateAdapter;
 import com.example.tunguyen.manga.view.adapter.CustomAdapter;
 import com.example.tunguyen.manga.view.adapter.ListChapterAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
+import com.example.tunguyen.manga.view.model.Preference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
+
 public class FraRelateChapter extends Fragment {
     CardView cardView;
     ListView list;
@@ -33,14 +36,15 @@ public class FraRelateChapter extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_relate_chapter, container, false);
         list=(ListView)view.findViewById(R.id.lvAdvertRelate);
-        LoadAdvertRalate();
+        Preference.restorePreference(getContext());
+        LoadAdvertRalate(TypeAdvertRefer);
         return view;
     }
 
-    public void LoadAdvertRalate()
+    public void LoadAdvertRalate(String type)
     {
         ResClien resClient=new ResClien();
-        resClient.GetService().GetListAdvert(
+        resClient.GetService().GetListAdvertByType(type,
                 new Callback<List<AdvertDto>>() {
                     @Override
                     public void success(List<AdvertDto> AdvertDto, Response response) {

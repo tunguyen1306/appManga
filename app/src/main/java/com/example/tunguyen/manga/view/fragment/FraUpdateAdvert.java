@@ -12,6 +12,7 @@ import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.adapter.AdvertRelateAdapter;
 import com.example.tunguyen.manga.view.adapter.CustomAdapter;
+import com.example.tunguyen.manga.view.adapter.UpdateAdvertAdapter;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 
 import org.lucasr.twowayview.widget.TwoWayView;
@@ -53,7 +54,7 @@ public class FraUpdateAdvert extends Fragment {
 
         try {
 
-            CustomAdapter adapter = new CustomAdapter(getActivity(), ItemUpdateAdvert);
+            UpdateAdvertAdapter adapter = new UpdateAdvertAdapter(getActivity(), ItemUpdateAdvert);
             grid.setAdapter(adapter);
         } catch (Exception ex) {
 

@@ -23,6 +23,7 @@ import java.util.List;
 
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 
 /**
  * Created by ducthien on 18/01/2017.
@@ -90,6 +91,7 @@ public class CustomAdapter extends BaseAdapter {
                 intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
                 NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
+                TypeAdvertRefer =AdvertDtos.get(position).getTypeAdvertManga();
                 Preference.CountView(AdvertDtos.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(_Context.getApplicationContext());
                 _Context.startActivity(intent_login);
