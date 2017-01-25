@@ -6,52 +6,37 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/icon_home"
-            android:title="Trang chủ"
+            android:icon="@drawable/ic_list_manga"
+            android:title="Danh sách"
             />
-
-    </group>
-    <group
-        android:id="@+id/gr_first"
-        android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_launcher"
-            android:title="Đăng nhập" />
-        <item
-            android:id="@+id/nav_register"
-            android:icon="@drawable/ic_launcher"
-            android:title="Đăng ký" />
-
-    </group>
-
-    <item android:title="Communicate">
         <group
             android:id="@+id/gr_second"
             android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_advert_save"
-                android:icon="@drawable/ic_launcher"
-                android:title="Sản phẩm đã xem" />
+                android:icon="@drawable/ic_history_manga"
+                android:title="Truyện đã xem" />
             <item
                 android:id="@+id/nav_email"
-                android:icon="@drawable/ic_launcher"
-                android:title="Hộp thư" />
+                android:icon="@drawable/ic_favorite_on_manga"
+                android:title="Truyện yêu thích" />
+
+        </group>
+    </group>
+
+
+    <item android:title="Communicate">
+
+        <group
+            android:id="@+id/gr_first"
+            android:checkableBehavior="single">
 
             <item
-                android:id="@+id/nav_acount_setting"
+                android:id="@+id/nav_login"
                 android:icon="@drawable/ic_launcher"
-                android:title="Cài đặt tài khoản"/>
-            <item
-                android:id="@+id/nav_about_products"
-                android:icon="@drawable/ic_launcher"
-                android:title="Thông tin sản phẩm"/>
+                android:title="Tài khoản" />
 
         </group>
     </item>
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/ic_launcher"
-        android:title="Đăng xuất"/>
+
 </menu>

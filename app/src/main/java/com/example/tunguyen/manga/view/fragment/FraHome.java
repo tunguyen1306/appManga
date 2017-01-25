@@ -59,6 +59,7 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
     List<String> ListStatusChapAdvertRead = new ArrayList<>();
     List<String> ListCountChapAdvertRead = new ArrayList<>();
     List<String> ListImgAdvertRead = new ArrayList<>();
+    List<String> ListTypeAdvertRead = new ArrayList<>();
     ////End Advert Read///////
 
 
@@ -72,6 +73,7 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
     List<String> ListStatusChapAdvertPopular = new ArrayList<>();
     List<String> ListCountChapAdvertPopular = new ArrayList<>();
     List<String> ListImgAdvertPopular = new ArrayList<>();
+    List<String> ListTypeAdvertPopular = new ArrayList<>();
     ////End Advert Read///////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,7 +141,7 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
     private List<AdvertDto>getDataSlide(){
         List<AdvertDto> items = new ArrayList<>();
         for (int i=0;i<ListIdAdvert.size();i++) {
-            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i),ListImgAdvert.get(i),ListNameAuthorAdvert.get(i)));
+            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i),ListImgAdvert.get(i),ListNameAuthorAdvert.get(i),ListTypeAdvert.get(i),ListStatusChapAdvert.get(i)));
         }
         return items;
     }
@@ -153,10 +155,17 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
                         for (int i = 0; i < AdvertDto.size(); i++) {
 
                             String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+
+
                             ListIdAdvert.add(tmpStr10);
                             ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
                             ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
                             ListNameAuthorAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
+                            ListTypeAdvert.add(AdvertDto.get(i).TypeAdvertManga);
+                            String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
+                            ListStatusChapAdvert.add(tmpStatus);
+
+
                         }
                         loadSilde();
                     }
@@ -192,7 +201,9 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
                             ListIdAdvertRead.get(i),
                             ListNameAdvertRead.get(i),
                             ListImgAdvertRead.get(i) ,
-                            ListNameAuthorAdvertRead.get(i)
+                            ListNameAuthorAdvertRead.get(i),
+                            ListTypeAdvertRead.get(i),
+                            ListStatusChapAdvertRead.get(i)
                     )
             );
         }
@@ -206,10 +217,13 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+                    String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
                     ListIdAdvertRead.add(tmpStr10);
                     ListNameAdvertRead.add(AdvertDto.get(i).NameAdvertManga);
                     ListImgAdvertRead.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorAdvertRead.add(AdvertDto.get(i).NameAuthorAdvertManga);
+                    ListTypeAdvertRead.add(AdvertDto.get(i).TypeAdvertManga);
+                    ListStatusChapAdvertRead.add(tmpStatus);
                 }
                 int count=AdvertDto.size();
                 tv_count_advert.setText(count+" truyện");
@@ -245,7 +259,9 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
                             ListIdAdvertPopular.get(i),
                             ListNameAdvertPopular.get(i),
                             ListImgAdvertPopular.get(i) ,
-                            ListNameAuthorAdvertPopular.get(i)
+                            ListNameAuthorAdvertPopular.get(i),
+                            ListTypeAdvertPopular.get(i),
+                            ListStatusChapAdvertPopular.get(i)
                     )
             );
         }
@@ -263,6 +279,9 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
                     ListNameAdvertPopular.add(AdvertDto.get(i).NameAdvertManga);
                     ListImgAdvertPopular.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorAdvertPopular.add(AdvertDto.get(i).NameAuthorAdvertManga);
+                    ListTypeAdvertPopular.add(AdvertDto.get(i).TypeAdvertManga);
+                    String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
+                    ListStatusChapAdvertPopular.add(tmpStatus);
                 }
                 int count=AdvertDto.size();
                 tv_count_advert2.setText(count+" truyện");

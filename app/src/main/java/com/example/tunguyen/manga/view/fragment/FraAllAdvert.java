@@ -36,6 +36,8 @@ public class FraAllAdvert extends Fragment {
     List<String> ListCountChapAllAdvert = new ArrayList<>();
     List<String> ListImgAllAdvert = new ArrayList<>();
     List<String> ListCountAllAdvert = new ArrayList<>();
+    List<String> ListTypeAllAdvert = new ArrayList<>();
+
     ////End Advert Read///////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -67,7 +69,9 @@ public class FraAllAdvert extends Fragment {
                             ListIdAllAdvert.get(i),
                             ListNameAllAdvert.get(i),
                             ListImgAllAdvert.get(i) ,
-                            ListNameAuthorAllAdvert.get(i)
+                            ListNameAuthorAllAdvert.get(i),
+                            ListTypeAllAdvert.get(i),
+                            ListStatusAllAdvert.get(i)
                     )
             );
         }
@@ -81,10 +85,15 @@ public class FraAllAdvert extends Fragment {
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+                    String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
                     ListIdAllAdvert.add(tmpStr10);
                     ListNameAllAdvert.add(AdvertDto.get(i).NameAdvertManga);
                     ListImgAllAdvert.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorAllAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
+                    ListTypeAllAdvert.add(AdvertDto.get(i).TypeAdvertManga);
+                    ListStatusAllAdvert.add(tmpStatus);
+
+
                 }
                 loadDataAllAdvert();
             }

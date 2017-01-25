@@ -8,12 +8,13 @@ public class AdvertDto {
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
                 this.num_update=Integer.parseInt(num_update);
         }
-        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String ){
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String StatusChapAdvertManga){
                 this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
                 this.NameAdvertManga=NameAdvertManga;
                 this.ImgAdvertManga=ImgAdvertManga;
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
                 this.TypeAdvertManga=TypeAdvertManga;
+                this.StatusChapAdvertManga=Integer.parseInt(StatusChapAdvertManga);
 
         }
         public static  int IdAdvertRefer;
