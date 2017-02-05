@@ -1,5 +1,6 @@
 package com.example.tunguyen.manga.view.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +15,14 @@ import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.DetailAdvert;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.Preference;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 import com.squareup.picasso.Picasso;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +35,9 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
     private final Context mContext;
     List<AdvertDto> _list = new ArrayList<>();
     String from_activity;
+    private DatabaseHelper databaseHelper = null;
+
+
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         LinearLayout ln_view;
@@ -89,6 +97,16 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
                 IdAdvertRefer=_list.get(position).getIdAdvertManga();
                 NameAdvertRefer =_list.get(position).getNameAdvertManga();
                 TypeAdvertRefer =_list.get(position).getTypeAdvertManga();
+
+                final AdvertMangas advertMangas = new AdvertMangas();
+                advertMangas.IdAdvertManga=_list.get(position).getIdAdvertManga();
+                advertMangas.NameAdvertManga=_list.get(position).getNameAdvertManga();
+                try {
+                    final Dao<AdvertMangas, Integer> AdvertMangas = getHelper().getAdvertMangasesDao();
+                    AdvertMangas.create(advertMangas);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 Preference.CountView(_list.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(mContext.getApplicationContext());
                 mContext.startActivity(intent_login);
@@ -106,4 +124,13 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
             return 0;
         }
     }
+    // This is how, DatabaseHelper can be initialized for future use
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(mContext ,DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.tunguyen.manga.view.activity;
 
+import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.fragment.FraInfoChapter;
 import com.example.tunguyen.manga.view.fragment.FraListChapter;
 import com.example.tunguyen.manga.view.fragment.FraRelateChapter;
@@ -24,9 +27,12 @@ import com.example.tunguyen.manga.view.fragment.NoSwipeableViewpager;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 import com.squareup.picasso.Picasso;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +48,9 @@ public class DetailAdvert extends ActionBarActivity  {
 
     DrawerLayout drawer;
 
-
+    private Dao<AdvertMangas, Integer> AdvertMangasDao;
+    private AdvertMangas AdvertMangasList;
+    private DatabaseHelper databaseHelper = null;
 
     TextView txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate,txtCountView;
     ImageView imgAdvert;
@@ -79,6 +87,20 @@ public class DetailAdvert extends ActionBarActivity  {
         txtChap=(TextView) findViewById(R.id.txtChap);
         txtRelate=(TextView) findViewById(R.id.txtRelate);
         ///End Advert///
+
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertMangasDao =  getHelper().getAdvertMangasesDao();
+
+            // Query the database. We need all the records so, used queryForAll()
+            AdvertMangasList.NameAdvertManga = AdvertMangasDao.queryBuilder().selectColumns("NameAdvertManga").toString();
+
+            txtNameAdvert.setText( AdvertMangasList.NameAdvertManga);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         ///Event Button///
         txtInfo.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +264,7 @@ public class DetailAdvert extends ActionBarActivity  {
         resClient.GetService().GetAdvertById(id, new Callback<List<clsAllAdvertDto>>() {
             @Override
             public void success(List<clsAllAdvertDto> advertDtos, Response response) {
-                txtNameAdvert.setText(advertDtos.get(0).tblAdvertManga.NameAdvertManga);
+               // txtNameAdvert.setText(advertDtos.get(0).tblAdvertManga.NameAdvertManga);
                 txtAuthor.setText(advertDtos.get(0).tblAdvertManga.NameAuthorAdvertManga);
                 int countChap= advertDtos.get(0).ListChapterManga.size();
                 txtCountChapter.setText(countChap+" Chap");
@@ -266,6 +288,23 @@ public class DetailAdvert extends ActionBarActivity  {
     }
     ///End Load Detail Advert by ID///
 
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+		/*
+		 * You'll need this in your class to release the helper when done.
+		 */
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
 }
