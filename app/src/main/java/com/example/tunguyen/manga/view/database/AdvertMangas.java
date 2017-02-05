@@ -1,15 +1,15 @@
 package com.example.tunguyen.manga.view.database;
 
+import java.io.Serializable;
 
-import android.provider.BaseColumns;
+public  class AdvertMangas implements Serializable {
 
-public final class AdvertMangas {
-    public  AdvertMangas(){}
-    public static class _AdvertMangas implements BaseColumns{
-        public static final String TABLE_NAME = "AdvertMangas";
-        public static final String COLUMN_ID_ADVERT="IdAdvertManga";
-        public static final String COLUMN_NAME_ADVERT="NameAdvertManga";
-        public static final String COLUMN_IMG_ADVERT = "ImgAdvertManga";
-    }
+    private static final long serialVersionUID = -222864131214757024L;
+    private static final String IdAdvertManga="IdAdvertManga";
+    private static final String NameAdvertManga="NameAdvertManga";
+    private static final String ImgAdvertManga="ImgAdvertManga";
+
+
+
 
 }
