@@ -29,6 +29,7 @@ import com.example.tunguyen.manga.view.model.Preference;
 import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.GenericRawResults;
 import com.squareup.picasso.Picasso;
 
 
@@ -49,7 +50,7 @@ public class DetailAdvert extends ActionBarActivity  {
     DrawerLayout drawer;
 
     private Dao<AdvertMangas, Integer> AdvertMangasDao;
-    private AdvertMangas AdvertMangasList;
+    private List<AdvertMangas> AdvertMangasList;
     private DatabaseHelper databaseHelper = null;
 
     TextView txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate,txtCountView;
@@ -91,12 +92,8 @@ public class DetailAdvert extends ActionBarActivity  {
         try {
             // This is how, a reference of DAO object can be done
             AdvertMangasDao =  getHelper().getAdvertMangasesDao();
-
             // Query the database. We need all the records so, used queryForAll()
-            AdvertMangasList.NameAdvertManga = AdvertMangasDao.queryBuilder().selectColumns("NameAdvertManga").toString();
-
-            txtNameAdvert.setText( AdvertMangasList.NameAdvertManga);
-
+            AdvertMangasList = AdvertMangasDao.queryForAll();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +111,7 @@ public class DetailAdvert extends ActionBarActivity  {
                 txtInfo.setTextColor(getResources().getColor(R.color.TextColor));
 
                 Fragment fragment = null;
-               fragment = new FraInfoChapter();
+                fragment = new FraInfoChapter();
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.fragment_frame, fragment);
@@ -264,7 +261,7 @@ public class DetailAdvert extends ActionBarActivity  {
         resClient.GetService().GetAdvertById(id, new Callback<List<clsAllAdvertDto>>() {
             @Override
             public void success(List<clsAllAdvertDto> advertDtos, Response response) {
-               // txtNameAdvert.setText(advertDtos.get(0).tblAdvertManga.NameAdvertManga);
+               txtNameAdvert.setText(advertDtos.get(0).tblAdvertManga.NameAdvertManga);
                 txtAuthor.setText(advertDtos.get(0).tblAdvertManga.NameAuthorAdvertManga);
                 int countChap= advertDtos.get(0).ListChapterManga.size();
                 txtCountChapter.setText(countChap+" Chap");

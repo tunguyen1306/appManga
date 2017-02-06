@@ -101,6 +101,8 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
                 final AdvertMangas advertMangas = new AdvertMangas();
                 advertMangas.IdAdvertManga=_list.get(position).getIdAdvertManga();
                 advertMangas.NameAdvertManga=_list.get(position).getNameAdvertManga();
+                advertMangas.ImgAdvertManga=_list.get(position).getImgAdvertManga();
+                advertMangas.CheckAdvertManga=1;
                 try {
                     final Dao<AdvertMangas, Integer> AdvertMangas = getHelper().getAdvertMangasesDao();
                     AdvertMangas.create(advertMangas);
@@ -124,8 +126,9 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
             return 0;
         }
     }
-    // This is how, DatabaseHelper can be initialized for future use
+
     private DatabaseHelper getHelper() {
+
         if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(mContext ,DatabaseHelper.class);
         }
