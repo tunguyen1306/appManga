@@ -21,6 +21,7 @@ import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.squareup.picasso.Picasso;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,8 +36,9 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
     private final Context mContext;
     List<AdvertDto> _list = new ArrayList<>();
     String from_activity;
-    private DatabaseHelper databaseHelper = null;
-
+    private  DatabaseHelper databaseHelper = null;
+    private  Dao<AdvertMangas, Integer> AdvertMangasDao;
+    private  List<AdvertMangas> AdvertMangasList;
 
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
@@ -98,17 +100,7 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
                 NameAdvertRefer =_list.get(position).getNameAdvertManga();
                 TypeAdvertRefer =_list.get(position).getTypeAdvertManga();
 
-                final AdvertMangas advertMangas = new AdvertMangas();
-                advertMangas.IdAdvertManga=_list.get(position).getIdAdvertManga();
-                advertMangas.NameAdvertManga=_list.get(position).getNameAdvertManga();
-                advertMangas.ImgAdvertManga=_list.get(position).getImgAdvertManga();
-                advertMangas.CheckAdvertManga=1;
-                try {
-                    final Dao<AdvertMangas, Integer> AdvertMangas = getHelper().getAdvertMangasesDao();
-                    AdvertMangas.create(advertMangas);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                AddAdvertSqlite(_list.get(position).getIdAdvertManga(),_list.get(position).getNameAdvertManga(),_list.get(position).getImgAdvertManga());
                 Preference.CountView(_list.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(mContext.getApplicationContext());
                 mContext.startActivity(intent_login);
@@ -126,14 +118,38 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
             return 0;
         }
     }
+    public  void AddAdvertSqlite(int IdAdvertManga, String NameAdvertManga, String ImgAdvertManga)
+    {
+        try {
+            AdvertMangasDao =  getHelper().getAdvertMangasesDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
+            AdvertMangasList = queryBuilder.query();
+            if (AdvertMangasList.size()<=0)
+            {
+                final AdvertMangas advertMangas = new AdvertMangas();
+                advertMangas.IdAdvertManga=IdAdvertManga;
+                advertMangas.NameAdvertManga=NameAdvertManga;
+                advertMangas.ImgAdvertManga=ImgAdvertManga;
+                advertMangas.CheckAdvertManga=1;
+                try {
+                    final Dao<AdvertMangas, Integer> AdvertMangas = getHelper().getAdvertMangasesDao();
+                    AdvertMangas.create(advertMangas);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
 
-    private DatabaseHelper getHelper() {
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private  DatabaseHelper getHelper() {
 
         if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(mContext ,DatabaseHelper.class);
         }
         return databaseHelper;
     }
-
-
 }

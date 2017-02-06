@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +31,7 @@ import com.example.tunguyen.manga.view.model.clsAllAdvertDto;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.squareup.picasso.Picasso;
 
 
@@ -49,9 +51,6 @@ public class DetailAdvert extends ActionBarActivity  {
 
     DrawerLayout drawer;
 
-    private Dao<AdvertMangas, Integer> AdvertMangasDao;
-    private List<AdvertMangas> AdvertMangasList;
-    private DatabaseHelper databaseHelper = null;
 
     TextView txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate,txtCountView;
     ImageView imgAdvert;
@@ -89,15 +88,7 @@ public class DetailAdvert extends ActionBarActivity  {
         txtRelate=(TextView) findViewById(R.id.txtRelate);
         ///End Advert///
 
-        try {
-            // This is how, a reference of DAO object can be done
-            AdvertMangasDao =  getHelper().getAdvertMangasesDao();
-            // Query the database. We need all the records so, used queryForAll()
-            AdvertMangasList = AdvertMangasDao.queryForAll();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         ///Event Button///
         txtInfo.setOnClickListener(new View.OnClickListener() {
@@ -285,23 +276,6 @@ public class DetailAdvert extends ActionBarActivity  {
     }
     ///End Load Detail Advert by ID///
 
-    private DatabaseHelper getHelper() {
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-		/*
-		 * You'll need this in your class to release the helper when done.
-		 */
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
-    }
 }

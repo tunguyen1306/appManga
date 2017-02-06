@@ -208,8 +208,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
         View mCustomView = mInflater.inflate(R.layout.actionbar, null);
-        //ImageView logo = (ImageView) mCustomView.findViewById(R.id.img_logo);
-       // logo.setImageResource(R.drawable.ic_launcher);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
     }
@@ -221,6 +219,10 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             case R.id.nav_home:
                 Intent home = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(home);
+                break;
+            case R.id.nav_advert_save:
+                Intent viewd = new Intent(getApplicationContext(), ViewedAdvert.class);
+                startActivity(viewd);
                 break;
 
         }
