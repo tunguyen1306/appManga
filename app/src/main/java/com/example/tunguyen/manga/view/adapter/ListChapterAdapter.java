@@ -6,17 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 
 import com.example.tunguyen.manga.view.activity.DetailChapter;
+import com.example.tunguyen.manga.view.database.ChapterMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
+
+import java.sql.SQLException;
 import java.util.List;
 
-import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 import static com.example.tunguyen.manga.view.model.ChapterDto.IdChapterRefer;
 import static com.example.tunguyen.manga.view.model.ChapterDto.NameChapterRefer;
 
@@ -27,10 +32,12 @@ import static com.example.tunguyen.manga.view.model.ChapterDto.NameChapterRefer;
 public class ListChapterAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context _Context;
-    List<ChapterDto> ChapterDto;
+    List<ChapterMangas> ChapterDto;
     TextView txt_tile;
     ViewHolder listViewHolder;
-    public ListChapterAdapter(Context context, List<ChapterDto> ChapterListView) {
+
+
+    public ListChapterAdapter(Context context, List<ChapterMangas> ChapterListView) {
         this._Context = context;
         layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ChapterDto = ChapterListView;
@@ -64,8 +71,12 @@ public class ListChapterAdapter extends BaseAdapter {
         {
             listViewHolder = (ViewHolder)convertView.getTag();
         }
-                 listViewHolder.txtNameChapter.setText(ChapterDto.get(position).NameChapterManga);
 
+        listViewHolder.txtNameChapter.setText(ChapterDto.get(position).NameChapterManga);
+        if (ChapterDto.get(position).CheckChapterManga==1)
+        {
+           // listViewHolder.txtNameChapter.setTextColor(_Context);
+        }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +84,6 @@ public class ListChapterAdapter extends BaseAdapter {
                 intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 IdChapterRefer=ChapterDto.get(position).getIdChapterManga();
                 NameChapterRefer =ChapterDto.get(position).getNameChapterManga();
-
                 Preference.savePreference(_Context.getApplicationContext());
                 _Context.startActivity(intent_login);
             }
@@ -83,4 +93,5 @@ public class ListChapterAdapter extends BaseAdapter {
     public  class  ViewHolder{
         TextView txtNameChapter;
     }
+
 }

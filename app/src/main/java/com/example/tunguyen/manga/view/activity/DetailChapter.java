@@ -52,7 +52,7 @@ public class DetailChapter extends ActionBarActivity  {
 
     //string
     private static String PREF_NAME = "pref";
-
+TextView txtCount,txtItemCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +65,24 @@ public class DetailChapter extends ActionBarActivity  {
         paper_chap=(ViewPager)findViewById(R.id.pager_chap);
         Preference.restorePreference(getApplicationContext());
         callServiceChap(ChapterDto.IdChapterRefer);
-        AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayout);
-        appBarLayout.setExpanded(true, true);
+        txtCount=(TextView)findViewById(R.id.txtCountDetailChap);
+        txtItemCount=(TextView)findViewById(R.id.txtItemCount);
+        paper_chap.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                txtItemCount.setText(String.valueOf(position+1));
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                txtItemCount.setText(String.valueOf(position+1));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }//end Oncreate
 
 
@@ -121,64 +137,20 @@ public class DetailChapter extends ActionBarActivity  {
             }
         }, 2000);
     }
-//    ///LoadAdvertRead///
-//    private void loadDataAdvertRead() {
-//
-//        ItemAdvertRead = getAllItemsAdvertRead();
-//
-//        try {
-//
-//            DetailChapterAdapter adapter = new DetailChapterAdapter(this, ItemAdvertRead, "project");
-//            lv_advert_read.setAdapter(adapter);
-//
-//
-//        }
-//        catch (Exception ex) {
-//
-//        }
-//    }
-//    private List<ChapterDto> getAllItemsAdvertRead() {
-//        List<ChapterDto> items = new ArrayList<>();
-//        for (int i = 0; i < ListImgAdvertRead.size(); i++) {
-//            items.add(
-//                    new ChapterDto(
-//                       ListImgAdvertRead.get(i)
-//
-//                    )
-//            );
-//        }
-//        return items;
-//    }
-//    public void callServiceAdvertRead(int id) {
-//        ResClien restClient = new ResClien();
-//        restClient.GetService().GetDetailChapByID(id,new Callback<List<ChapterDto>>() {
-//            @Override
-//            public void success(List<ChapterDto> AdvertDto, Response response) {
-//                for (int i = 0; i < AdvertDto.size(); i++) {
-//
-//                    ListImgAdvertRead.add(AdvertDto.get(i).Link);
-//
-//                }
-//                loadDataAdvertRead();
-//            }
-//            @Override
-//            public void failure(RetrofitError error) {
-//                Log.d("myLogs", "-------ERROR-------Img");
-//                Log.d("myLogs", Log.getStackTraceString(error));
-//            }
-//        });
-//    }
-//    ///End LoadAdvertRead///
 
     ///LoadSlide///////
     private void loadChap(){
 
         ItemChap = getDataChap();
         try {
+
+            String t1=String.valueOf("/"+ ItemChap.size());
+            txtCount.setText(t1);
             for (int i = 0; i < ItemChap.size(); i++) {
 
                 SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
                 paper_chap.setAdapter(slideAdapter1);
+
                 //indicator_chap.setViewPager(paper_chap);
             }
         }
@@ -213,4 +185,6 @@ public class DetailChapter extends ActionBarActivity  {
                 });
     }
     ///End LoadSlide///
+
+
 }
