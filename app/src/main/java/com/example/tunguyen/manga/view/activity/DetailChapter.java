@@ -2,6 +2,7 @@ package com.example.tunguyen.manga.view.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -64,6 +65,8 @@ public class DetailChapter extends ActionBarActivity  {
         paper_chap=(ViewPager)findViewById(R.id.pager_chap);
         Preference.restorePreference(getApplicationContext());
         callServiceChap(ChapterDto.IdChapterRefer);
+        AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayout);
+        appBarLayout.setExpanded(true, true);
     }//end Oncreate
 
 

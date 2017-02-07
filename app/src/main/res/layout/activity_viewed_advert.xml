@@ -30,6 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lvAdvertViewed"
+                    android:padding="10dp"
                     android:background="@color/backgroundDetail"
                     android:layout_gravity="center_horizontal" />
 

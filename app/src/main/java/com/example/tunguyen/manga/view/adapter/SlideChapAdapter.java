@@ -57,15 +57,15 @@ public class SlideChapAdapter extends PagerAdapter {
         //Picasso.with(context).load(R.drawable.icon_home).into(imageView);
         view.addView(imageLayout, 0);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation animation = new AlphaAnimation(0.3f, 1.0f);
-                animation.setDuration(1000);
-                v.startAnimation(animation);
-
-            }
-        });
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Animation animation = new AlphaAnimation(0.3f, 1.0f);
+//                animation.setDuration(1000);
+//                v.startAnimation(animation);
+//
+//            }
+//        });
         return imageLayout;
     }
 

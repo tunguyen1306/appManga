@@ -114,6 +114,27 @@
                         android:textColor="@color/colorTextDetail"
                         android:textSize="12sp"
                         />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+
+                    android:gravity="center_horizontal"
+                    android:background="@color/backgroundDetail"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtRead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:text="Đọc"
+                        android:textColor="@color/colorTextMain"
+                        android:background="@color/backgroundIcon"
+                        android:textSize="16sp"
+                        android:padding="3dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -19,19 +19,46 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:background="@color/backgroundDetail"
             android:orientation="vertical">
-
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/Base.AppCompat.Responsive"
                 android:background="@color/black" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"/>
 
+
+            </android.support.design.widget.AppBarLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundDetail"
+                >
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager_chap"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+               android:textSize="20dp"
+                android:layout_alignBottom="@id/pager_chap"
+                android:text="ewewrewrewewrew ew rew "
+                android:background="#80FF0000"
+                android:textColor="#ffffff" />
+            </RelativeLayout>
             <com.pixelcan.inkpageindicator.InkPageIndicator
                 android:id="@+id/indicator_chap"
                 android:layout_width="match_parent"
