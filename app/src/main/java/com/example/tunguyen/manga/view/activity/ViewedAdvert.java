@@ -19,6 +19,7 @@ import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -44,7 +45,7 @@ public class ViewedAdvert extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         list=(ListView)findViewById(R.id.lvAdvertViewed);
-        LoadAdvertRalate();
+        LoadAdvertView();
         setupActionBar();
 
     }//end Oncreate
@@ -83,13 +84,14 @@ public class ViewedAdvert extends ActionBarActivity {
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
     }
-    public void LoadAdvertRalate()
+    public void LoadAdvertView()
     {
         try {
             // This is how, a reference of DAO object can be done
             AdvertViewedMangasDao =  getHelper().getAdvertViewedMangasDao();
-
-            AdvertViewedMangasList = AdvertViewedMangasDao.queryForAll();
+            QueryBuilder<AdvertViewedMangas, Integer> queryBuilder = AdvertViewedMangasDao.queryBuilder();
+            queryBuilder.orderBy("TimeUpdatedChapterManga",false);
+            AdvertViewedMangasList = queryBuilder.query();
             list.setAdapter(new AdvertViewedAdapter(this,AdvertViewedMangasList));
         } catch (SQLException e) {
             e.printStackTrace();

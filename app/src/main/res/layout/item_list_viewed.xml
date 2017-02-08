@@ -50,6 +50,19 @@ android:padding="2dp">
         android:textSize="10sp"
         android:textColor="@color/colorTextDetail"
         />
+    <TextView
+        android:id="@+id/txtTimeChapViewed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:maxLines="2"
+        android:text="9 phút trước"
+        android:textSize="10sp"
+        android:textColor="@color/colorTextDetail"
+        />
 
 
 </LinearLayout>

@@ -12,6 +12,7 @@ import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.sql.SQLException;
@@ -181,9 +182,7 @@ public class Preference {
             queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
             AdvertViewedMangasList = queryBuilder.query();
             Calendar c = Calendar.getInstance();
-            System.out.println("Current time => " + c.getTime());
-
-            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String formattedDate = df.format(c.getTime());
 
             if (AdvertViewedMangasList.size()<=0 )
@@ -203,17 +202,16 @@ public class Preference {
                     e.printStackTrace();
                 }
             }else {
-                final AdvertViewedMangas AdvertViewedMangas = new AdvertViewedMangas();
-                AdvertViewedMangas.IdAdvertManga=IdAdvertManga;
-                AdvertViewedMangas.NameAdvertManga=NameAdvertManga;
-                AdvertViewedMangas.ImgAdvertManga=ImgAdvertManga;
-                AdvertViewedMangas.NameChapManga=NameChapManga;
-                AdvertViewedMangas.IdChapterManga=IdChapterManga;
-                AdvertViewedMangas.TimeUpdatedChapterManga=formattedDate;
-
                 try {
                     final Dao<AdvertViewedMangas, Integer> advertViewedMangas = getHelper(context).getAdvertViewedMangasDao();
-                    advertViewedMangas.update(AdvertViewedMangas);
+
+                    UpdateBuilder<AdvertViewedMangas, Integer> updateBuilder = advertViewedMangas.updateBuilder();
+                    updateBuilder.updateColumnValue("NameChapterManga", NameChapManga);
+                    updateBuilder.updateColumnValue("IdChapterManga",IdChapterManga);
+                    updateBuilder.updateColumnValue("NameAdvertManga",NameAdvertManga);
+                    updateBuilder.updateColumnValue("TimeUpdatedChapterManga",formattedDate);
+                    updateBuilder.where().eq("id",AdvertViewedMangasList.get(0).Id);
+                    updateBuilder.update();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

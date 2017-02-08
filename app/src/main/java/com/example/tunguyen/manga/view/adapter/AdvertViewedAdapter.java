@@ -17,6 +17,10 @@ import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
@@ -63,6 +67,7 @@ public class AdvertViewedAdapter extends BaseAdapter {
                 listViewHolder.txtNameAdvertViewed=(TextView)convertView.findViewById(R.id.txtNameAdvertViewed);
                 listViewHolder.txtNameChapViewed=(TextView)convertView.findViewById(R.id.txtNameChapViewed);
                 listViewHolder.imgAdvertViewed=(ImageView) convertView.findViewById(R.id.imgAdvertViewed);
+                listViewHolder.txtTimeChapViewed=(TextView)convertView.findViewById(R.id.txtTimeChapViewed);
                 convertView.setTag(listViewHolder);
             }
             else
@@ -71,6 +76,27 @@ public class AdvertViewedAdapter extends BaseAdapter {
             }
             listViewHolder.txtNameAdvertViewed.setText(AdvertDtos.get(position).NameAdvertManga);
             listViewHolder.txtNameChapViewed.setText(AdvertDtos.get(position).NameChapManga);
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String formattedDate = df.format(c.getTime());
+            SimpleDateFormat simpleDateFormat =
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+            try {
+
+                Date date1 = simpleDateFormat.parse(formattedDate);
+                Date date2 = simpleDateFormat.parse(AdvertDtos.get(position).TimeUpdatedChapterManga);
+
+                listViewHolder.txtTimeChapViewed.setText(printDifference(date2, date1));
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
+
             if(AdvertDtos.get(position).ImgAdvertManga !="")
             {
                 Picasso.with(_Context).load(AdvertDtos.get(position).ImgAdvertManga).into(listViewHolder.imgAdvertViewed);}
@@ -100,7 +126,47 @@ public class AdvertViewedAdapter extends BaseAdapter {
         return convertView;
     }
     public  class  ViewHolder{
-        TextView txtNameAdvertViewed,txtNameChapViewed,txtPercentAdvertViewed;
+        TextView txtNameAdvertViewed,txtNameChapViewed,txtTimeChapViewed;
         ImageView imgAdvertViewed;
+    }
+    public String printDifference(Date startDate, Date endDate){
+
+        //milliseconds
+        long different = endDate.getTime() - startDate.getTime();
+
+
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long daysInMilli = hoursInMilli * 24;
+
+        long elapsedDays = different / daysInMilli;
+        different = different % daysInMilli;
+
+        long elapsedHours = different / hoursInMilli;
+        different = different % hoursInMilli;
+
+        long elapsedMinutes = different / minutesInMilli;
+        different = different % minutesInMilli;
+
+        long elapsedSeconds = different / secondsInMilli;
+        String t ="";
+        if (elapsedDays>0)
+        {
+            t=elapsedDays+" ngày trước";
+        }
+        if (elapsedHours>0)
+        {
+            t=elapsedDays+" giờ trước";
+        }
+        if (elapsedMinutes>0)
+        {
+            t=elapsedDays+" phút trước";
+        }
+        if (elapsedSeconds>0)
+        {
+            t=elapsedDays+" giây trước";
+        }
+       return t;
     }
 }
