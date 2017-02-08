@@ -17,11 +17,18 @@ import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.adapter.AdvertFeaturedAdapter;
 import com.example.tunguyen.manga.view.adapter.AdvertPopularAdapter;
 import com.example.tunguyen.manga.view.adapter.AdvertReadAdapter;
+import com.example.tunguyen.manga.view.adapter.CustomAdapter;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.Preference;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.lucasr.twowayview.widget.TwoWayView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,46 +42,12 @@ public class FraHome extends Fragment {
     //ViewPager pager_banner;
     //InkPageIndicator indicator_banel;
     View view;
-TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
-    ////Slide///////
+    TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
+
     TwoWayView lv_advert_feature;
-    List<AdvertDto> ItemAdvert;
-    List<String> ListIdAdvert = new ArrayList<>();
-    List<String> ListNameAdvert = new ArrayList<>();
-    List<String> ListNameAuthorAdvert = new ArrayList<>();
-    List<String> ListStatusAdvert = new ArrayList<>();
-    List<String> ListStatusChapAdvert = new ArrayList<>();
-    List<String> ListCountChapAdvert = new ArrayList<>();
-    List<String> ListTypeAdvert = new ArrayList<>();
-    List<String> ListImgAdvert = new ArrayList<>();
-    ////End Slide///
-
-    ////Advert Read///////
     TwoWayView lv_advert_read;
-    List<AdvertDto> ItemAdvertRead;
-    List<String> ListIdAdvertRead = new ArrayList<>();
-    List<String> ListNameAdvertRead = new ArrayList<>();
-    List<String> ListNameAuthorAdvertRead = new ArrayList<>();
-    List<String> ListStatusAdvertRead = new ArrayList<>();
-    List<String> ListStatusChapAdvertRead = new ArrayList<>();
-    List<String> ListCountChapAdvertRead = new ArrayList<>();
-    List<String> ListImgAdvertRead = new ArrayList<>();
-    List<String> ListTypeAdvertRead = new ArrayList<>();
-    ////End Advert Read///////
-
-
-    ////Advert Read///////
     TwoWayView lv_advert_popular;
-    List<AdvertDto> ItemAdvertPopular;
-    List<String> ListIdAdvertPopular = new ArrayList<>();
-    List<String> ListNameAdvertPopular = new ArrayList<>();
-    List<String> ListNameAuthorAdvertPopular = new ArrayList<>();
-    List<String> ListStatusAdvertPopular = new ArrayList<>();
-    List<String> ListStatusChapAdvertPopular = new ArrayList<>();
-    List<String> ListCountChapAdvertPopular = new ArrayList<>();
-    List<String> ListImgAdvertPopular = new ArrayList<>();
-    List<String> ListTypeAdvertPopular = new ArrayList<>();
-    ////End Advert Read///////
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -85,9 +58,7 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
         tv_count_advert2=(TextView) view.findViewById(R.id.tv_count_advert2);
         txtReadmore=(TextView) view.findViewById(R.id.txtReadmore);
         txtReadmore1=(TextView) view.findViewById(R.id.txtReadmore1);
-        callServiceSlide(1);
-        callServiceAdvertRead(2);
-        callServiceAdvertPopular(3);
+
         txtReadmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,187 +85,69 @@ TextView tv_count_advert,tv_count_advert2,txtReadmore,txtReadmore1;
 
             }
         });
+
+        LoadAdvertPopular();
+        LoadAdvertRead();
+        LoadAdvertFeature();
         return view;
 
     }
-
-    ///LoadSlide///////
-    private void loadSilde(){
-        ItemAdvert = getDataSlide();
+    private Dao<AdvertMangas, Integer> AdvertMangasDao;
+    private List<AdvertMangas> AdvertMangasList;
+    private DatabaseHelper databaseHelper = null;
+    public void LoadAdvertPopular()
+    {
         try {
-            for (int i = 0; i < ItemAdvert.size(); i++) {
+            // This is how, a reference of DAO object can be done
+            AdvertMangasDao =  getHelper().getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.where().eq("TypeStatusAdvertManga",3);
+            AdvertMangasList = queryBuilder.query();
 
-               // pager_banner.setAdapter(new SlideAdapter(getActivity(), ItemAdvert));//pager_banner.setAdapter(slideAdapter);
-                //indicator_banel.setViewPager(pager_banner);
-                try {
-                    AdvertFeaturedAdapter adapter = new AdvertFeaturedAdapter(getActivity(), ItemAdvert, "advert feature");
-                    lv_advert_feature.setAdapter(adapter);
-                } catch (Exception ex) {
-
-                }
-            }
-        }
-        catch (Exception ex) {
-
-        }
-    }
-    private List<AdvertDto>getDataSlide(){
-        List<AdvertDto> items = new ArrayList<>();
-        for (int i=0;i<ListIdAdvert.size();i++) {
-            items.add(new AdvertDto(ListIdAdvert.get(i),ListNameAdvert.get(i),ListImgAdvert.get(i),ListNameAuthorAdvert.get(i),ListTypeAdvert.get(i),ListStatusChapAdvert.get(i)));
-        }
-        return items;
-    }
-    public void callServiceSlide(int id) {
-        ResClien restClient = new ResClien();
-        restClient.GetService().GetAdvertByTypeId(id,
-                new Callback<List<AdvertDto>>() {
-                    @Override
-                    public void success(List<AdvertDto> AdvertDto, Response response) {
-
-                        for (int i = 0; i < AdvertDto.size(); i++) {
-
-                            String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
-
-
-                            ListIdAdvert.add(tmpStr10);
-                            ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
-                            ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
-                            ListNameAuthorAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
-                            ListTypeAdvert.add(AdvertDto.get(i).TypeAdvertManga);
-                            String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
-                            ListStatusChapAdvert.add(tmpStatus);
-
-
-                        }
-                        loadSilde();
-                    }
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.d("myLogs", "-------ERROR-------");
-                        Log.d("myLogs", Log.getStackTraceString(error));
-                    }
-                });
-    }
-    ///End LoadSlide///
-
-
-    ///LoadAdvertRead///
-    private void loadDataAdvertRead() {
-
-        ItemAdvertRead = getAllItemsAdvertRead();
-
-        try {
-
-            AdvertReadAdapter adapter = new AdvertReadAdapter(getActivity(), ItemAdvertRead, "project");
-            lv_advert_read.setAdapter(adapter);
-
-        } catch (Exception ex) {
-
-        }
-    }
-    private List<AdvertDto> getAllItemsAdvertRead() {
-        List<AdvertDto> items = new ArrayList<>();
-        for (int i = 0; i < ListIdAdvertRead.size(); i++) {
-            items.add(
-                    new AdvertDto(
-                            ListIdAdvertRead.get(i),
-                            ListNameAdvertRead.get(i),
-                            ListImgAdvertRead.get(i) ,
-                            ListNameAuthorAdvertRead.get(i),
-                            ListTypeAdvertRead.get(i),
-                            ListStatusChapAdvertRead.get(i)
-                    )
-            );
-        }
-        return items;
-    }
-    public void callServiceAdvertRead(int id) {
-        ResClien restClient = new ResClien();
-        restClient.GetService().GetAdvertByTypeId(id,new Callback<List<AdvertDto>>() {
-            @Override
-            public void success(List<AdvertDto> AdvertDto, Response response) {
-                for (int i = 0; i < AdvertDto.size(); i++) {
-
-                    String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
-                    String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
-                    ListIdAdvertRead.add(tmpStr10);
-                    ListNameAdvertRead.add(AdvertDto.get(i).NameAdvertManga);
-                    ListImgAdvertRead.add(AdvertDto.get(i).ImgAdvertManga);
-                    ListNameAuthorAdvertRead.add(AdvertDto.get(i).NameAuthorAdvertManga);
-                    ListTypeAdvertRead.add(AdvertDto.get(i).TypeAdvertManga);
-                    ListStatusChapAdvertRead.add(tmpStatus);
-                }
-                int count=AdvertDto.size();
-                tv_count_advert.setText(count+" truyện");
-                loadDataAdvertRead();
-            }
-            @Override
-            public void failure(RetrofitError error) {
-                Log.d("myLogs", "-------ERROR-------Slide");
-                Log.d("myLogs", Log.getStackTraceString(error));
-            }
-        });
-    }
-    ///End LoadAdvertRead///
-
-    ///LoadAdvertPopular///
-    private void loadDataAdvertPopular() {
-
-        ItemAdvertPopular = getAllItemsAdvertPopular();
-
-        try {
-
-            AdvertPopularAdapter adapter = new AdvertPopularAdapter(getActivity(), ItemAdvertPopular, "Advert Popular");
+            AdvertPopularAdapter adapter = new AdvertPopularAdapter(getActivity(), AdvertMangasList, "Advert Popular");
             lv_advert_popular.setAdapter(adapter);
-        } catch (Exception ex) {
-
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-    private List<AdvertDto> getAllItemsAdvertPopular() {
-        List<AdvertDto> items = new ArrayList<>();
-        for (int i = 0; i < ListIdAdvertPopular.size(); i++) {
-            items.add(
-                    new AdvertDto(
-                            ListIdAdvertPopular.get(i),
-                            ListNameAdvertPopular.get(i),
-                            ListImgAdvertPopular.get(i) ,
-                            ListNameAuthorAdvertPopular.get(i),
-                            ListTypeAdvertPopular.get(i),
-                            ListStatusChapAdvertPopular.get(i)
-                    )
-            );
-        }
-        return items;
-    }
-    public void callServiceAdvertPopular(int id) {
-        ResClien restClient = new ResClien();
-        restClient.GetService().GetAdvertByTypeId(id,new Callback<List<AdvertDto>>() {
-            @Override
-            public void success(List<AdvertDto> AdvertDto, Response response) {
-                for (int i = 0; i < AdvertDto.size(); i++) {
+    public void LoadAdvertRead()
+    {
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertMangasDao =  getHelper().getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.where().eq("TypeStatusAdvertManga",2);
+            AdvertMangasList = queryBuilder.query();
 
-                    String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
-                    ListIdAdvertPopular.add(tmpStr10);
-                    ListNameAdvertPopular.add(AdvertDto.get(i).NameAdvertManga);
-                    ListImgAdvertPopular.add(AdvertDto.get(i).ImgAdvertManga);
-                    ListNameAuthorAdvertPopular.add(AdvertDto.get(i).NameAuthorAdvertManga);
-                    ListTypeAdvertPopular.add(AdvertDto.get(i).TypeAdvertManga);
-                    String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
-                    ListStatusChapAdvertPopular.add(tmpStatus);
-                }
-                int count=AdvertDto.size();
-                tv_count_advert2.setText(count+" truyện");
-                loadDataAdvertPopular();
-            }
-            @Override
-            public void failure(RetrofitError error) {
-                Log.d("myLogs", "-------ERROR-------Slide");
-                Log.d("myLogs", Log.getStackTraceString(error));
-            }
-        });
+            AdvertReadAdapter adapter = new AdvertReadAdapter(getActivity(), AdvertMangasList, "Advert Popular");
+            lv_advert_read.setAdapter(adapter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
-    ///End LoadAdvertRead///
+    public void LoadAdvertFeature()
+    {
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertMangasDao =  getHelper().getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.where().eq("TypeStatusAdvertManga",1);
+            AdvertMangasList = queryBuilder.query();
+
+            AdvertFeaturedAdapter adapter = new AdvertFeaturedAdapter(getActivity(), AdvertMangasList, "Advert Popular");
+            lv_advert_feature.setAdapter(adapter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
 
 
 }

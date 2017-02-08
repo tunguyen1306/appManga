@@ -38,7 +38,7 @@ android:padding="2dp">
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtNameAuthorAdvertViewed"
+        android:id="@+id/txtNameChapViewed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"

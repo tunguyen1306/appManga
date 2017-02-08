@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
-import com.example.tunguyen.manga.view.adapter.AdvertViewedAdapter;
 import com.example.tunguyen.manga.view.adapter.ListChapterAdapter;
 import com.example.tunguyen.manga.view.database.ChapterMangas;
 import com.example.tunguyen.manga.view.database.DatabaseHelper;
@@ -36,17 +36,19 @@ public class FraListChapter extends Fragment {
     CardView cardView;
     ListView list;
     View view;
+    TextView txtChapName;
     private DatabaseHelper databaseHelper = null;
-    private Dao<ChapterMangas, Integer> ChaptermangasDao;
-    private  List<ChapterMangas> ChaptermangasList;
+    private Dao<ChapterMangas, Integer> ChapterMangasDao;
+    private  List<ChapterMangas> chapterMangasList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_list_chapter, container, false);
         cardView=(CardView)view.findViewById(R.id.cardViewChapter);
         list=(ListView)view.findViewById(R.id.lvChapter);
+        //txtChapName=(TextView)view.findViewById(R.id.txtNameChapter);
         Preference.restorePreference(getContext());
         LoadDetailAdvertById(AdvertDto.IdAdvertRefer);
-        LoadAdvertRalate(AdvertDto.IdAdvertRefer);
+        LoadChapter(AdvertDto.IdAdvertRefer);
         return view;
     }
     ///Load Detail Advert by ID///
@@ -58,9 +60,9 @@ public class FraListChapter extends Fragment {
             public void success(List<ChapterDto> ChapterDto, Response response) {
 
                 for (int i = 0; i < ChapterDto.size(); i++) {
-                    AddChapterSqlite(ChapterDto.get(i).IdChapterManga,ChapterDto.get(i).NameChapterManga,ChapterDto.get(i).Link,ChapterDto.get(i).IdAdvertManga);
+                Preference.AddChapterSqlite(getContext(),ChapterDto.get(i).IdChapterManga,ChapterDto.get(i).NameChapterManga,ChapterDto.get(i).Link,ChapterDto.get(i).IdAdvertManga);
                 }
-
+                LoadChapter(AdvertDto.IdAdvertRefer);
             }
 
             @Override
@@ -71,34 +73,6 @@ public class FraListChapter extends Fragment {
     }
     ///End Load Detail Advert by ID///
 
-    public  void AddChapterSqlite(int IdChapterManga, String NameChapterManga, String Link,int IdAdvertManga)
-    {
-        try {
-            ChaptermangasDao =  getHelper().getChapterMangasesDao();
-            QueryBuilder<ChapterMangas, Integer> queryBuilder = ChaptermangasDao.queryBuilder();
-            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga).and().eq("IdChapterManga",IdChapterManga);
-            ChaptermangasList = queryBuilder.query();
-            if (ChaptermangasList.size()<=0 )
-            {
-                final ChapterMangas chapterMangas = new ChapterMangas();
-                chapterMangas.IdAdvertManga=IdAdvertManga;
-                chapterMangas.NameChapterManga=NameChapterManga;
-                chapterMangas.Link=Link;
-                chapterMangas.IdChapterManga=IdChapterManga;
-                chapterMangas.CheckChapterManga=1;
-                try {
-                    final Dao<ChapterMangas, Integer> ChapterMangas = getHelper().getChapterMangasesDao();
-                    ChapterMangas.create(chapterMangas);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     private DatabaseHelper getHelper() {
 
         if (databaseHelper == null) {
@@ -106,15 +80,16 @@ public class FraListChapter extends Fragment {
         }
         return databaseHelper;
     }
-    public void LoadAdvertRalate(int IdAdvertManga)
+    public void LoadChapter(int IdAdvertManga)
     {
         try {
             // This is how, a reference of DAO object can be done
-            ChaptermangasDao =  getHelper().getChapterMangasesDao();
-            QueryBuilder<ChapterMangas, Integer> queryBuilder = ChaptermangasDao.queryBuilder();
+            ChapterMangasDao =  getHelper().getChapterMangasDao();
+            QueryBuilder<ChapterMangas, Integer> queryBuilder = ChapterMangasDao.queryBuilder();
             queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
-            ChaptermangasList = queryBuilder.query();
-            list.setAdapter(new ListChapterAdapter(getActivity(),ChaptermangasList));
+            chapterMangasList = queryBuilder.query();
+            list.setAdapter(new ListChapterAdapter(getActivity(), chapterMangasList));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

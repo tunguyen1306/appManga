@@ -20,6 +20,7 @@ public class AdvertDto {
         public static  int IdAdvertRefer;
         public static  String NameAdvertRefer;
         public static  String TypeAdvertRefer;
+        public static  String ImgAdvertRefer;
         public static int CountViewRefer;
         public  int IdAdvertManga;
         public  String NameAdvertManga;
@@ -77,6 +78,15 @@ public class AdvertDto {
         public  int StatusChapAdvertManga;
         public  int CountChapAdvertManga;
 
+        public int getTypeStatusAdvertManga() {
+                return TypeStatusAdvertManga;
+        }
+
+        public void setTypeStatusAdvertManga(int typeStatusAdvertManga) {
+                TypeStatusAdvertManga = typeStatusAdvertManga;
+        }
+
+        public  int TypeStatusAdvertManga;
         public String getImgAdvertManga() {
                 return ImgAdvertManga;
         }

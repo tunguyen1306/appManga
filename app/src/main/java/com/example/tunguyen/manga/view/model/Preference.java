@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.ResClien;
 import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.AdvertViewedMangas;
+import com.example.tunguyen.manga.view.database.ChapterMangas;
 import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -13,6 +15,8 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit.Callback;
@@ -90,5 +94,135 @@ public class Preference {
 
             }
         });
+    }
+    private static DatabaseHelper databaseHelper = null;
+    private static Dao<ChapterMangas, Integer> ChapterMangasDao;
+    private static List<ChapterMangas> chapterMangasList;
+    public static void AddChapterSqlite(Context context,int IdChapterManga, String NameChapterManga, String Link,int IdAdvertManga)
+    {
+        try {
+            ChapterMangasDao =  getHelper(context).getChapterMangasDao();
+            QueryBuilder<ChapterMangas, Integer> queryBuilder = ChapterMangasDao.queryBuilder();
+            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga).and().eq("IdChapterManga",IdChapterManga);
+            chapterMangasList = queryBuilder.query();
+            if (chapterMangasList.size()<=0 )
+            {
+                final ChapterMangas chapterMangas = new ChapterMangas();
+                chapterMangas.IdAdvertManga=IdAdvertManga;
+                chapterMangas.NameChapterManga=NameChapterManga;
+                chapterMangas.Link=Link;
+                chapterMangas.IdChapterManga=IdChapterManga;
+                chapterMangas.CheckChapterManga=1;
+                try {
+                    final Dao<ChapterMangas, Integer> ChapterMangas = getHelper(context).getChapterMangasDao();
+                    ChapterMangas.create(chapterMangas);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static DatabaseHelper getHelper(Context context) {
+
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(context,DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+    private static   Dao<AdvertMangas, Integer> AdvertMangasDao;
+    private static List<AdvertMangas> AdvertMangasList;
+
+    public static void AddAllAdvertMangaSqlite(Context context,int IdAdvertManga, String NameAdvertManga, String ImgAdvertManga,
+                                            String NameAuthorAdvertManga,String DesAdvertManga,String TypeAdvertManga,int CountView,int TypeStatusAdvertManga)
+    {
+        try {
+            AdvertMangasDao =  getHelper(context).getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
+            AdvertMangasList = queryBuilder.query();
+            if (AdvertMangasList.size()<=0 )
+            {
+                final AdvertMangas AdvertMangas = new AdvertMangas();
+                AdvertMangas.IdAdvertManga=IdAdvertManga;
+                AdvertMangas.NameAdvertManga=NameAdvertManga;
+                AdvertMangas.ImgAdvertManga=ImgAdvertManga;
+                AdvertMangas.NameAuthorAdvertManga=NameAuthorAdvertManga;
+                AdvertMangas.DesAdvertManga=DesAdvertManga;
+                AdvertMangas.TypeAdvertManga=TypeAdvertManga;
+                AdvertMangas.CountView=CountView;
+                AdvertMangas.TypeStatusAdvertManga=TypeStatusAdvertManga;
+                try {
+                    final Dao<AdvertMangas, Integer> advertMangas = getHelper(context).getAdvertMangasDao();
+                    advertMangas.create(AdvertMangas);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static   Dao<AdvertViewedMangas, Integer> AdvertViewedMangasDao;
+    private static List<AdvertViewedMangas> AdvertViewedMangasList;
+    public static void AddAdvertViewedSqlite(Context context,int IdAdvertManga, String NameAdvertManga,String ImgAdvertManga,String NameChapManga,int IdChapterManga)
+    {
+        try {
+            AdvertViewedMangasDao =  getHelper(context).getAdvertViewedMangasDao();
+            QueryBuilder<AdvertViewedMangas, Integer> queryBuilder = AdvertViewedMangasDao.queryBuilder();
+            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
+            AdvertViewedMangasList = queryBuilder.query();
+            Calendar c = Calendar.getInstance();
+            System.out.println("Current time => " + c.getTime());
+
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            String formattedDate = df.format(c.getTime());
+
+            if (AdvertViewedMangasList.size()<=0 )
+            {
+                final AdvertViewedMangas AdvertViewedMangas = new AdvertViewedMangas();
+                AdvertViewedMangas.IdAdvertManga=IdAdvertManga;
+                AdvertViewedMangas.NameAdvertManga=NameAdvertManga;
+                AdvertViewedMangas.ImgAdvertManga=ImgAdvertManga;
+                AdvertViewedMangas.NameChapManga=NameChapManga;
+                AdvertViewedMangas.IdChapterManga=IdChapterManga;
+                AdvertViewedMangas.TimeUpdatedChapterManga=formattedDate;
+
+                try {
+                    final Dao<AdvertViewedMangas, Integer> advertViewedMangas = getHelper(context).getAdvertViewedMangasDao();
+                    advertViewedMangas.create(AdvertViewedMangas);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                final AdvertViewedMangas AdvertViewedMangas = new AdvertViewedMangas();
+                AdvertViewedMangas.IdAdvertManga=IdAdvertManga;
+                AdvertViewedMangas.NameAdvertManga=NameAdvertManga;
+                AdvertViewedMangas.ImgAdvertManga=ImgAdvertManga;
+                AdvertViewedMangas.NameChapManga=NameChapManga;
+                AdvertViewedMangas.IdChapterManga=IdChapterManga;
+                AdvertViewedMangas.TimeUpdatedChapterManga=formattedDate;
+
+                try {
+                    final Dao<AdvertViewedMangas, Integer> advertViewedMangas = getHelper(context).getAdvertViewedMangasDao();
+                    advertViewedMangas.update(AdvertViewedMangas);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

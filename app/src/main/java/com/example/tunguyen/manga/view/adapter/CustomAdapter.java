@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.DetailAdvert;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
@@ -32,10 +33,10 @@ import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 public class CustomAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context _Context;
-    List<AdvertDto> AdvertDtos;
+    List<AdvertMangas> AdvertDtos;
     TextView txt_tile;
     CustomAdapter.ViewHolder listViewHolder;
-    public CustomAdapter(Context context, List<AdvertDto> AdvertRelateListView) {
+    public CustomAdapter(Context context, List<AdvertMangas> AdvertRelateListView) {
         this._Context = context;
         layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         AdvertDtos = AdvertRelateListView;

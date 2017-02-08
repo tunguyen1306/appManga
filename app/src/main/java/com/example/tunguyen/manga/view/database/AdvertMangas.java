@@ -12,16 +12,67 @@ public  class AdvertMangas implements Serializable {
 public int Id;
     @DatabaseField(columnName = "IdAdvertManga")
     public int IdAdvertManga;
+
     @DatabaseField(columnName = "NameAdvertManga")
     public   String NameAdvertManga="NameAdvertManga";
+
     @DatabaseField(columnName = "ImgAdvertManga")
     public String ImgAdvertManga;
+
     @DatabaseField( columnName = "CheckAdvertManga")
     public int CheckAdvertManga;
-public AdvertMangas(){
 
-}
-    //For our own purpose, so it's easier to create a TeacherDetails object
+    @DatabaseField( columnName = "StatusChapAdvertManga")
+    public int StatusChapAdvertManga;
+
+    @DatabaseField( columnName = "StatusAdvertManga")
+    public int StatusAdvertManga;
+
+    @DatabaseField( columnName = "CountChapAdvertManga")
+    public int CountChapAdvertManga;
+
+    @DatabaseField(columnName = "NameAuthorAdvertManga")
+    public String NameAuthorAdvertManga;
+
+    @DatabaseField(columnName = "DesAdvertManga")
+    public String DesAdvertManga;
+
+    @DatabaseField(columnName = "TypeAdvertManga")
+    public String TypeAdvertManga;
+
+    @DatabaseField( columnName = "CountView")
+    public int CountView;
+
+    public int getTypeStatusAdvertManga() {
+        return TypeStatusAdvertManga;
+    }
+
+    public void setTypeStatusAdvertManga(int typeStatusAdvertManga) {
+        TypeStatusAdvertManga = typeStatusAdvertManga;
+    }
+
+    @DatabaseField( columnName = "TypeStatusAdvertManga")
+    public int TypeStatusAdvertManga;
+
+    public AdvertMangas(){
+
+    }
+
+    public AdvertMangas(final int IdAdvertManga,final String NameAdvertManga,final String ImgAdvertManga,final int CheckAdvertManga,int StatusChapAdvertManga,
+                        int StatusAdvertManga,String NameAuthorAdvertManga,String DesAdvertManga,String TypeAdvertManga,int CountView,int TypeStatusAdvertManga){
+        this.IdAdvertManga=IdAdvertManga;
+        this.NameAdvertManga = NameAdvertManga;
+        this.ImgAdvertManga = ImgAdvertManga;
+        this.CheckAdvertManga = CheckAdvertManga;
+        this.StatusChapAdvertManga = StatusChapAdvertManga;
+        this.StatusAdvertManga = StatusAdvertManga;
+        this.NameAuthorAdvertManga = NameAuthorAdvertManga;
+        this.DesAdvertManga = DesAdvertManga;
+        this.TypeAdvertManga = TypeAdvertManga;
+        this.CountView = CountView;
+        this.TypeStatusAdvertManga = TypeStatusAdvertManga;
+    }
+
     public AdvertMangas(final int IdAdvertManga,final String NameAdvertManga,final String ImgAdvertManga,final int CheckAdvertManga){
         this.IdAdvertManga=IdAdvertManga;
         this.NameAdvertManga = NameAdvertManga;
@@ -78,10 +129,6 @@ public AdvertMangas(){
         CountChapAdvertManga = countChapAdvertManga;
     }
 
-    public  String NameAuthorAdvertManga;
-    public  int StatusAdvertManga;
-    public  int StatusChapAdvertManga;
-    public  int CountChapAdvertManga;
 
     public String getImgAdvertManga() {
         return ImgAdvertManga;
@@ -98,7 +145,7 @@ public AdvertMangas(){
         DesAdvertManga = desAdvertManga;
     }
 
-    public  String DesAdvertManga;
+
 
     public String getTypeAdvertManga() {
         return TypeAdvertManga;
@@ -108,7 +155,7 @@ public AdvertMangas(){
         TypeAdvertManga = typeAdvertManga;
     }
 
-    public  String TypeAdvertManga;
+
     public int getCountView() {
         return CountView;
     }
@@ -117,7 +164,7 @@ public AdvertMangas(){
         CountView = countView;
     }
 
-    public  int CountView;
+
 
 
 

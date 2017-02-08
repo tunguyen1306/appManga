@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.adapter.AdvertViewedAdapter;
 import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.AdvertViewedMangas;
 import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -30,8 +31,8 @@ public class ViewedAdvert extends ActionBarActivity {
     private Toolbar toolbar;
     DrawerLayout drawer;
     ListView list;
-    private Dao<AdvertMangas, Integer> AdvertMangasDao;
-    private List<AdvertMangas> AdvertMangasList;
+    private Dao<AdvertViewedMangas, Integer> AdvertViewedMangasDao;
+    private List<AdvertViewedMangas> AdvertViewedMangasList;
     private DatabaseHelper databaseHelper = null;
 
     private static String PREF_NAME = "pref";
@@ -86,10 +87,10 @@ public class ViewedAdvert extends ActionBarActivity {
     {
         try {
             // This is how, a reference of DAO object can be done
-            AdvertMangasDao =  getHelper().getAdvertMangasesDao();
+            AdvertViewedMangasDao =  getHelper().getAdvertViewedMangasDao();
 
-            AdvertMangasList = AdvertMangasDao.queryForAll();
-            list.setAdapter(new AdvertViewedAdapter(this,AdvertMangasList));
+            AdvertViewedMangasList = AdvertViewedMangasDao.queryForAll();
+            list.setAdapter(new AdvertViewedAdapter(this,AdvertViewedMangasList));
         } catch (SQLException e) {
             e.printStackTrace();
         }

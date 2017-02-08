@@ -35,7 +35,7 @@ public class DetailChapter extends ActionBarActivity  {
     private Toolbar toolbar;
     DrawerLayout drawer;
     ViewPager paper_chap;
-    InkPageIndicator indicator_chap;
+
     ////Advert Read///////
     TwoWayView lv_advert_read;
     List<ChapterDto> ItemAdvertRead;
@@ -52,7 +52,7 @@ public class DetailChapter extends ActionBarActivity  {
 
     //string
     private static String PREF_NAME = "pref";
-TextView txtCount,txtItemCount;
+TextView txtCount,txtItemCount,txtItemChapterName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +61,12 @@ TextView txtCount,txtItemCount;
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //lv_advert_read = (TwoWayView)findViewById(R.id.lv_detail_chap);
         setupActionBar();
-        indicator_chap=(InkPageIndicator)findViewById(R.id.indicator_chap);
         paper_chap=(ViewPager)findViewById(R.id.pager_chap);
         Preference.restorePreference(getApplicationContext());
         callServiceChap(ChapterDto.IdChapterRefer);
         txtCount=(TextView)findViewById(R.id.txtCountDetailChap);
+        txtItemChapterName=(TextView)findViewById(R.id.txtItemChapterName);
+        txtItemChapterName.setText(ChapterDto.NameChapterRefer);
         txtItemCount=(TextView)findViewById(R.id.txtItemCount);
         paper_chap.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -109,7 +110,7 @@ TextView txtCount,txtItemCount;
         LinearLayout ln_back = (LinearLayout) mCustomView.findViewById(R.id.ln_back);
         TextView tv_title = (TextView) mCustomView.findViewById(R.id.tv_title);
         TextView tv_title_name = (TextView) mCustomView.findViewById(R.id.tv_title_name);
-        tv_title.setText(AdvertDto.NameAdvertRefer+"-"+ChapterDto.NameChapterRefer);
+        tv_title.setText(AdvertDto.NameAdvertRefer);
         ln_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,8 +151,6 @@ TextView txtCount,txtItemCount;
 
                 SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
                 paper_chap.setAdapter(slideAdapter1);
-
-                //indicator_chap.setViewPager(paper_chap);
             }
         }
         catch (Exception ex) {

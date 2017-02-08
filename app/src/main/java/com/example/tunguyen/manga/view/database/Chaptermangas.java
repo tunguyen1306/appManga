@@ -70,7 +70,7 @@ public class ChapterMangas implements Serializable {
     public ChapterMangas(){
 
     }
-    //For our own purpose, so it's easier to create a TeacherDetails object
+
     public ChapterMangas(final int IdChapterManga, final String NameChapterManga, final String Link, final int IdAdvertManga, final int CheckChapterManga){
         this.IdAdvertManga=IdAdvertManga;
         this.NameChapterManga = NameChapterManga;

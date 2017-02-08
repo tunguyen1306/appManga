@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.DetailAdvert;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.squareup.picasso.Picasso;
@@ -28,7 +29,7 @@ import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 
 public class AdvertPopularAdapter extends RecyclerView.Adapter<AdvertPopularAdapter.SimpleViewHolder> {
     private final Context mContext;
-    List<AdvertDto> _list = new ArrayList<>();
+    List<AdvertMangas> _list = new ArrayList<>();
     String from_activity;
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +46,7 @@ public class AdvertPopularAdapter extends RecyclerView.Adapter<AdvertPopularAdap
         }
     }
 
-    public AdvertPopularAdapter(Context context, List<AdvertDto> list, String from_activity) {
+    public AdvertPopularAdapter(Context context, List<AdvertMangas> list, String from_activity) {
         mContext = context;
         this._list = list;
         this.from_activity = from_activity;

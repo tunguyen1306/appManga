@@ -28,6 +28,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<AdvertMangas, Integer> advertMangasesDao;
     private Dao<ChapterMangas, Integer> chapterMangasesDao;
+    private Dao<AdvertViewedMangas, Integer> advertViewedMangasesDao;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
@@ -44,6 +45,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             // Create tables. This onCreate() method will be invoked only once of the application life time i.e. the first time when the application starts.
             TableUtils.createTable(connectionSource, AdvertMangas.class);
             TableUtils.createTable(connectionSource, ChapterMangas.class);
+            TableUtils.createTable(connectionSource, AdvertViewedMangas.class);
 
 
         } catch (SQLException e) {
@@ -61,6 +63,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             TableUtils.dropTable(connectionSource, AdvertMangas.class, true);
             TableUtils.dropTable(connectionSource, ChapterMangas.class, true);
+            TableUtils.dropTable(connectionSource, AdvertViewedMangas.class, true);
             onCreate(sqliteDatabase, connectionSource);
 
         } catch (SQLException e) {
@@ -68,16 +71,23 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                     + newVer, e);
         }
     }
-    public Dao<AdvertMangas, Integer> getAdvertMangasesDao() throws SQLException {
+    public Dao<AdvertMangas, Integer> getAdvertMangasDao() throws SQLException {
         if (advertMangasesDao == null) {
             advertMangasesDao = getDao(AdvertMangas.class);
         }
         return advertMangasesDao;
     }
-    public Dao<ChapterMangas, Integer> getChapterMangasesDao() throws SQLException {
+    public Dao<ChapterMangas, Integer> getChapterMangasDao() throws SQLException {
         if (chapterMangasesDao == null) {
             chapterMangasesDao = getDao(ChapterMangas.class);
         }
         return chapterMangasesDao;
     }
+    public Dao<AdvertViewedMangas, Integer> getAdvertViewedMangasDao() throws SQLException {
+        if (advertViewedMangasesDao == null) {
+            advertViewedMangasesDao = getDao(AdvertViewedMangas.class);
+        }
+        return advertViewedMangasesDao;
+    }
+
 }

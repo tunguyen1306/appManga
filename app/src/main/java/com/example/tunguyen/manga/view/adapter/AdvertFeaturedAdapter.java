@@ -30,17 +30,12 @@ import java.util.List;
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
-
+import static com.example.tunguyen.manga.view.model.AdvertDto.ImgAdvertRefer;
 
 public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAdapter.SimpleViewHolder> {
     private final Context mContext;
-    List<AdvertDto> _list = new ArrayList<>();
+    List<AdvertMangas> _list = new ArrayList<>();
     String from_activity;
-    private  DatabaseHelper databaseHelper = null;
-    private  Dao<AdvertMangas, Integer> AdvertMangasDao;
-    private  List<AdvertMangas> AdvertMangasList;
-
-
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         LinearLayout ln_view;
         ImageView image;
@@ -55,7 +50,7 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
         }
     }
 
-    public AdvertFeaturedAdapter(Context context, List<AdvertDto> list, String from_activity) {
+    public AdvertFeaturedAdapter(Context context, List<AdvertMangas> list, String from_activity) {
         mContext = context;
         this._list = list;
         this.from_activity = from_activity;
@@ -99,8 +94,7 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
                 IdAdvertRefer=_list.get(position).getIdAdvertManga();
                 NameAdvertRefer =_list.get(position).getNameAdvertManga();
                 TypeAdvertRefer =_list.get(position).getTypeAdvertManga();
-
-                AddAdvertSqlite(_list.get(position).getIdAdvertManga(),_list.get(position).getNameAdvertManga(),_list.get(position).getImgAdvertManga());
+                ImgAdvertRefer =_list.get(position).getImgAdvertManga();
                 Preference.CountView(_list.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(mContext.getApplicationContext());
                 mContext.startActivity(intent_login);
@@ -118,38 +112,6 @@ public class AdvertFeaturedAdapter extends RecyclerView.Adapter<AdvertFeaturedAd
             return 0;
         }
     }
-    public  void AddAdvertSqlite(int IdAdvertManga, String NameAdvertManga, String ImgAdvertManga)
-    {
-        try {
-            AdvertMangasDao =  getHelper().getAdvertMangasesDao();
-            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
-            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
-            AdvertMangasList = queryBuilder.query();
-            if (AdvertMangasList.size()<=0)
-            {
-                final AdvertMangas advertMangas = new AdvertMangas();
-                advertMangas.IdAdvertManga=IdAdvertManga;
-                advertMangas.NameAdvertManga=NameAdvertManga;
-                advertMangas.ImgAdvertManga=ImgAdvertManga;
-                advertMangas.CheckAdvertManga=1;
-                try {
-                    final Dao<AdvertMangas, Integer> AdvertMangas = getHelper().getAdvertMangasesDao();
-                    AdvertMangas.create(advertMangas);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    private  DatabaseHelper getHelper() {
-
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(mContext ,DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }
 }
