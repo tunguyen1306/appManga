@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -112,12 +114,15 @@ public class AdvertViewedAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Animation animation = new AlphaAnimation(0.3f, 1.0f);
+                    animation.setDuration(1000);
+                    v.startAnimation(animation);
                     IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
                     NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
                     ImgAdvertRefer =AdvertDtos.get(position).getImgAdvertManga();
                     PositionItemChapterRefer=AdvertDtos.get(position).getPositionItemChapterManga();
                     IdChapterRefer=AdvertDtos.get(position).getIdChapterManga();
+                    NameChapterRefer=AdvertDtos.get(position).getNameChapManga();
                     Preference.savePreference(_Context.getApplicationContext());
                     if (AdvertDtos.get(position).getPositionItemChapterManga()>0)
                     {

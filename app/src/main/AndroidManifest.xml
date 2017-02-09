@@ -36,5 +36,9 @@
             android:name="com.example.tunguyen.manga.view.activity.ViewedAdvert"
             android:label="" >
         </activity>
+        <activity
+            android:name="com.example.tunguyen.manga.view.activity.FavoriteAdvert"
+            android:label="" >
+        </activity>
     </application>
 </manifest>

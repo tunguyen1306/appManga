@@ -1,7 +1,9 @@
 package com.example.tunguyen.manga.view.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ import retrofit.client.Response;
 
 public class FraAllAdvert extends Fragment {
         GridView grid;
+    SwipeRefreshLayout swipeLayout;
     private Dao<AdvertMangas, Integer> AdvertMangasDao;
     private List<AdvertMangas> AdvertMangasList;
     private DatabaseHelper databaseHelper = null;
@@ -42,6 +45,24 @@ public class FraAllAdvert extends Fragment {
         View view = inflater.inflate(R.layout.fra_all_advert, container, false);
         grid=(GridView)view.findViewById(R.id.gridView1);
         LoadAllAdvert();
+        swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
+
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeLayout.setRefreshing(true);
+                ControlDatabase.AddAllAdvert(getContext());
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+
+                            swipeLayout.setRefreshing(false);
+
+                    }
+                }, 5000);
+
+            }
+        });
         return view;
     }
 
@@ -62,6 +83,10 @@ public class FraAllAdvert extends Fragment {
             e.printStackTrace();
         }
     }
+
+
+
+
     private DatabaseHelper getHelper() {
         if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);

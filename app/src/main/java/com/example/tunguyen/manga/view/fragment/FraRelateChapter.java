@@ -37,6 +37,7 @@ public class FraRelateChapter extends Fragment {
         View view = inflater.inflate(R.layout.fra_relate_chapter, container, false);
         list=(ListView)view.findViewById(R.id.lvAdvertRelate);
         Preference.restorePreference(getContext());
+        //view.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         LoadAdvertRalate(TypeAdvertRefer);
         return view;
     }

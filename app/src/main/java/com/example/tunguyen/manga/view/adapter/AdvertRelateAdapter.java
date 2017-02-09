@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,6 +81,9 @@ public class AdvertRelateAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Animation animation = new AlphaAnimation(0.3f, 1.0f);
+                    animation.setDuration(1000);
+                    v.startAnimation(animation);
                     Intent intent_login=new Intent(_Context,DetailAdvert.class);
                     intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();

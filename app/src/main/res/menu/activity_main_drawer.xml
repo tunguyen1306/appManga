@@ -17,7 +17,7 @@
                 android:icon="@drawable/ic_history_manga"
                 android:title="Truyện đã xem" />
             <item
-                android:id="@+id/nav_email"
+                android:id="@+id/nav_advert_favorite"
                 android:icon="@drawable/ic_favorite_on_manga"
                 android:title="Truyện yêu thích" />
 

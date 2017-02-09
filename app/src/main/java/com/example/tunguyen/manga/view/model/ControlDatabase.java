@@ -22,7 +22,7 @@ public class ControlDatabase {
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     Preference.AddAllAdvertMangaSqlite(context,AdvertDto.get(i).IdAdvertManga,AdvertDto.get(i).NameAdvertManga,AdvertDto.get(i).ImgAdvertManga,AdvertDto.get(i).NameAuthorAdvertManga,AdvertDto.get(i).DesAdvertManga,AdvertDto.get(i).TypeAdvertManga,AdvertDto.get(i).CountView,AdvertDto.get(i).TypeStatusAdvertManga);
-
+                    LoadDetailAdvertById(AdvertDto.get(i).IdAdvertManga,context);
                 }
 
             }
@@ -30,6 +30,26 @@ public class ControlDatabase {
             public void failure(RetrofitError error) {
                 Log.d("myLogs", "-------ERROR-------Slide");
                 Log.d("myLogs", Log.getStackTraceString(error));
+            }
+        });
+    }
+    public static void LoadDetailAdvertById(int id,final Context context)
+    {
+        ResClien resClient=new ResClien();
+        resClient.GetService().GetChapByAdvertID(id, new Callback<List<ChapterDto>>() {
+            @Override
+            public void success(List<ChapterDto> ChapterDto, Response response) {
+
+                for (int i = 0; i < ChapterDto.size(); i++) {
+
+                    Preference.AddChapterSqlite(context,ChapterDto.get(i).IdChapterManga,ChapterDto.get(i).NameChapterManga,ChapterDto.get(i).Link,ChapterDto.get(i).IdAdvertManga);
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
     }

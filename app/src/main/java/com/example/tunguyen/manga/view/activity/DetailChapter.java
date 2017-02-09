@@ -159,6 +159,7 @@ TextView txtCount,txtItemCount,txtItemChapterName;
                     }else {
                         SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
                         paper_chap.setAdapter(slideAdapter1);
+                        paper_chap.setCurrentItem(0);
                     }
 
                 }

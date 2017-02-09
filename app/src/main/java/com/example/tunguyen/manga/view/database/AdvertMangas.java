@@ -43,6 +43,17 @@ public int Id;
     @DatabaseField( columnName = "CountView")
     public int CountView;
 
+    public int getIdFavorite() {
+        return IdFavorite;
+    }
+
+    public void setIdFavorite(int idFavorite) {
+        IdFavorite = idFavorite;
+    }
+
+    @DatabaseField( columnName = "IdFavorite")
+    public int IdFavorite;
+
     public int getTypeStatusAdvertManga() {
         return TypeStatusAdvertManga;
     }

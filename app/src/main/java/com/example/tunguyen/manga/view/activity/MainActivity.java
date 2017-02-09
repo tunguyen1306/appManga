@@ -224,7 +224,10 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                 Intent viewd = new Intent(getApplicationContext(), ViewedAdvert.class);
                 startActivity(viewd);
                 break;
-
+            case R.id.nav_advert_favorite:
+                Intent favorite = new Intent(getApplicationContext(), FavoriteAdvert.class);
+                startActivity(favorite);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

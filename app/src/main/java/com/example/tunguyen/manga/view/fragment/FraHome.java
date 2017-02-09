@@ -78,10 +78,15 @@ public class FraHome extends Fragment {
                 LoadAdvertPopular();
                 LoadAdvertRead();
                 LoadAdvertFeature();
-                if (countDow>=2)
-                {
-                    swipeLayout.setRefreshing(false);
-                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        if (countDow>=2)
+                        {
+                            swipeLayout.setRefreshing(false);
+                        }
+                    }
+                }, 5000);
+
             }
         });
         txtReadmore.setOnClickListener(new View.OnClickListener() {

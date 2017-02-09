@@ -45,32 +45,30 @@ public class FraListChapter extends Fragment {
         View view = inflater.inflate(R.layout.fra_list_chapter, container, false);
         cardView=(CardView)view.findViewById(R.id.cardViewChapter);
         list=(ListView)view.findViewById(R.id.lvChapter);
-        //txtChapName=(TextView)view.findViewById(R.id.txtNameChapter);
         Preference.restorePreference(getContext());
-        LoadDetailAdvertById(AdvertDto.IdAdvertRefer);
         LoadChapter(AdvertDto.IdAdvertRefer);
         return view;
     }
     ///Load Detail Advert by ID///
-    public void LoadDetailAdvertById(int id)
-    {
-        ResClien resClient=new ResClien();
-        resClient.GetService().GetChapByAdvertID(id, new Callback<List<ChapterDto>>() {
-            @Override
-            public void success(List<ChapterDto> ChapterDto, Response response) {
-
-                for (int i = 0; i < ChapterDto.size(); i++) {
-                Preference.AddChapterSqlite(getContext(),ChapterDto.get(i).IdChapterManga,ChapterDto.get(i).NameChapterManga,ChapterDto.get(i).Link,ChapterDto.get(i).IdAdvertManga);
-                }
-                LoadChapter(AdvertDto.IdAdvertRefer);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
-    }
+//    public void LoadDetailAdvertById(int id)
+//    {
+//        ResClien resClient=new ResClien();
+//        resClient.GetService().GetChapByAdvertID(id, new Callback<List<ChapterDto>>() {
+//            @Override
+//            public void success(List<ChapterDto> ChapterDto, Response response) {
+//
+//                for (int i = 0; i < ChapterDto.size(); i++) {
+//                Preference.AddChapterSqlite(getContext(),ChapterDto.get(i).IdChapterManga,ChapterDto.get(i).NameChapterManga,ChapterDto.get(i).Link,ChapterDto.get(i).IdAdvertManga);
+//                }
+//                LoadChapter(AdvertDto.IdAdvertRefer);
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//
+//            }
+//        });
+//    }
     ///End Load Detail Advert by ID///
 
     private DatabaseHelper getHelper() {
