@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.ImgAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 
@@ -83,6 +84,7 @@ public class AdvertRelateAdapter extends BaseAdapter {
                     IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
                     NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
                     TypeAdvertRefer =AdvertDtos.get(position).getTypeAdvertManga();
+                    ImgAdvertRefer =AdvertDtos.get(position).getImgAdvertManga();
                     Preference.CountView(AdvertDtos.get(position).getIdAdvertManga(),123);
                     Preference.savePreference(_Context.getApplicationContext());
                     _Context.startActivity(intent_login);

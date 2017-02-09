@@ -2,6 +2,7 @@ package com.example.tunguyen.manga.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,9 +69,12 @@ public class ListChapterAdapter extends BaseAdapter {
         }
 
         listViewHolder.txtNameChapter.setText(ChapterDto.get(position).NameChapterManga);
-        if (ChapterDto.get(position).CheckChapterManga==1)
+        if (ChapterDto.get(position).CheckChapterManga==0)
         {
-        // listViewHolder.txtNameChapter.setTextColor(Color.parseColor("#000000"));
+           listViewHolder.txtNameChapter.setTextColor(Color.parseColor("#929398"));
+        }
+        else{
+            listViewHolder.txtNameChapter.setTextColor(Color.parseColor("#ffffff"));
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +84,8 @@ public class ListChapterAdapter extends BaseAdapter {
                 IdChapterRefer=ChapterDto.get(position).getIdChapterManga();
                 NameChapterRefer =ChapterDto.get(position).getNameChapterManga();
                 Preference.savePreference(_Context.getApplicationContext());
-
                 Preference.AddAdvertViewedSqlite(_Context,ChapterDto.get(position).getIdAdvertManga(), AdvertDto.NameAdvertRefer,AdvertDto.ImgAdvertRefer,NameChapterRefer,IdChapterRefer);
+                Preference.UpdateChapterSqlite(_Context,IdChapterRefer);
                 _Context.startActivity(intent_login);
             }
         });

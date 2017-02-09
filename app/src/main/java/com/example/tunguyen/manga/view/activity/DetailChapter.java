@@ -72,11 +72,13 @@ TextView txtCount,txtItemCount,txtItemChapterName;
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 txtItemCount.setText(String.valueOf(position+1));
+                Preference.UpdatePositionViewedSqlite(getApplicationContext(),position+1,AdvertDto.IdAdvertRefer,ChapterDto.IdChapterRefer);
             }
 
             @Override
             public void onPageSelected(int position) {
                 txtItemCount.setText(String.valueOf(position+1));
+                Preference.UpdatePositionViewedSqlite(getApplicationContext(),position+1,AdvertDto.IdAdvertRefer,ChapterDto.IdChapterRefer);
             }
 
             @Override
@@ -141,24 +143,35 @@ TextView txtCount,txtItemCount,txtItemChapterName;
 
     ///LoadSlide///////
     private void loadChap(){
+           ItemChap = getDataChap();
+                try {
 
-        ItemChap = getDataChap();
-        try {
+                    String t1=String.valueOf("/"+ ItemChap.size());
+                    txtCount.setText(t1);
 
-            String t1=String.valueOf("/"+ ItemChap.size());
-            txtCount.setText(t1);
-            for (int i = 0; i < ItemChap.size(); i++) {
 
-                SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
-                paper_chap.setAdapter(slideAdapter1);
-            }
-        }
-        catch (Exception ex) {
 
-        }
+                    if (AdvertDto.PositionItemChapterRefer>0){
+                        SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
+                        paper_chap.setAdapter(slideAdapter1);
+                        paper_chap.setCurrentItem(AdvertDto.PositionItemChapterRefer-1);
+
+                    }else {
+                        SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
+                        paper_chap.setAdapter(slideAdapter1);
+                    }
+
+                }
+                catch (Exception ex) {
+
+                }
+
+
+
     }
     private List<ChapterDto>getDataChap(){
         List<ChapterDto> items = new ArrayList<>();
+
         for (int i=0;i<list_img_chap.size();i++) {
             items.add(new ChapterDto(list_img_chap.get(i)));
         }

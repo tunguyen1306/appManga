@@ -10,6 +10,63 @@ public  class AdvertViewedMangas implements Serializable {
 
 @DatabaseField(generatedId = true, columnName = "Id")
 public int Id;
+
+    public int getIdAdvertManga() {
+        return IdAdvertManga;
+    }
+
+    public void setIdAdvertManga(int idAdvertManga) {
+        IdAdvertManga = idAdvertManga;
+    }
+
+    public String getNameAdvertManga() {
+        return NameAdvertManga;
+    }
+
+    public void setNameAdvertManga(String nameAdvertManga) {
+        NameAdvertManga = nameAdvertManga;
+    }
+
+    public String getImgAdvertManga() {
+        return ImgAdvertManga;
+    }
+
+    public void setImgAdvertManga(String imgAdvertManga) {
+        ImgAdvertManga = imgAdvertManga;
+    }
+
+    public String getNameChapManga() {
+        return NameChapManga;
+    }
+
+    public void setNameChapManga(String nameChapManga) {
+        NameChapManga = nameChapManga;
+    }
+
+    public int getIdChapterManga() {
+        return IdChapterManga;
+    }
+
+    public void setIdChapterManga(int idChapterManga) {
+        IdChapterManga = idChapterManga;
+    }
+
+    public String getTimeUpdatedChapterManga() {
+        return TimeUpdatedChapterManga;
+    }
+
+    public void setTimeUpdatedChapterManga(String timeUpdatedChapterManga) {
+        TimeUpdatedChapterManga = timeUpdatedChapterManga;
+    }
+
+    public int getPositionItemChapterManga() {
+        return PositionItemChapterManga;
+    }
+
+    public void setPositionItemChapterManga(int positionItemChapterManga) {
+        PositionItemChapterManga = positionItemChapterManga;
+    }
+
     @DatabaseField(columnName = "IdAdvertManga")
     public int IdAdvertManga;
 
@@ -27,6 +84,11 @@ public int Id;
 
     @DatabaseField(columnName = "TimeUpdatedChapterManga")
     public String TimeUpdatedChapterManga;
+
+    @DatabaseField(columnName = "PositionItemChapterManga")
+    public int PositionItemChapterManga;
+
+
     public AdvertViewedMangas()
     {
 

@@ -22,6 +22,8 @@ public class AdvertDto {
         public static  String TypeAdvertRefer;
         public static  String ImgAdvertRefer;
         public static int CountViewRefer;
+        public static  int PositionItemChapterRefer;
+
         public  int IdAdvertManga;
         public  String NameAdvertManga;
 

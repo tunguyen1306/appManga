@@ -143,6 +143,7 @@ public class Preference {
                                             String NameAuthorAdvertManga,String DesAdvertManga,String TypeAdvertManga,int CountView,int TypeStatusAdvertManga)
     {
         try {
+
             AdvertMangasDao =  getHelper(context).getAdvertMangasDao();
             QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
             queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
@@ -164,6 +165,18 @@ public class Preference {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }else {
+                UpdateBuilder<AdvertMangas, Integer> updateBuilder = AdvertMangasDao.updateBuilder();
+                updateBuilder.updateColumnValue("IdAdvertManga", IdAdvertManga);
+                updateBuilder.updateColumnValue("NameAdvertManga",NameAdvertManga);
+                updateBuilder.updateColumnValue("ImgAdvertManga",ImgAdvertManga);
+                updateBuilder.updateColumnValue("NameAuthorAdvertManga",NameAuthorAdvertManga);
+                updateBuilder.updateColumnValue("DesAdvertManga",DesAdvertManga);
+                updateBuilder.updateColumnValue("TypeAdvertManga",TypeAdvertManga);
+                updateBuilder.updateColumnValue("CountView",CountView);
+                updateBuilder.updateColumnValue("TypeStatusAdvertManga",TypeStatusAdvertManga);
+                updateBuilder.where().eq("IdAdvertManga",IdAdvertManga);
+                updateBuilder.update();
             }
 
 
@@ -193,6 +206,7 @@ public class Preference {
                 AdvertViewedMangas.ImgAdvertManga=ImgAdvertManga;
                 AdvertViewedMangas.NameChapManga=NameChapManga;
                 AdvertViewedMangas.IdChapterManga=IdChapterManga;
+                AdvertViewedMangas.PositionItemChapterManga=0;
                 AdvertViewedMangas.TimeUpdatedChapterManga=formattedDate;
 
                 try {
@@ -219,6 +233,36 @@ public class Preference {
             }
 
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void UpdateChapterSqlite(Context context,int IdChapterManga)
+    {
+        try {
+            final Dao<ChapterMangas, Integer> ChapterMangas = getHelper(context).getChapterMangasDao();
+            UpdateBuilder<ChapterMangas, Integer> updateBuilder = ChapterMangas.updateBuilder();
+            updateBuilder.updateColumnValue("CheckChapterManga", 0);
+            updateBuilder.where().eq("IdChapterManga",IdChapterManga);
+            updateBuilder.update();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void UpdatePositionViewedSqlite(Context context,int PositionItemChapterManga,int IdAdvertManga,int IdChapterManga)
+    {
+        try {
+            final Dao<AdvertViewedMangas, Integer> advertViewedMangas = getHelper(context).getAdvertViewedMangasDao();
+
+            UpdateBuilder<AdvertViewedMangas, Integer> updateBuilder = advertViewedMangas.updateBuilder();
+            updateBuilder.updateColumnValue("PositionItemChapterManga", PositionItemChapterManga);
+            updateBuilder.where().eq("idadvertmanga",IdAdvertManga).and().eq("idchaptermanga",IdChapterManga);
+            updateBuilder.update();
+            AdvertViewedMangasDao =  getHelper(context).getAdvertViewedMangasDao();
+            QueryBuilder<AdvertViewedMangas, Integer> queryBuilder = AdvertViewedMangasDao.queryBuilder();
+            AdvertViewedMangasList = queryBuilder.query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

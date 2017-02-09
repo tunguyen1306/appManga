@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.ImgAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 
@@ -87,6 +88,7 @@ public class AdvertReadAdapter extends RecyclerView.Adapter<AdvertReadAdapter.Si
                 IdAdvertRefer=_list.get(position).getIdAdvertManga();
                 NameAdvertRefer =_list.get(position).getNameAdvertManga();
                 TypeAdvertRefer =_list.get(position).getTypeAdvertManga();
+                ImgAdvertRefer =_list.get(position).getImgAdvertManga();
                 Preference.CountView(_list.get(position).getIdAdvertManga(),123);
                 Preference.savePreference(mContext.getApplicationContext());
                 mContext.startActivity(intent_login);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
 import com.example.tunguyen.manga.view.activity.DetailAdvert;
+import com.example.tunguyen.manga.view.activity.DetailChapter;
 import com.example.tunguyen.manga.view.database.AdvertMangas;
 import com.example.tunguyen.manga.view.database.AdvertViewedMangas;
 import com.example.tunguyen.manga.view.model.AdvertDto;
@@ -24,8 +25,12 @@ import java.util.Date;
 import java.util.List;
 
 import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.ImgAdvertRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.PositionItemChapterRefer;
 import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
+import static com.example.tunguyen.manga.view.model.ChapterDto.IdChapterRefer;
+import static com.example.tunguyen.manga.view.model.ChapterDto.NameChapterRefer;
 
 /**
  * Created by TuNguyen on 09/10/2016.
@@ -107,11 +112,25 @@ public class AdvertViewedAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent_login=new Intent(_Context,DetailAdvert.class);
-                    intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+                    IdAdvertRefer=AdvertDtos.get(position).getIdAdvertManga();
+                    NameAdvertRefer =AdvertDtos.get(position).getNameAdvertManga();
+                    ImgAdvertRefer =AdvertDtos.get(position).getImgAdvertManga();
+                    PositionItemChapterRefer=AdvertDtos.get(position).getPositionItemChapterManga();
+                    IdChapterRefer=AdvertDtos.get(position).getIdChapterManga();
                     Preference.savePreference(_Context.getApplicationContext());
-                    _Context.startActivity(intent_login);
+                    if (AdvertDtos.get(position).getPositionItemChapterManga()>0)
+                    {
+                        Intent intent_detailchapter=new Intent(_Context,DetailChapter.class);
+                        intent_detailchapter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        _Context.startActivity(intent_detailchapter);
+                    }
+                    else {
+                        Intent intent_login=new Intent(_Context,DetailAdvert.class);
+                        intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        _Context.startActivity(intent_login);
+                    }
+
 
 
                 }
@@ -151,21 +170,22 @@ public class AdvertViewedAdapter extends BaseAdapter {
 
         long elapsedSeconds = different / secondsInMilli;
         String t ="";
-        if (elapsedDays>0)
+
+        if (elapsedSeconds>0)
         {
-            t=elapsedDays+" ngày trước";
-        }
-        if (elapsedHours>0)
-        {
-            t=elapsedDays+" giờ trước";
+            t=elapsedSeconds+" giây trước";
         }
         if (elapsedMinutes>0)
         {
-            t=elapsedDays+" phút trước";
+            t=elapsedMinutes+" phút trước";
         }
-        if (elapsedSeconds>0)
+        if (elapsedHours>0)
         {
-            t=elapsedDays+" giây trước";
+            t=elapsedHours+" giờ trước";
+        }
+        if (elapsedDays>0)
+        {
+            t=elapsedDays+" ngày trước";
         }
        return t;
     }

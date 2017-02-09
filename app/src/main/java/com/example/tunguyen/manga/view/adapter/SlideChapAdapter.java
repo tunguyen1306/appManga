@@ -47,14 +47,16 @@ public class SlideChapAdapter extends PagerAdapter {
         assert imageLayout != null;
         final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.SlideChap);
         list_slide.get(position).getLink();
-        if(list_slide.get(position).getLink()!=""){
-            Picasso.with(context).load(list_slide.get(position).getLink()).into(imageView);
-        }
-        else {
-            Picasso.with(context).load(R.drawable.icon_home).into(imageView);
-        }
 
-        //Picasso.with(context).load(R.drawable.icon_home).into(imageView);
+            if(list_slide.get(position).getLink()!=""){
+                Picasso.with(context).load(list_slide.get(position).getLink()).into(imageView);
+            }
+            else {
+                Picasso.with(context).load(R.drawable.icon_home).into(imageView);
+            }
+
+
+
         view.addView(imageLayout, 0);
 
 //        imageView.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -19,7 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.adapter.AdvertReadAdapter;
+import com.example.tunguyen.manga.view.adapter.AdvertViewedAdapter;
 import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.AdvertViewedMangas;
 import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.fragment.FraInfoChapter;
 import com.example.tunguyen.manga.view.fragment.FraListChapter;
@@ -43,6 +47,11 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.ImgAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.PositionItemChapterRefer;
+import static com.example.tunguyen.manga.view.model.ChapterDto.IdChapterRefer;
 import static com.example.tunguyen.manga.view.model.DeviceDto.SerialDeviceRefer;
 
 public class DetailAdvert extends ActionBarActivity  {
@@ -52,7 +61,7 @@ public class DetailAdvert extends ActionBarActivity  {
     DrawerLayout drawer;
 
 
-    TextView txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate,txtCountView;
+    TextView txtNameAdvert,txtAuthor,txtCountChapter,txtStatusChap,txtInfo,txtChap,txtRelate,txtCountView,txtRead;
     ImageView imgAdvert;
 
     public FragmentTransaction ft;
@@ -86,9 +95,8 @@ public class DetailAdvert extends ActionBarActivity  {
         txtInfo=(TextView) findViewById(R.id.txtInfo);
         txtChap=(TextView) findViewById(R.id.txtChap);
         txtRelate=(TextView) findViewById(R.id.txtRelate);
+        txtRead=(TextView) findViewById(R.id.txtRead);
         ///End Advert///
-
-
 
         ///Event Button///
         txtInfo.setOnClickListener(new View.OnClickListener() {
@@ -151,10 +159,12 @@ public class DetailAdvert extends ActionBarActivity  {
 
             }
         });
-
-        ///End Event Button///
-
         setupActionBar();
+        ///End Event Button///
+        LoadDetailAdvertById(AdvertDto.IdAdvertRefer);
+        LoadAdvertView(AdvertDto.IdAdvertRefer);
+
+
 
 
 
@@ -192,9 +202,6 @@ public class DetailAdvert extends ActionBarActivity  {
         });
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
-
-        ///Call Function///
-        LoadDetailAdvertById(AdvertDto.IdAdvertRefer);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -274,6 +281,58 @@ public class DetailAdvert extends ActionBarActivity  {
             }
         });
     }
+    private Dao<AdvertViewedMangas, Integer> AdvertViewedMangasDao;
+    private List<AdvertViewedMangas> AdvertViewedMangasList;
+    private DatabaseHelper databaseHelper = null;
+    public void LoadAdvertView(int IdAdvertManga)
+    {
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertViewedMangasDao =  getHelper().getAdvertViewedMangasDao();
+            QueryBuilder<AdvertViewedMangas, Integer> queryBuilder = AdvertViewedMangasDao.queryBuilder();
+            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
+            AdvertViewedMangasList = queryBuilder.query();
+                   if(AdvertViewedMangasList.get(0).PositionItemChapterManga>0) {
+           txtRead.setText("Đọc tiếp");
+           txtRead.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+
+                   IdAdvertRefer=AdvertViewedMangasList.get(0).IdAdvertManga;
+                   NameAdvertRefer =AdvertViewedMangasList.get(0).NameAdvertManga;
+                   PositionItemChapterRefer=AdvertViewedMangasList.get(0).PositionItemChapterManga;
+                   IdChapterRefer=AdvertViewedMangasList.get(0).IdChapterManga;
+                   Preference.savePreference(getApplicationContext());
+                   Intent intent_detailchapter=new Intent(getApplicationContext(),DetailChapter.class);
+                   intent_detailchapter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   getApplicationContext().startActivity(intent_detailchapter);
+
+               }
+           });
+       }
+        else {
+           txtRead.setText("Đọc");
+           txtRead.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+               }
+           });
+       }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(getApplicationContext(), DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+
     ///End Load Detail Advert by ID///
 
 
