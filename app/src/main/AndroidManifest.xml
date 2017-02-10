@@ -40,5 +40,6 @@
             android:name="com.example.tunguyen.manga.view.activity.FavoriteAdvert"
             android:label="" >
         </activity>
+        <service android:name=".view.model.MyService" />
     </application>
 </manifest>

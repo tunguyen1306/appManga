@@ -90,7 +90,15 @@ public int Id;
         this.ImgAdvertManga = ImgAdvertManga;
         this.CheckAdvertManga = CheckAdvertManga;
     }
+    public AdvertMangas (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String StatusChapAdvertManga){
+        this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
+        this.NameAdvertManga=NameAdvertManga;
+        this.ImgAdvertManga=ImgAdvertManga;
+        this.NameAuthorAdvertManga=NameAuthorAdvertManga;
+        this.TypeAdvertManga=TypeAdvertManga;
+        this.StatusChapAdvertManga=Integer.parseInt(StatusChapAdvertManga);
 
+    }
 
     public String getNameAuthorAdvertManga() {
         return NameAuthorAdvertManga;

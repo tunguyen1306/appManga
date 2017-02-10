@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,11 +32,16 @@ import com.example.tunguyen.manga.view.fragment.FraAllAdvert;
 import com.example.tunguyen.manga.view.fragment.FraUpdateAdvert;
 import com.example.tunguyen.manga.view.fragment.FraHome;
 //import com.google.android.gms.appindexing.AppIndex;
+import com.example.tunguyen.manga.view.model.MyService;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.example.tunguyen.manga.view.model.DeviceDto.SerialDeviceRefer;
 
@@ -81,16 +87,16 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 //        }
 
         setContentView(R.layout.activity_main);
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        telephonyManager.getDeviceId();// Product
-        String SerialDevice = telephonyManager.getLine1Number();
+//        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+//        telephonyManager.getDeviceId();// Product
+        //String SerialDevice = telephonyManager.getLine1Number();
         String OsVersion=System.getProperty("os.version");
         String OsInCremental=android.os.Build.VERSION.INCREMENTAL;
         int OSAPILevel = android.os.Build.VERSION.SDK_INT;
         String OsDevice= android.os.Build.DEVICE;
         String ModelDevice=  android.os.Build.MODEL;
         String ProductDevice=  android.os.Build.PRODUCT;
-        SerialDeviceRefer=SerialDevice;
+       // SerialDeviceRefer=SerialDevice;
         Preference.savePreference(getApplicationContext());
         //Preference.AddDevice(SerialDevice,OsVersion,OsInCremental,OsDevice,ModelDevice,OSAPILevel,ProductDevice);
 
@@ -110,6 +116,13 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
 
+        final Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                startService();
+            }
+        }, 7200000,72000000);
         /////replace fragment/////
         Fragment fragment = null;
         fragment = new FraHome();
@@ -140,6 +153,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.fragment_main, fragment);
                 transaction.commit();
+
 
             }
         });
@@ -182,6 +196,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                 transaction.replace(R.id.fragment_main, fragment);
                 transaction.commit();
 
+
             }
         });
 
@@ -189,7 +204,12 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
     }//end Oncreate
 
-
+    public  void startService() {
+        startService(new Intent(getBaseContext(), MyService.class));
+    }
+    public void stopService() {
+        stopService(new Intent(getBaseContext(), MyService.class));
+    }
     @Override
     public void onPause() {
         super.onPause();

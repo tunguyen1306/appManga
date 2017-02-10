@@ -358,11 +358,7 @@ public class DetailAdvert extends ActionBarActivity {
                             Intent intent_login = new Intent(getApplicationContext(), DetailChapter.class);
                             intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             int tt = AdvertDto.IdAdvertRefer;
-//                   IdChapterRefer=ChapterDto.get(position).getIdChapterManga();
-//                   NameChapterRefer =ChapterDto.get(position).getNameChapterManga();
-//                   Preference.savePreference(_Context.getApplicationContext());
-//                   Preference.AddAdvertViewedSqlite(_Context,ChapterDto.get(position).getIdAdvertManga(), AdvertDto.NameAdvertRefer,AdvertDto.ImgAdvertRefer,NameChapterRefer,IdChapterRefer);
-//                   Preference.UpdateChapterSqlite(_Context,IdChapterRefer);
+
                             startActivity(intent_login);
                         }
                     });

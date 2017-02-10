@@ -1,6 +1,7 @@
 package com.example.tunguyen.manga.view.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.tunguyen.manga.view.activity.ResClien;
@@ -286,4 +287,5 @@ public class Preference {
             e.printStackTrace();
         }
     }
+
 }
