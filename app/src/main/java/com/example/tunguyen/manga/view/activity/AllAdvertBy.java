@@ -15,15 +15,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.adapter.AdvertPopularAdapter;
+import com.example.tunguyen.manga.view.adapter.AdvertReadAdapter;
 import com.example.tunguyen.manga.view.adapter.AllAdvertAdapter;
 import com.example.tunguyen.manga.view.adapter.SlideChapAdapter;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import org.lucasr.twowayview.widget.TwoWayView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +44,9 @@ public class AllAdvertBy extends ActionBarActivity  {
     private Toolbar toolbar;
     DrawerLayout drawer;
     ListView list;
-
+    private Dao<AdvertMangas, Integer> AdvertMangasDao;
+    private List<AdvertMangas> AdvertMangasList;
+    private DatabaseHelper databaseHelper = null;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -73,7 +83,7 @@ public class AllAdvertBy extends ActionBarActivity  {
         View mCustomView = mInflater.inflate(R.layout.actionbar_title, null);
         LinearLayout ln_back = (LinearLayout) mCustomView.findViewById(R.id.ln_back);
         TextView tv_title = (TextView) mCustomView.findViewById(R.id.tv_title);
-        TextView tv_title_name = (TextView) mCustomView.findViewById(R.id.tv_title_name);
+
 
         switch(Preference.idActionbar) {
             case 1:
@@ -144,5 +154,46 @@ public class AllAdvertBy extends ActionBarActivity  {
                         Log.d("myLogs", Log.getStackTraceString(error));
                     }
                 });
+    }
+
+    public void LoadAdvertPopularBySqlite() {
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertMangasDao = getHelper().getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.orderBy("CountView", false);
+            queryBuilder.orderBy("IdAdvertManga", false);
+            AdvertMangasList = queryBuilder.query();
+
+            queryBuilder.limit(10);
+            AdvertMangasList = queryBuilder.query();
+            AdvertPopularAdapter adapter = new AdvertPopularAdapter(getApplicationContext(), AdvertMangasList, "Advert Popular");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void LoadAdvertReadBySqlite() {
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertMangasDao = getHelper().getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.orderBy("CountView", false);
+            AdvertMangasList = queryBuilder.query();
+            queryBuilder.limit(10);
+            AdvertMangasList = queryBuilder.query();
+            AdvertReadAdapter adapter = new AdvertReadAdapter(getApplicationContext(), AdvertMangasList, "Advert Popular");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(getApplicationContext(), DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 }

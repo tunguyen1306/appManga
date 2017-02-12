@@ -191,10 +191,12 @@ public class FraHome extends Fragment {
             // This is how, a reference of DAO object can be done
             AdvertMangasDao = getHelper().getAdvertMangasDao();
             QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
-            queryBuilder.where().eq("TypeStatusAdvertManga", 3);
             queryBuilder.orderBy("CountView", false);
+            queryBuilder.orderBy("IdAdvertManga", false);
             AdvertMangasList = queryBuilder.query();
-
+            tv_count_advert2.setText(AdvertMangasList.size() + " truyện");
+            queryBuilder.limit(10);
+            AdvertMangasList = queryBuilder.query();
             AdvertPopularAdapter adapter = new AdvertPopularAdapter(getActivity(), AdvertMangasList, "Advert Popular");
             lv_advert_popular.setAdapter(adapter);
             countDow = countDow + 1;
@@ -208,10 +210,11 @@ public class FraHome extends Fragment {
             // This is how, a reference of DAO object can be done
             AdvertMangasDao = getHelper().getAdvertMangasDao();
             QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
-            queryBuilder.where().eq("TypeStatusAdvertManga", 2);
             queryBuilder.orderBy("CountView", false);
             AdvertMangasList = queryBuilder.query();
-
+            tv_count_advert2.setText(AdvertMangasList.size() + " truyện");
+            queryBuilder.limit(10);
+            AdvertMangasList = queryBuilder.query();
             AdvertReadAdapter adapter = new AdvertReadAdapter(getActivity(), AdvertMangasList, "Advert Popular");
             lv_advert_read.setAdapter(adapter);
             countDow = countDow + 1;
@@ -226,13 +229,13 @@ public class FraHome extends Fragment {
             // This is how, a reference of DAO object can be done
             AdvertMangasDao = getHelper().getAdvertMangasDao();
             QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
-            queryBuilder.where().eq("TypeStatusAdvertManga", 1);
-            queryBuilder.orderBy("CountView", false);
-            queryBuilder.orderBy("CountView", false);
+            queryBuilder.orderBy("IdAdvertManga", false);
+            queryBuilder.limit(10);
             AdvertMangasList = queryBuilder.query();
 
             AdvertFeaturedAdapter adapter = new AdvertFeaturedAdapter(getActivity(), AdvertMangasList, "Advert Popular");
             lv_advert_feature.setAdapter(adapter);
+
             countDow = countDow + 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -285,8 +288,6 @@ public class FraHome extends Fragment {
                         for (int i = 0; i < AdvertDto.size(); i++) {
 
                             String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
-
-
                             ListIdAdvert.add(tmpStr10);
                             ListNameAdvert.add(AdvertDto.get(i).NameAdvertManga);
                             ListImgAdvert.add(AdvertDto.get(i).ImgAdvertManga);
@@ -346,6 +347,7 @@ public class FraHome extends Fragment {
         restClient.GetService().GetAdvertByTypeId(id, new Callback<List<AdvertDto>>() {
             @Override
             public void success(List<AdvertDto> AdvertDto, Response response) {
+
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
@@ -407,6 +409,7 @@ public class FraHome extends Fragment {
         restClient.GetService().GetAdvertByTypeId(id, new Callback<List<AdvertDto>>() {
             @Override
             public void success(List<AdvertDto> AdvertDto, Response response) {
+
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
                     String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);

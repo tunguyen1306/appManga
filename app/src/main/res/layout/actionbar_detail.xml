@@ -52,6 +52,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/imgAdvertDownload"
-            android:src="@drawable/ic_dowload_mangas" />
+            android:src="@drawable/ic_dowload_manga1" />
     </LinearLayout>
 </RelativeLayout>

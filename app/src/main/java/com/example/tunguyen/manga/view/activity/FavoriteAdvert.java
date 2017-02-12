@@ -72,7 +72,6 @@ public class FavoriteAdvert extends ActionBarActivity {
         View mCustomView = mInflater.inflate(R.layout.actionbar_title, null);
         LinearLayout ln_back = (LinearLayout) mCustomView.findViewById(R.id.ln_back);
         TextView tv_title = (TextView) mCustomView.findViewById(R.id.tv_title);
-        TextView tv_title_name = (TextView) mCustomView.findViewById(R.id.tv_title_name);
         tv_title.setText("Danh sách yêu thích");
         ln_back.setOnClickListener(new View.OnClickListener() {
             @Override

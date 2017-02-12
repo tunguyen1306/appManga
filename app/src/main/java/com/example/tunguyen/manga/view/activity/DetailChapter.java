@@ -17,13 +17,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.adapter.AdvertViewedAdapter;
 import com.example.tunguyen.manga.view.adapter.SlideChapAdapter;
+import com.example.tunguyen.manga.view.database.AdvertViewedMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.ChapterDto;
 import com.example.tunguyen.manga.view.model.Preference;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import org.lucasr.twowayview.widget.TwoWayView;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import retrofit.Callback;
@@ -111,7 +119,7 @@ TextView txtCount,txtItemCount,txtItemChapterName;
         View mCustomView = mInflater.inflate(R.layout.actionbar_title, null);
         LinearLayout ln_back = (LinearLayout) mCustomView.findViewById(R.id.ln_back);
         TextView tv_title = (TextView) mCustomView.findViewById(R.id.tv_title);
-        TextView tv_title_name = (TextView) mCustomView.findViewById(R.id.tv_title_name);
+
         tv_title.setText(AdvertDto.NameAdvertRefer);
         ln_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,14 +157,15 @@ TextView txtCount,txtItemCount,txtItemChapterName;
                     String t1=String.valueOf("/"+ ItemChap.size());
                     txtCount.setText(t1);
 
+                    LoadAdvertView(AdvertDto.IdAdvertRefer);
 
-
-                    if (AdvertDto.PositionItemChapterRefer>0){
+                    if (AdvertViewedMangasList.get(0).PositionItemChapterManga>0){
                         SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
                         paper_chap.setAdapter(slideAdapter1);
                         paper_chap.setCurrentItem(AdvertDto.PositionItemChapterRefer-1);
 
-                    }else {
+                    }
+                    else {
                         SlideChapAdapter slideAdapter1 =new SlideChapAdapter(this, ItemChap);
                         paper_chap.setAdapter(slideAdapter1);
                         paper_chap.setCurrentItem(0);
@@ -198,6 +207,30 @@ TextView txtCount,txtItemCount,txtItemChapterName;
                 });
     }
     ///End LoadSlide///
+    private Dao<AdvertViewedMangas, Integer> AdvertViewedMangasDao;
+    private List<AdvertViewedMangas> AdvertViewedMangasList;
+    private DatabaseHelper databaseHelper = null;
+    public void LoadAdvertView(int IdAdvertManga)
+    {
+        try {
+            // This is how, a reference of DAO object can be done
+            AdvertViewedMangasDao =  getHelper().getAdvertViewedMangasDao();
+            QueryBuilder<AdvertViewedMangas, Integer> queryBuilder = AdvertViewedMangasDao.queryBuilder();
+            queryBuilder.where().eq("IdAdvertManga",IdAdvertManga);
+
+            AdvertViewedMangasList = queryBuilder.query();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
 
 
 }

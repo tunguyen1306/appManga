@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             public void run() {
                 startService();
             }
-        }, 7200000,72000000);
+        },20,72000000);
         /////replace fragment/////
         Fragment fragment = null;
         fragment = new FraHome();
