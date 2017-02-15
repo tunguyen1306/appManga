@@ -30,5 +30,11 @@
             android:gravity="center"
             android:id="@+id/imgAdvertDownload"
             android:src="@drawable/ic_filter_manga" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/imgAdvertSearch"
+            android:src="@drawable/ic_search_mangas" />
     </LinearLayout>
 </RelativeLayout>

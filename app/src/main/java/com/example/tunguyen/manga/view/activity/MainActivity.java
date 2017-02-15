@@ -1,4 +1,7 @@
 package com.example.tunguyen.manga.view.activity;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,9 +20,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,8 +60,8 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     NavigationView navigationView;
 
     View header;
-    TextView tvHeaderName, tvHeaderEmail,txtUpdateAdvert,txtAllAdvert,txtFeauture;
-    ImageView imgHeaderUser;
+    TextView txtUpdateAdvert,txtAllAdvert,txtFeauture;
+    ImageView imgAdvertSearch;
 
 
     boolean doubleBackToExitPressedOnce = false;
@@ -134,6 +140,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         txtFeauture=(TextView) findViewById(R.id.txtFeauture);
         txtAllAdvert=(TextView) findViewById(R.id.txtAllAdvert);
         txtUpdateAdvert=(TextView) findViewById(R.id.txtUpdateAdvert);
+        imgAdvertSearch=(ImageView) findViewById(R.id.imgAdvertSearch);
         ///End Advert///
 
         ///Event Button///
@@ -200,7 +207,15 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             }
         });
 
+        imgAdvertSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent home = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(home);
+
+            }
+        });
 
     }//end Oncreate
 
@@ -252,9 +267,30 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        // Assumes current activity is the searchable activity
+        ComponentName componentName = new ComponentName(getApplicationContext(), MainActivity.class);//getComponentName();
+        SearchableInfo info = searchManager.getSearchableInfo(componentName);
+        searchView.setSearchableInfo(info);
 
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("App", "setOnSearchClickListener");
+                if (searchView.getQuery().length() == 0)
+                    searchView.setQuery("", true);
+            }
+        });
+        return true;
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -266,36 +302,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         super.onStop();
 
 
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
     }
 
     @Override

@@ -41,5 +41,9 @@
             android:label="" >
         </activity>
         <service android:name=".view.model.MyService" />
+        <activity
+            android:name="com.example.tunguyen.manga.view.activity.SearchActivity"
+            android:label="" >
+        </activity>
     </application>
 </manifest>
