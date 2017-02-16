@@ -61,17 +61,14 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
     View header;
     TextView txtUpdateAdvert,txtAllAdvert,txtFeauture;
-    ImageView imgAdvertSearch;
+    //ImageView imgAdvertSearch;
 
 
     boolean doubleBackToExitPressedOnce = false;
 
     //string
     private static String PREF_NAME = "pref";
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
     @Override
@@ -140,7 +137,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         txtFeauture=(TextView) findViewById(R.id.txtFeauture);
         txtAllAdvert=(TextView) findViewById(R.id.txtAllAdvert);
         txtUpdateAdvert=(TextView) findViewById(R.id.txtUpdateAdvert);
-        imgAdvertSearch=(ImageView) findViewById(R.id.imgAdvertSearch);
+        //imgAdvertSearch=(ImageView) findViewById(R.id.imgAdvertSearch);
         ///End Advert///
 
         ///Event Button///
@@ -207,15 +204,15 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             }
         });
 
-        imgAdvertSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent home = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(home);
-
-            }
-        });
+//        imgAdvertSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent home = new Intent(getApplicationContext(), SearchActivity.class);
+//                startActivity(home);
+//
+//            }
+//        });
 
     }//end Oncreate
 
