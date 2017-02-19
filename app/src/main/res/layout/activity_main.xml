@@ -23,7 +23,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Base.AppCompat.Responsive"
+            android:theme="@style/ToolbarTheme"
             android:background="@color/black" />
 
 
@@ -85,7 +85,19 @@
                 android:id="@+id/txtUpdateAdvert"
                 android:background="@color/black"/>
         </LinearLayout>
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true" />
 
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/fragment_main"
             android:layout_width="match_parent"

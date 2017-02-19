@@ -1,76 +1,98 @@
 package com.example.tunguyen.manga.view.activity;
 import android.app.SearchManager;
-import android.app.SearchableInfo;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
-import com.example.tunguyen.manga.view.fragment.FraListChapter;
-import com.example.tunguyen.manga.view.fragment.FraRelateChapter;
+import com.example.tunguyen.manga.view.adapter.AllAdvertAdapter;
+import com.example.tunguyen.manga.view.adapter.CustomAdapter;
+import com.example.tunguyen.manga.view.adapter.SearchAdvertAdapter;
+import com.example.tunguyen.manga.view.database.AdvertMangas;
 import com.example.tunguyen.manga.view.fragment.FraAllAdvert;
+import com.example.tunguyen.manga.view.fragment.FraSearchAdvert;
 import com.example.tunguyen.manga.view.fragment.FraUpdateAdvert;
 import com.example.tunguyen.manga.view.fragment.FraHome;
-//import com.google.android.gms.appindexing.AppIndex;
+import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.MyService;
+import com.example.tunguyen.manga.view.model.Post;
 import com.example.tunguyen.manga.view.model.Preference;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.json.JSONException;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.example.tunguyen.manga.view.model.DeviceDto.SerialDeviceRefer;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+import static com.example.tunguyen.manga.view.model.AdvertDto.IdAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.ImgAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.NameAdvertRefer;
+import static com.example.tunguyen.manga.view.model.AdvertDto.TypeAdvertRefer;
 
 public class MainActivity extends ActionBarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-    //private TabLayout tabLayout;
-    //private NoSwipeableViewpager viewPager;
     DrawerLayout drawer;
     NavigationView navigationView;
-
-    View header;
-    TextView txtUpdateAdvert,txtAllAdvert,txtFeauture;
-    //ImageView imgAdvertSearch;
-
+    TextView txtUpdateAdvert, txtAllAdvert, txtFeauture;
 
     boolean doubleBackToExitPressedOnce = false;
 
-    //string
-    private static String PREF_NAME = "pref";
+    private GoogleApiClient client2;
+    GridView grid;
 
-    private GoogleApiClient client;
+    ////Advert Read///////
+    List<AdvertMangas> ItemAllAdvert;
+    List<String> ListIdAllAdvert = new ArrayList<>();
+    List<String> ListNameAllAdvert = new ArrayList<>();
+    List<String> ListNameAuthorAllAdvert = new ArrayList<>();
+    List<String> ListStatusAllAdvert = new ArrayList<>();
+    List<String> ListStatusChapAllAdvert = new ArrayList<>();
+    List<String> ListCountChapAllAdvert = new ArrayList<>();
+    List<String> ListImgAllAdvert = new ArrayList<>();
+    List<String> ListCountAllAdvert = new ArrayList<>();
+    List<String> ListTypeAllAdvert = new ArrayList<>();
 
+    ////End Advert Read///////
+    SearchAdvertAdapter myAppAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,13 +115,13 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 //        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 //        telephonyManager.getDeviceId();// Product
         //String SerialDevice = telephonyManager.getLine1Number();
-        String OsVersion=System.getProperty("os.version");
-        String OsInCremental=android.os.Build.VERSION.INCREMENTAL;
-        int OSAPILevel = android.os.Build.VERSION.SDK_INT;
-        String OsDevice= android.os.Build.DEVICE;
-        String ModelDevice=  android.os.Build.MODEL;
-        String ProductDevice=  android.os.Build.PRODUCT;
-       // SerialDeviceRefer=SerialDevice;
+        String OsVersion = System.getProperty("os.version");
+        String OsInCremental = Build.VERSION.INCREMENTAL;
+        int OSAPILevel = Build.VERSION.SDK_INT;
+        String OsDevice = Build.DEVICE;
+        String ModelDevice = Build.MODEL;
+        String ProductDevice = Build.PRODUCT;
+        // SerialDeviceRefer=SerialDevice;
         Preference.savePreference(getApplicationContext());
         //Preference.AddDevice(SerialDevice,OsVersion,OsInCremental,OsDevice,ModelDevice,OSAPILevel,ProductDevice);
 
@@ -119,13 +141,14 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
 
+
         final Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 startService();
             }
-        },20,72000000);
+        }, 20, 72000000);
         /////replace fragment/////
         Fragment fragment = null;
         fragment = new FraHome();
@@ -134,10 +157,11 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         transaction.replace(R.id.fragment_main, fragment);
         transaction.commit();
 
-        txtFeauture=(TextView) findViewById(R.id.txtFeauture);
-        txtAllAdvert=(TextView) findViewById(R.id.txtAllAdvert);
-        txtUpdateAdvert=(TextView) findViewById(R.id.txtUpdateAdvert);
-        //imgAdvertSearch=(ImageView) findViewById(R.id.imgAdvertSearch);
+
+        txtFeauture = (TextView) findViewById(R.id.txtFeauture);
+        txtAllAdvert = (TextView) findViewById(R.id.txtAllAdvert);
+        txtUpdateAdvert = (TextView) findViewById(R.id.txtUpdateAdvert);
+
         ///End Advert///
 
         ///Event Button///
@@ -204,24 +228,22 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
             }
         });
 
-//        imgAdvertSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent home = new Intent(getApplicationContext(), SearchActivity.class);
-//                startActivity(home);
-//
-//            }
-//        });
-
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        grid=(GridView)findViewById(R.id.gridView1);
     }//end Oncreate
 
-    public  void startService() {
+
+
+    public void startService() {
         startService(new Intent(getBaseContext(), MyService.class));
     }
+
     public void stopService() {
         stopService(new Intent(getBaseContext(), MyService.class));
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -242,6 +264,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         View mCustomView = mInflater.inflate(R.layout.actionbar, null);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
+
     }
 
     @Override
@@ -267,38 +290,30 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
         return true;
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        // Assumes current activity is the searchable activity
-        ComponentName componentName = new ComponentName(getApplicationContext(), MainActivity.class);//getComponentName();
-        SearchableInfo info = searchManager.getSearchableInfo(componentName);
-        searchView.setSearchableInfo(info);
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v("App", "setOnSearchClickListener");
-                if (searchView.getQuery().length() == 0)
-                    searchView.setQuery("", true);
-            }
-        });
-        return true;
-    }
+
+
     @Override
     public void onStart() {
-        super.onStart();
+        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2.connect();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.start(client2, getIndexApiAction());
     }
 
     @Override
     public void onStop() {
-        super.onStop();
+        super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client2, getIndexApiAction());
 
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2.disconnect();
     }
 
     @Override
@@ -310,7 +325,6 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
         this.doubleBackToExitPressedOnce = true;
 
-        
 
         new Handler().postDelayed(new Runnable() {
 
@@ -321,4 +335,157 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         }, 2000);
     }
 
+    private void changeSearchViewTextColor(View view) {
+        if (view != null) {
+            if (view instanceof TextView) {
+                ((TextView) view).setTextColor(Color.WHITE);
+                return;
+            } else if (view instanceof ViewGroup) {
+                ViewGroup viewGroup = (ViewGroup) view;
+                for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                    changeSearchViewTextColor(viewGroup.getChildAt(i));
+                }
+            }
+
+        }
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Main Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        //*** setOnQueryTextFocusChangeListener ***
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String searchQuery) {
+                if (searchQuery=="")
+                {
+
+                }else {
+                    myAppAdapter.filter(searchQuery.toString().trim());
+                    grid.invalidate();
+                }
+
+                return true;
+            }
+        });
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                // Do something when collapsed
+                return true;  // Return true to collapse action view
+            }
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                // Do something when expanded
+                return true;  // Return true to expand action view
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    ///LoadAllAdvert///
+    private void loadDataAllAdvert() {
+
+        ItemAllAdvert = getAllItemsAllAdvert();
+
+        try {
+
+            CustomAdapter adapter = new CustomAdapter(getBaseContext(), ItemAllAdvert);
+            grid.setAdapter(adapter);
+        } catch (Exception ex) {
+
+        }
+    }
+    private List<AdvertMangas> getAllItemsAllAdvert() {
+        List<AdvertMangas> items = new ArrayList<>();
+        for (int i = 0; i < ListIdAllAdvert.size(); i++) {
+            items.add(
+                    new AdvertMangas(
+                            ListIdAllAdvert.get(i),
+                            ListNameAllAdvert.get(i),
+                            ListImgAllAdvert.get(i) ,
+                            ListNameAuthorAllAdvert.get(i),
+                            ListTypeAllAdvert.get(i),
+                            ListStatusAllAdvert.get(i)
+                    )
+            );
+        }
+        return items;
+    }
+    public void callServiceAllAdvert() {
+        ResClien restClient = new ResClien();
+        restClient.GetService().GetListAdvert(new Callback<List<AdvertDto>>() {
+            @Override
+            public void success(List<AdvertDto> AdvertDto, Response response) {
+                for (int i = 0; i < AdvertDto.size(); i++) {
+
+                    String tmpStr10 = Integer.toString(AdvertDto.get(i).IdAdvertManga);
+                    String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
+                    ListIdAllAdvert.add(tmpStr10);
+                    ListNameAllAdvert.add(AdvertDto.get(i).NameAdvertManga);
+                    ListImgAllAdvert.add(AdvertDto.get(i).ImgAdvertManga);
+                    ListNameAuthorAllAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
+                    ListTypeAllAdvert.add(AdvertDto.get(i).TypeAdvertManga);
+                    ListStatusAllAdvert.add(tmpStatus);
+
+
+                }
+                loadDataAllAdvert();
+            }
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("myLogs", "-------ERROR-------Slide");
+                Log.d("myLogs", Log.getStackTraceString(error));
+            }
+        });
+    }
+    ///End LoadAdvertRead///
 }
