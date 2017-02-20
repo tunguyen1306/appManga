@@ -44,7 +44,6 @@ import com.example.tunguyen.manga.view.fragment.FraUpdateAdvert;
 import com.example.tunguyen.manga.view.fragment.FraHome;
 import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.MyService;
-import com.example.tunguyen.manga.view.model.Post;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
