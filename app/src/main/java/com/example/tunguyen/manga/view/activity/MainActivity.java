@@ -232,6 +232,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         grid=(GridView)findViewById(R.id.gridView1);
+        callServiceAllAdvert();
     }//end Oncreate
 
 
@@ -389,13 +390,10 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextChange(String searchQuery) {
-                if (searchQuery=="")
-                {
 
-                }else {
                     myAppAdapter.filter(searchQuery.toString().trim());
                     grid.invalidate();
-                }
+
 
                 return true;
             }
