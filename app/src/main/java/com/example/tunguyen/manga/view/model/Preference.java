@@ -145,7 +145,7 @@ public class Preference {
     private static List<AdvertMangas> AdvertMangasList;
 
     public static void AddAllAdvertMangaSqlite(Context context, int IdAdvertManga, String NameAdvertManga, String ImgAdvertManga,
-                                               String NameAuthorAdvertManga, String DesAdvertManga, String TypeAdvertManga, int CountView, int TypeStatusAdvertManga) {
+                                               String NameAuthorAdvertManga, String DesAdvertManga, String TypeAdvertManga, int CountView, int TypeStatusAdvertManga,String CodeAdvertManga) {
         try {
 
             AdvertMangasDao = getHelper(context).getAdvertMangasDao();
@@ -163,6 +163,7 @@ public class Preference {
                 AdvertMangas.CountView = CountView;
                 AdvertMangas.TypeStatusAdvertManga = TypeStatusAdvertManga;
                 AdvertMangas.IdFavorite = 1;
+                AdvertMangas.CodeAdvertManga=CodeAdvertManga;
                 try {
                     final Dao<AdvertMangas, Integer> advertMangas = getHelper(context).getAdvertMangasDao();
                     advertMangas.create(AdvertMangas);
@@ -179,6 +180,7 @@ public class Preference {
                 updateBuilder.updateColumnValue("TypeAdvertManga", TypeAdvertManga);
                 updateBuilder.updateColumnValue("CountView", CountView);
                 updateBuilder.updateColumnValue("TypeStatusAdvertManga", TypeStatusAdvertManga);
+                updateBuilder.updateColumnValue("CodeAdvertManga", CodeAdvertManga);
                 updateBuilder.where().eq("IdAdvertManga", IdAdvertManga);
                 updateBuilder.update();
             }

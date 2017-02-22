@@ -10,6 +10,8 @@
         <item name="toolbarStyle">@style/Custom.Widget.Toolbar</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="colorButtonNormal">@color/white</item>
+        <item name="android:icon">@drawable/ic_search_mangas</item>
+
         <item name="android:textColorHint">@color/white</item>
 
     </style>

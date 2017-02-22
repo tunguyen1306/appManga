@@ -1,20 +1,22 @@
 package com.example.tunguyen.manga.view.model;
 
 public class AdvertDto {
-        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga, String num_update){
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga, String num_update,String CodeAdvertManga){
                 this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
                 this.NameAdvertManga=NameAdvertManga;
                 this.ImgAdvertManga=ImgAdvertManga;
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
                 this.num_update=Integer.parseInt(num_update);
+                this.CodeAdvertManga=CodeAdvertManga;
         }
-        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String StatusChapAdvertManga){
+        public AdvertDto (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String StatusChapAdvertManga,String CodeAdvertManga){
                 this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
                 this.NameAdvertManga=NameAdvertManga;
                 this.ImgAdvertManga=ImgAdvertManga;
                 this.NameAuthorAdvertManga=NameAuthorAdvertManga;
                 this.TypeAdvertManga=TypeAdvertManga;
                 this.StatusChapAdvertManga=Integer.parseInt(StatusChapAdvertManga);
+                this.CodeAdvertManga=CodeAdvertManga;
 
         }
         public static  int IdAdvertRefer;
@@ -76,6 +78,16 @@ public class AdvertDto {
         }
 
         public  String NameAuthorAdvertManga;
+
+        public String getCodeAdvertManga() {
+                return CodeAdvertManga;
+        }
+
+        public void setCodeAdvertManga(String codeAdvertManga) {
+                CodeAdvertManga = codeAdvertManga;
+        }
+
+        public  String CodeAdvertManga;
         public  int StatusAdvertManga;
         public  int StatusChapAdvertManga;
         public  int CountChapAdvertManga;

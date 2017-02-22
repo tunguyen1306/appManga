@@ -1,7 +1,9 @@
 package com.example.tunguyen.manga.view.activity;
+import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +37,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tunguyen.manga.R;
+import com.example.tunguyen.manga.view.adapter.AdvertFeaturedAdapter;
 import com.example.tunguyen.manga.view.adapter.AllAdvertAdapter;
 import com.example.tunguyen.manga.view.adapter.CustomAdapter;
+import com.example.tunguyen.manga.view.adapter.ExampleAdapter;
 import com.example.tunguyen.manga.view.adapter.SearchAdvertAdapter;
 import com.example.tunguyen.manga.view.database.AdvertMangas;
+import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.example.tunguyen.manga.view.fragment.FraAllAdvert;
 import com.example.tunguyen.manga.view.fragment.FraSearchAdvert;
 import com.example.tunguyen.manga.view.fragment.FraUpdateAdvert;
@@ -46,8 +52,12 @@ import com.example.tunguyen.manga.view.model.AdvertDto;
 import com.example.tunguyen.manga.view.model.MyService;
 import com.example.tunguyen.manga.view.model.Preference;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.squareup.picasso.Picasso;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -86,6 +96,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     List<String> ListImgAllAdvert = new ArrayList<>();
     List<String> ListCountAllAdvert = new ArrayList<>();
     List<String> ListTypeAllAdvert = new ArrayList<>();
+    List<String> ListCodeAdvertManga = new ArrayList<>();
 
     ////End Advert Read///////
     SearchAdvertAdapter myAppAdapter;
@@ -337,7 +348,40 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+
+
+        MenuInflater inflater = getMenuInflater();
+        // Inflate menu to add items to action bar if it is present.
+        inflater.inflate(R.menu.menu_search, menu);
+        // Associate searchable configuration with the SearchView
+        this.menu = menu;
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                LoadAdverBySqlite(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private Menu menu;
 
     ///LoadAllAdvert///
     private void loadDataAllAdvert() {
@@ -362,7 +406,9 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                             ListImgAllAdvert.get(i) ,
                             ListNameAuthorAllAdvert.get(i),
                             ListTypeAllAdvert.get(i),
-                            ListStatusAllAdvert.get(i)
+                            ListStatusAllAdvert.get(i),
+                            ListCodeAdvertManga.get(i)
+
                     )
             );
         }
@@ -383,7 +429,7 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
                     ListNameAuthorAllAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
                     ListTypeAllAdvert.add(AdvertDto.get(i).TypeAdvertManga);
                     ListStatusAllAdvert.add(tmpStatus);
-
+                    ListCodeAdvertManga.add(AdvertDto.get(i).CodeAdvertManga);
 
                 }
                 loadDataAllAdvert();
@@ -396,4 +442,53 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         });
     }
     ///End LoadAdvertRead///
+
+    private Dao<AdvertMangas, Integer> AdvertMangasDao;
+    private List<AdvertMangas> AdvertMangasList;
+    private DatabaseHelper databaseHelper = null;
+
+    public void LoadAdverBySqlite(String query) {
+        try {
+
+            AdvertMangasDao = getHelper().getAdvertMangasDao();
+            QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
+            queryBuilder.where().like("CodeAdvertManga","%"+ query+"%");
+            AdvertMangasList = queryBuilder.query();
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+
+                // Cursor
+                String[] columns = new String[] { "_id", "text" };
+                Object[] temp = new Object[] { 0, "default" };
+
+                MatrixCursor cursor = new MatrixCursor(columns);
+
+                for(int i = 0; i < AdvertMangasList.size(); i++) {
+
+                    temp[0] = i;
+                    temp[1] = AdvertMangasList.get(i);
+
+                    cursor.addRow(temp);
+
+                }
+
+                // SearchView
+                SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+                final SearchView search = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+
+                search.setSuggestionsAdapter(new ExampleAdapter(this, cursor, AdvertMangasList));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
 }

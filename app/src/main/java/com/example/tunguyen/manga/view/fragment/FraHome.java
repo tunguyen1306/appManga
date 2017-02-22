@@ -57,6 +57,7 @@ public class FraHome extends Fragment {
     List<String> ListStatusChapAdvert = new ArrayList<>();
     List<String> ListCountChapAdvert = new ArrayList<>();
     List<String> ListTypeAdvert = new ArrayList<>();
+    List<String> ListCodeAdvert = new ArrayList<>();
     List<String> ListImgAdvert = new ArrayList<>();
     ////End Slide///
 
@@ -71,6 +72,7 @@ public class FraHome extends Fragment {
     List<String> ListCountChapAdvertRead = new ArrayList<>();
     List<String> ListImgAdvertRead = new ArrayList<>();
     List<String> ListTypeAdvertRead = new ArrayList<>();
+    List<String> ListCodeAdvertRead = new ArrayList<>();
     ////End Advert Read///////
 
 
@@ -85,6 +87,8 @@ public class FraHome extends Fragment {
     List<String> ListCountChapAdvertPopular = new ArrayList<>();
     List<String> ListImgAdvertPopular = new ArrayList<>();
     List<String> ListTypeAdvertPopular = new ArrayList<>();
+    List<String> ListCodePopular = new ArrayList<>();
+
     ////End Advert Read///////
     private Dao<AdvertMangas, Integer> AdvertMangasDao;
     private List<AdvertMangas> AdvertMangasList;
@@ -273,7 +277,7 @@ public class FraHome extends Fragment {
     private List<AdvertMangas> getDataSlide() {
         List<AdvertMangas> items = new ArrayList<>();
         for (int i = 0; i < ListIdAdvert.size(); i++) {
-            items.add(new AdvertMangas(ListIdAdvert.get(i), ListNameAdvert.get(i), ListImgAdvert.get(i), ListNameAuthorAdvert.get(i), ListTypeAdvert.get(i), ListStatusChapAdvert.get(i)));
+            items.add(new AdvertMangas(ListIdAdvert.get(i), ListNameAdvert.get(i), ListImgAdvert.get(i), ListNameAuthorAdvert.get(i), ListTypeAdvert.get(i), ListStatusChapAdvert.get(i),ListCodeAdvert.get(i)));
         }
         return items;
     }
@@ -295,6 +299,7 @@ public class FraHome extends Fragment {
                             ListTypeAdvert.add(AdvertDto.get(i).TypeAdvertManga);
                             String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
                             ListStatusChapAdvert.add(tmpStatus);
+                            ListCodeAdvert.add(AdvertDto.get(i).CodeAdvertManga);
 
 
                         }
@@ -335,7 +340,8 @@ public class FraHome extends Fragment {
                             ListImgAdvertRead.get(i),
                             ListNameAuthorAdvertRead.get(i),
                             ListTypeAdvertRead.get(i),
-                            ListStatusChapAdvertRead.get(i)
+                            ListStatusChapAdvertRead.get(i),
+                            ListCodeAdvertRead.get(i)
                     )
             );
         }
@@ -358,6 +364,7 @@ public class FraHome extends Fragment {
                     ListNameAuthorAdvertRead.add(AdvertDto.get(i).NameAuthorAdvertManga);
                     ListTypeAdvertRead.add(AdvertDto.get(i).TypeAdvertManga);
                     ListStatusChapAdvertRead.add(tmpStatus);
+                    ListCodeAdvertRead.add(AdvertDto.get(i).CodeAdvertManga);
                 }
                 int count = AdvertDto.size();
                 tv_count_advert.setText(count + " truyện");
@@ -397,7 +404,8 @@ public class FraHome extends Fragment {
                             ListImgAdvertPopular.get(i),
                             ListNameAuthorAdvertPopular.get(i),
                             ListTypeAdvertPopular.get(i),
-                            ListStatusChapAdvertPopular.get(i)
+                            ListStatusChapAdvertPopular.get(i),
+                            ListCodePopular.get(i)
                     )
             );
         }
@@ -420,6 +428,7 @@ public class FraHome extends Fragment {
                     ListTypeAdvertPopular.add(AdvertDto.get(i).TypeAdvertManga);
                     String tmpStatus = Integer.toString(AdvertDto.get(i).StatusChapAdvertManga);
                     ListStatusChapAdvertPopular.add(tmpStatus);
+                    ListCodePopular.add(AdvertDto.get(i).CodeAdvertManga);
                 }
                 int count = AdvertDto.size();
                 tv_count_advert2.setText(count + " truyện");

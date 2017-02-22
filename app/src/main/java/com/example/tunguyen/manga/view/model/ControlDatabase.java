@@ -21,7 +21,7 @@ public class ControlDatabase {
             public void success(List<AdvertDto> AdvertDto, Response response) {
                 for (int i = 0; i < AdvertDto.size(); i++) {
 
-                    Preference.AddAllAdvertMangaSqlite(context,AdvertDto.get(i).IdAdvertManga,AdvertDto.get(i).NameAdvertManga,AdvertDto.get(i).ImgAdvertManga,AdvertDto.get(i).NameAuthorAdvertManga,AdvertDto.get(i).DesAdvertManga,AdvertDto.get(i).TypeAdvertManga,AdvertDto.get(i).CountView,AdvertDto.get(i).TypeStatusAdvertManga);
+                    Preference.AddAllAdvertMangaSqlite(context,AdvertDto.get(i).IdAdvertManga,AdvertDto.get(i).NameAdvertManga,AdvertDto.get(i).ImgAdvertManga,AdvertDto.get(i).NameAuthorAdvertManga,AdvertDto.get(i).DesAdvertManga,AdvertDto.get(i).TypeAdvertManga,AdvertDto.get(i).CountView,AdvertDto.get(i).TypeStatusAdvertManga,AdvertDto.get(i).CodeAdvertManga);
                     LoadDetailAdvertById(AdvertDto.get(i).IdAdvertManga,context);
                 }
 

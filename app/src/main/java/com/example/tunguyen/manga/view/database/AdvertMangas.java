@@ -40,6 +40,16 @@ public int Id;
     @DatabaseField(columnName = "TypeAdvertManga")
     public String TypeAdvertManga;
 
+    public String getCodeAdvertManga() {
+        return CodeAdvertManga;
+    }
+
+    public void setCodeAdvertManga(String codeAdvertManga) {
+        CodeAdvertManga = codeAdvertManga;
+    }
+
+    @DatabaseField(columnName = "CodeAdvertManga")
+    public String CodeAdvertManga;
     @DatabaseField( columnName = "CountView")
     public int CountView;
 
@@ -84,19 +94,21 @@ public int Id;
         this.TypeStatusAdvertManga = TypeStatusAdvertManga;
     }
 
-    public AdvertMangas(final int IdAdvertManga,final String NameAdvertManga,final String ImgAdvertManga,final int CheckAdvertManga){
+    public AdvertMangas(final int IdAdvertManga,final String NameAdvertManga,final String ImgAdvertManga,final int CheckAdvertManga,String CodeAdvertManga){
         this.IdAdvertManga=IdAdvertManga;
         this.NameAdvertManga = NameAdvertManga;
         this.ImgAdvertManga = ImgAdvertManga;
         this.CheckAdvertManga = CheckAdvertManga;
+        this.CodeAdvertManga = CodeAdvertManga;
     }
-    public AdvertMangas (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String StatusChapAdvertManga){
+    public AdvertMangas (String IdAdvertManga,String NameAdvertManga,String ImgAdvertManga,String NameAuthorAdvertManga,String TypeAdvertManga,String StatusChapAdvertManga,String CodeAdvertManga){
         this.IdAdvertManga=Integer.parseInt(IdAdvertManga);
         this.NameAdvertManga=NameAdvertManga;
         this.ImgAdvertManga=ImgAdvertManga;
         this.NameAuthorAdvertManga=NameAuthorAdvertManga;
         this.TypeAdvertManga=TypeAdvertManga;
         this.StatusChapAdvertManga=Integer.parseInt(StatusChapAdvertManga);
+        this.CodeAdvertManga=CodeAdvertManga;
 
     }
 

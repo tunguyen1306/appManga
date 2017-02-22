@@ -40,6 +40,16 @@
             android:name="com.example.tunguyen.manga.view.activity.FavoriteAdvert"
             android:label="" >
         </activity>
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value="com.example.ExampleActivity" />
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
         <service android:name=".view.model.MyService" />
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

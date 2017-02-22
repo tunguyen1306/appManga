@@ -37,6 +37,7 @@ public class FraUpdateAdvert extends Fragment {
     List<String> ListCountChapUpdateAdvert = new ArrayList<>();
     List<String> ListImgUpdateAdvert = new ArrayList<>();
     List<String> ListCountUpdateAdvert = new ArrayList<>();
+    List<String> ListCodeAdvert = new ArrayList<>();
     ////End Advert Read///////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -69,7 +70,8 @@ public class FraUpdateAdvert extends Fragment {
                             ListNameUpdateAdvert.get(i),
                             ListImgUpdateAdvert.get(i) ,
                             ListNameAuthorUpdateAdvert.get(i),
-                            ListCountUpdateAdvert.get(i)
+                            ListCountUpdateAdvert.get(i),
+                            ListCodeAdvert.get(i)
                     )
             );
         }
@@ -89,6 +91,8 @@ public class FraUpdateAdvert extends Fragment {
                     ListImgUpdateAdvert.add(AdvertDto.get(i).ImgAdvertManga);
                     ListNameAuthorUpdateAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
                     ListCountUpdateAdvert.add(strCount);
+                    ListCodeAdvert.add(AdvertDto.get(i).CodeAdvertManga);
+
                 }
                 loadDataUpdateAdvert();
             }

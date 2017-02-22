@@ -50,6 +50,7 @@ public class FraSearchAdvert extends Fragment {
     List<String> ListImgAllAdvert = new ArrayList<>();
     List<String> ListCountAllAdvert = new ArrayList<>();
     List<String> ListTypeAllAdvert = new ArrayList<>();
+    List<String> ListCodellAdvert = new ArrayList<>();
 
     ////End Advert Read///////
 
@@ -154,7 +155,8 @@ public class FraSearchAdvert extends Fragment {
                             ListImgAllAdvert.get(i) ,
                             ListNameAuthorAllAdvert.get(i),
                             ListTypeAllAdvert.get(i),
-                            ListStatusAllAdvert.get(i)
+                            ListStatusAllAdvert.get(i),
+                            ListCodellAdvert.get(i)
                     )
             );
         }
@@ -175,6 +177,7 @@ public class FraSearchAdvert extends Fragment {
                     ListNameAuthorAllAdvert.add(AdvertDto.get(i).NameAuthorAdvertManga);
                     ListTypeAllAdvert.add(AdvertDto.get(i).TypeAdvertManga);
                     ListStatusAllAdvert.add(tmpStatus);
+                    ListCodellAdvert.add(AdvertDto.get(i).CodeAdvertManga);
 
 
                 }
