@@ -148,14 +148,14 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
 
-
-        final Timer t = new Timer();
-        t.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                startService();
-            }
-        }, 20, 72000000);
+        startService();
+//        final Timer t = new Timer();
+//        t.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                startService();
+//            }
+//        }, 20, 72000000);
         /////replace fragment/////
         Fragment fragment = null;
         fragment = new FraHome();

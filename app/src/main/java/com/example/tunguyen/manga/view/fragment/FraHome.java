@@ -216,8 +216,8 @@ public class FraHome extends Fragment {
             QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
             queryBuilder.orderBy("CountView", false);
             AdvertMangasList = queryBuilder.query();
-            tv_count_advert2.setText(AdvertMangasList.size() + " truyện");
-            queryBuilder.limit(10);
+            tv_count_advert.setText(AdvertMangasList.size() + " truyện");
+
             AdvertMangasList = queryBuilder.query();
             AdvertReadAdapter adapter = new AdvertReadAdapter(getActivity(), AdvertMangasList, "Advert Popular");
             lv_advert_read.setAdapter(adapter);
@@ -234,7 +234,7 @@ public class FraHome extends Fragment {
             AdvertMangasDao = getHelper().getAdvertMangasDao();
             QueryBuilder<AdvertMangas, Integer> queryBuilder = AdvertMangasDao.queryBuilder();
             queryBuilder.orderBy("IdAdvertManga", false);
-            queryBuilder.limit(10);
+
             AdvertMangasList = queryBuilder.query();
 
             AdvertFeaturedAdapter adapter = new AdvertFeaturedAdapter(getActivity(), AdvertMangasList, "Advert Popular");

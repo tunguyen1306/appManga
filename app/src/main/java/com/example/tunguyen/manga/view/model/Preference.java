@@ -11,6 +11,7 @@ import com.example.tunguyen.manga.view.database.ChapterMangas;
 import com.example.tunguyen.manga.view.database.DatabaseHelper;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 
@@ -145,7 +146,7 @@ public class Preference {
     private static List<AdvertMangas> AdvertMangasList;
 
     public static void AddAllAdvertMangaSqlite(Context context, int IdAdvertManga, String NameAdvertManga, String ImgAdvertManga,
-                                               String NameAuthorAdvertManga, String DesAdvertManga, String TypeAdvertManga, int CountView, int TypeStatusAdvertManga,String CodeAdvertManga) {
+                                               String NameAuthorAdvertManga, String DesAdvertManga, String TypeAdvertManga, int CountView, int TypeStatusAdvertManga,String CodeAdvertManga,int StatusAdvertManga) {
         try {
 
             AdvertMangasDao = getHelper(context).getAdvertMangasDao();
@@ -160,6 +161,7 @@ public class Preference {
                 AdvertMangas.NameAuthorAdvertManga = NameAuthorAdvertManga;
                 AdvertMangas.DesAdvertManga = DesAdvertManga;
                 AdvertMangas.TypeAdvertManga = TypeAdvertManga;
+                AdvertMangas.StatusAdvertManga = StatusAdvertManga;
                 AdvertMangas.CountView = CountView;
                 AdvertMangas.TypeStatusAdvertManga = TypeStatusAdvertManga;
                 AdvertMangas.IdFavorite = 1;
@@ -179,11 +181,15 @@ public class Preference {
                 updateBuilder.updateColumnValue("DesAdvertManga", DesAdvertManga);
                 updateBuilder.updateColumnValue("TypeAdvertManga", TypeAdvertManga);
                 updateBuilder.updateColumnValue("CountView", CountView);
+                updateBuilder.updateColumnValue("StatusAdvertManga", StatusAdvertManga);
                 updateBuilder.updateColumnValue("TypeStatusAdvertManga", TypeStatusAdvertManga);
                 updateBuilder.updateColumnValue("CodeAdvertManga", CodeAdvertManga);
                 updateBuilder.where().eq("IdAdvertManga", IdAdvertManga);
                 updateBuilder.update();
             }
+            DeleteBuilder<AdvertMangas, Integer>deleteBuilder = AdvertMangasDao.deleteBuilder();
+            deleteBuilder.where().eq("StatusAdvertManga", 0);
+            deleteBuilder.delete();
 
 
         } catch (SQLException e) {
