@@ -148,14 +148,14 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
 
-        startService();
-//        final Timer t = new Timer();
-//        t.scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//                startService();
-//            }
-//        }, 20, 72000000);
+
+        final Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                startService();
+            }
+        }, 20, 72000000);
         /////replace fragment/////
         Fragment fragment = null;
         fragment = new FraHome();
@@ -374,7 +374,10 @@ public class MainActivity extends ActionBarActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                LoadAdverBySqlite(newText);
+                if(newText.length()>=2){
+                    LoadAdverBySqlite(newText);
+                }
+
                 return false;
             }
         });

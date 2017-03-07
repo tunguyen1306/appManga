@@ -20,10 +20,10 @@ public class ControlDatabase {
             @Override
             public void success(List<AdvertDto> AdvertDto, Response response) {
                 for (int i = 0; i < AdvertDto.size(); i++) {
-                    if (AdvertDto.get(i).StatusAdvertManga != 0) {
+
                         Preference.AddAllAdvertMangaSqlite(context, AdvertDto.get(i).IdAdvertManga, AdvertDto.get(i).NameAdvertManga, AdvertDto.get(i).ImgAdvertManga, AdvertDto.get(i).NameAuthorAdvertManga, AdvertDto.get(i).DesAdvertManga, AdvertDto.get(i).TypeAdvertManga, AdvertDto.get(i).CountView, AdvertDto.get(i).TypeStatusAdvertManga, AdvertDto.get(i).CodeAdvertManga, AdvertDto.get(i).StatusAdvertManga);
                         LoadDetailAdvertById(AdvertDto.get(i).IdAdvertManga, context);
-                    }
+
                 }
 
             }

@@ -189,7 +189,7 @@ public class Preference {
             }
             DeleteBuilder<AdvertMangas, Integer>deleteBuilder = AdvertMangasDao.deleteBuilder();
             deleteBuilder.where().eq("StatusAdvertManga", 0);
-            deleteBuilder.delete();
+            AdvertMangasDao.delete(deleteBuilder.prepare());
 
 
         } catch (SQLException e) {
