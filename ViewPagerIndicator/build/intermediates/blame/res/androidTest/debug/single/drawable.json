@@ -4,6 +4,10 @@
         "source": "C:\\Company\\App\\appManga\\ViewPagerIndicator\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
     },
     {
+        "merged": "C:\\Company\\Company\\AppManga\\appManga\\ViewPagerIndicator\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "C:\\Company\\Company\\AppManga\\appManga\\ViewPagerIndicator\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
+    },
+    {
         "merged": "D:\\Company\\Android\\appManga\\ViewPagerIndicator\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
         "source": "D:\\Company\\Android\\appManga\\ViewPagerIndicator\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
     }
